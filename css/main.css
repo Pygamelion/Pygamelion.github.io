@@ -333,10 +333,6 @@ body [data-aos="zoom-in"] {
   content: "\e603";
 }
 
-.icon-weibo:before {
-  content: "\e62c";
-}
-
 .icon-steam:before {
   content: "\e624";
 }
@@ -4061,22 +4057,18 @@ body .aplayer .aplayer-info .aplayer-controller .aplayer-volume-wrap,
   color: var(--grey-7) !important;
 }
 
-#live2d-plugin {
-  right: 0 !important;
+#waifu {
+  right: 100px !important;
   left: auto !important;
 }
 
-#live2d-tool {
+#waifu-tool {
   right: auto !important;
   left: -10px !important;
 }
 
-#live2d-toggle {
+#waifu-toggle {
   z-index: 1;
-}
-
-#live2d-plugin {
-  z-index: 98 !important;
 }
 
 .share-wrapper {
