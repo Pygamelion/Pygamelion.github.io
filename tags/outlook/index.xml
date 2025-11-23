@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Outlook on 11-D Space</title>
+    <link>http://localhost:1313/tags/outlook/</link>
+    <description>Recent content from 11-D Space</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    
+    <managingEditor>yabusamehour@outlook.com (Yabusame Houlen)</managingEditor>
+    <webMaster>yabusamehour@outlook.com (Yabusame Houlen)</webMaster>
+    
+    <copyright>本博客所有文章除特别声明外，均采用 BY-NC-SA 许可协议。转载请注明出处！</copyright>
+    
+    <lastBuildDate>Tue, 18 Nov 2025 11:00:00 +0800</lastBuildDate>
+    
+    
+    <atom:link href="http://localhost:1313/tags/outlook/index.xml" rel="self" type="application/rss&#43;xml" />
+    
+
+    
+    
+
+    <item>
+      <title>Outlook 软件使用</title>
+      <link>http://localhost:1313/post/tools/outlook/</link>
+      <pubDate>Tue, 18 Nov 2025 11:00:00 &#43;0800</pubDate>
+      <author>yabusamehour@outlook.com (Yabusame Houlen)</author>
+      <guid>http://localhost:1313/post/tools/outlook/</guid>
+      <description>
+        <![CDATA[<h1>Outlook 软件使用</h1><p>作者：Yabusame Houlen（yabusamehour@outlook.com）</p>
+        
+          <p>尝试使用windows自带的Outlook软件来使用gmail邮箱和新注册的outlook邮箱，今天和<code>0x80190001</code>斗争良久，虽然还是不太清楚发生了什么，但是一顿乱搞之后搞定了，将情况记录如下以备日后参考：</p>
+        
+        <hr><p>本文2025-11-18首发于<a href='http://localhost:1313/'>11-D Space</a>，最后修改于2025-11-18</p>]]>
+      </description>
+      
+        <category>Tools</category>
+      
+    </item>
+    
+  </channel>
+</rss>

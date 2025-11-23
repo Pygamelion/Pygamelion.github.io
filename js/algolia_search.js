@@ -38,7 +38,20 @@
         container: "#reimu-hits",
         templates: {
           item: (data) => {
-            return '<a href="' + data.permalink + '" class="reimu-hit-item-link" title="' + (data.title || "") + '">' + data._highlightResult.title.value + "</a>";
+            let title = data.title;
+            let highlightTitle = data._highlightResult?.title?.value;
+            if (!title && data.type) {
+              if (data.type === "content" && data.content) {
+                title = data.content;
+                highlightTitle = data._highlightResult?.content?.value;
+              } else if (data.type.startsWith("lvl") && data.hierarchy) {
+                title = Object.values(data.hierarchy).join(" > ");
+                highlightTitle = Object.values(
+                  data._highlightResult?.hierarchy || {}
+                ).map((v) => v?.value).filter(Boolean).join(" > ");
+              }
+            }
+            return '<a href="' + (data.permalink ?? data.url) + '" class="reimu-hit-item-link" title="' + (title || "") + '">' + highlightTitle + "</a>";
           },
           empty: (data) => {
             return '<div id="reimu-hits-empty">' + algoliaSettings.labels.hits_empty.replace(

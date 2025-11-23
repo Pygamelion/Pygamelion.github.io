@@ -1,0 +1,1034 @@
+<!doctype html>
+<html
+  lang="zh-cn" 
+  data-theme-mode="auto"
+  >
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8" />
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1, shrink-to-fit=no"
+/><title>
+  从负开始的C&#43;&#43;学习 | Yabusame Houlen
+</title>
+<meta name="description" content="少女折寿中..."/><script>
+  window.siteConfig = JSON.parse("{\"anchor_icon\":null,\"base\":\"http://localhost:1313/\",\"clipboard\":{\"copyright\":{\"content\":\"本文版权：本博客所有文章除特别声明外，均采用 BY-NC-SA 许可协议。转载请注明出处！\",\"count\":200,\"enable\":true,\"license_type\":\"by-nc-sa\"},\"fail\":\"ERROR(ﾟ⊿ﾟ)ﾂ\",\"success\":\"(*^▽^*)\"},\"code_block\":{\"expand\":25},\"icon_font\":\"4552607_4k4bc36ef96\",\"outdate\":{\"daysago\":180,\"enable\":true,\"message\":\"本文最后更新于 {time}，请注意文中内容可能已经发生变化。\"}}");
+  
+  window.siteConfig.swPath = '\/sw.js';
+  
+</script>
+<link
+    rel="preload"
+    as="style"
+    crossorigin
+    href="https://fontsapi.zeoseven.com/292/main/result.css"
+    onload="this.rel='stylesheet'"
+  /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  rel="preload"
+  as="style"
+  href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7cNoto%20Serif%20SC:400,400italic,700,700italic%7c&amp;display=swap"
+/>
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7cNoto%20Serif%20SC:400,400italic,700,700italic%7c&amp;display=swap"
+  media="print"
+  onload="this.media='all'"
+/>
+<link
+    rel="preload"
+    href="//at.alicdn.com/t/c/font_4552607_4k4bc36ef96.woff2"
+    as="font"
+    type="font/woff2"
+    crossorigin="anonymous"
+  /><link rel="stylesheet" href="/css/loader.css" />
+<meta property="og:type" content="website" />
+  <meta property="og:title" content="从负开始的C&#43;&#43;学习 | Yabusame Houlen" />
+  <meta
+    property="og:description"
+    content="少女折寿中..."
+  />
+  <meta property="og:url" content="http://localhost:1313/post/cxx/cxx_0/" />
+  <meta
+    property="og:site_name"
+    content="11-D Space"
+  />
+  <meta
+    property="og:image"
+    content="https://raw.githubusercontent.com/Pygamelion/Mottos/refs/heads/master/Figures/Art/TH/kaguya.jpg"
+  />
+  <meta property="article:author" content="Yabusame Houlen" />
+  <meta property="article:published_time" content="2025-10-01T11:00:00&#43;08:00" />
+  <meta property="article:modified_time" content="2025-11-11T11:00:00&#43;08:00" /><meta property="article:tag" content="Cxx" /><meta name="twitter:card" content="summary" />
+  <meta name="twitter:image" content="https://raw.githubusercontent.com/Pygamelion/Mottos/refs/heads/master/Figures/Art/TH/kaguya.jpg" />
+<link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/css/main.css" />
+<link
+    rel="preload"
+    as="style"
+    href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css"
+    integrity="sha384-IfxC36XL/toUyJ939C73PcgMuRzAZuIzZxE38drsmO5p6jD7ei&#43;Zx/1oA/0l8ysE" crossorigin="anonymous"onload="this.onload=null;this.rel='stylesheet'"
+  /><link
+    rel="preload"
+    as="style"
+    href="https://npm.webcache.cn/katex@0.16.24/dist/katex.min.css"
+    integrity="sha384-tTgKLjMYmJr94v8qu2PE5MUGSMbyN2xiH266JUB3gpm8vnnJywd1dWSOEfrFz&#43;YI" crossorigin="anonymous"onload="this.onload=null;this.rel='stylesheet'"
+  /><script
+    src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js"
+    integrity="sha384-k6YtvFUEIuEFBdrLKJ3YAUbBki333tj1CSUisai5Cswsg9wcLNaPzsTHDswp4Az8" crossorigin="anonymous"></script><link
+    rel="stylesheet"
+    href="https://npm.webcache.cn/@reimujs/aos@0.1.2/dist/aos.css"
+    integrity="sha384-GMRP93c6Hkz9JVKGAuRR3nTS7M07RwPgTFenXiosjq2VbVgvdDNcz1g6Mkj8AONa" crossorigin="anonymous"/><link
+    rel="stylesheet"
+    href="https://npm.webcache.cn/aplayer@1.10.1/dist/APlayer.min.css"
+    integrity="sha384-tLMkTWh2pfXNWGFlUS0w1TFtRG5xZ9lPWFOooj&#43;vDDLIL&#43;xBGQU/voDBY5XE2lVh" crossorigin="anonymous"/>
+<style>
+  .two {
+    columns: 2;
+    column-gap: 2rem;
+  }
+  .multi {
+    columns: 3;
+    column-gap: 2rem;
+  }
+</style>
+</head>
+  <body><div id='loader'>
+    <div class="loading-left-bg loading-bg"></div>
+    <div class="loading-right-bg loading-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi rotate"><svg width="150" height="150" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="https://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+            <path d="M303.5 432A80 80 0 0 1 291.5 592A80 80 0 0 1 303.5 432z" fill="var(--red-1, #ff5252)" />
+            <path d="M512 65A447 447 0 0 1 512 959L512 929A417 417 0 0 0 512 95A417 417 0 0 0 512 929L512 959A447 447 0 0 1 512 65z 
+          M512 95A417 417 0 0 1 929 512A208.5 208.5 0 0 1 720.5 720.5L720.5 592A80 80 0 0 0 720.5 432A80 80 0 0 0 720.5 592L720.5 720.5A208.5 208.5 0 0 1 512 512A208.5 208.5 0 0 0 303.5 303.5A208.5 208.5 0 0 0 95 512A417 417 0 0 1 512 95z" fill="var(--red-1, #ff5252)" />
+          </svg></div><div class="loading-word">少女祈祷中...</div>
+    </div>
+  </div>
+  </div>
+  <script>
+    var time = null;
+    var loaderEl = document.getElementById('loader');
+    var startLoading = () => {
+      time = Date.now();
+      loaderEl.classList.remove("loading");
+    }
+    var hideLoader = () => {
+      document.body.style.overflow = 'auto';
+      loader.classList.add('loading');
+    };
+
+    var endLoading = () => {
+      if (!time) {
+        hideLoader();
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          hideLoader();
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+    loaderEl.addEventListener('click', endLoading);
+  </script><div id="copy-tooltip"></div>
+<div id="lang-tooltip">
+本文章没有找到对应的语言版本
+</div>
+<div id="heatmap-tooltip"></div><div class="notification-wrapper">
+    <h1>发现新版本</h1>
+    <p>网站好像有新内容，是否更新(ﾟ⊿ﾟ)ﾂ？</p>
+    <div class="notification-btn">
+      <button id="notification-update-btn">更新</button>
+      <button id="notification-close-btn">取消</button>
+    </div>
+  </div><div id="container">
+      <div id="wrap"><div id="header-nav">
+  <nav id="main-nav" aria-label="Primary navigation"><a class="main-nav-link-wrap" href="/">
+        <div class='main-nav-icon icon '>&#x1F704;</div>
+        <span class="main-nav-link">首页</span>
+      </a><a class="main-nav-link-wrap" href="/archives">
+        <div class='main-nav-icon icon '>&#x1F702;</div>
+        <span class="main-nav-link">归档</span>
+      </a><a class="main-nav-link-wrap" href="/resource">
+        <div class='main-nav-icon icon '>&#x1F703;</div>
+        <span class="main-nav-link">站点</span>
+      </a><a class="main-nav-link-wrap" href="/about">
+        <div class='main-nav-icon icon '>&#x1F701;</div>
+        <span class="main-nav-link">收录</span>
+      </a><a id="main-nav-toggle" class="nav-icon" aria-label="Toggle navigation" role="button"></a>
+  </nav>
+  <nav id="sub-nav" aria-label="Secondary navigation"><a id="nav-search-btn" class="nav-icon popup-trigger" title="搜索" aria-label="搜索"></a></nav></div>
+<header id="header" aria-label="Site header"><picture></picture>
+    <img crossorigin="anonymous" fetchpriority="high" src="https://raw.githubusercontent.com/Pygamelion/Mottos/refs/heads/master/Figures/Art/TH/kaguya.jpg" alt="从负开始的C&#43;&#43;学习"><div id="header-outer">
+    <div id="header-title"><span id="logo">
+            <h1 data-aos="slide-up">从负开始的C&#43;&#43;学习</h1>
+          </span><h2 id="subtitle-wrap" data-aos="slide-down"><span id="subtitle"><div style="text-align:center; font-size:16px; color:red; font-weight: 900;">CAUTION</div><div style="text-align:center; font-size:14px; color:red;">Learning C++ can seriously harm your mental health and that of your loved ones.</div></span></h2></div>
+  </div>
+</header><div id="content"
+          aria-label="Page content"
+          
+          class="sidebar-right"  ><aside id="sidebar" aria-label="Sidebar"><div class="sidebar-wrapper-container sticky"><div class="sidebar-wrapper">
+    <div
+      class="sidebar-wrap"
+      data-aos="fade-up"
+    ><div class="sidebar-toc-sidebar"><h3 class="toc-title">文章目录</h3>
+<div class="sidebar-toc-wrapper toc-div-class">
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#从编译工具开始">从编译工具开始</a></li>
+    <li><a href="#关于生态兼容">关于生态兼容</a></li>
+    <li><a href="#record">Record</a></li>
+  </ul>
+</nav>
+</div></div>
+          <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img
+    data-src="/avatar/avatar.jpg"
+    data-sizes="auto"
+    alt="Yabusame Houlen"
+    class="lazyload"
+  />
+  <div class="sidebar-author-name">Yabusame Houlen</div>
+  <div class="sidebar-description">少女折寿中...</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div><div class="sidebar-state-number">4</div>
+  </div>
+  <a class="sidebar-state-category" href="/categories/" aria-label="sidebar-state-category-link">
+    <div>分类</div>
+    <div class="sidebar-state-number">
+      3
+    </div>
+  </a>
+  <a class="sidebar-state-tag" href="/tags/" aria-label="sidebar-state-tag-link">
+    <div>标签</div>
+    <div class="sidebar-state-number">3</div>
+  </a>
+</div>
+<div class="sidebar-social"><div class="icon-bilibili sidebar-social-icon">
+      <a
+        href="https://space.bilibili.com/312577459"
+        itemprop="url"
+        target="_blank"
+        aria-label="bilibili"
+        rel="noopener nofollow noreferrer"
+      ></a>
+    </div><div class="icon-github sidebar-social-icon">
+      <a
+        href="https://github.com/Pygamelion"
+        itemprop="url"
+        target="_blank"
+        aria-label="github"
+        rel="noopener nofollow noreferrer"
+      ></a>
+    </div><div class="icon-steam sidebar-social-icon">
+      <a
+        href="https://steamcommunity.com/profiles/76561198908551093"
+        itemprop="url"
+        target="_blank"
+        aria-label="steam"
+        rel="noopener nofollow noreferrer"
+      ></a>
+    </div></div>
+<div class="sidebar-menu"><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/"
+        aria-label="首页"
+      ></a>
+      <div class='sidebar-menu-icon icon '>&#x1F704;</div>
+      <div class="sidebar-menu-link">首页</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/archives"
+        aria-label="归档"
+      ></a>
+      <div class='sidebar-menu-icon icon '>&#x1F702;</div>
+      <div class="sidebar-menu-link">归档</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/resource"
+        aria-label="站点"
+      ></a>
+      <div class='sidebar-menu-icon icon '>&#x1F703;</div>
+      <div class="sidebar-menu-link">站点</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/about"
+        aria-label="收录"
+      ></a>
+      <div class='sidebar-menu-icon icon '>&#x1F701;</div>
+      <div class="sidebar-menu-link">收录</div>
+    </div></div>
+</div><div class="sidebar-btn-wrapper" style="position:static">
+            <div class="sidebar-toc-btn current"></div>
+            <div class="sidebar-common-btn"></div>
+          </div></div>
+  </div><div class="sidebar-widget"></div></div></aside>
+<section id="main" aria-label="Main content"><article
+  class="h-entry article"
+  itemscope
+  itemtype="https://schema.org/BlogPosting"
+>
+  <div
+    class="article-inner"
+    data-aos="fade-up"
+  >
+    <div class="article-meta"><div class="article-date">
+  <span
+    class="article-date-link icon-calendar"
+    data-aos="zoom-in"
+  >
+    <time datetime="2025-10-01 11:00:00 &#43;0800 CST" itemprop="datePublished"
+      >2025-10-01</time
+    >
+    <time style="display: none;" id="post-update-time"
+      >2025-11-11</time
+    >
+  </span></div>
+<div class="article-category"><a
+      class="article-category-link"
+      href="/categories/programming"
+      data-aos="zoom-in"
+      >PROGRAMMING</a
+    ></div>
+</div><div class="hr-line"></div><div class="article-gallery">
+    <div class="article-gallery-photos"><a class="article-gallery-img article-gallery-item" href="https://raw.githubusercontent.com/Pygamelion/Mottos/refs/heads/master/Figures/Techology/C&#43;&#43;.png" target="_blank">
+          <img src="https://raw.githubusercontent.com/Pygamelion/Mottos/refs/heads/master/Figures/Techology/C&#43;&#43;.png" itemprop="image" alt="gallery" onload="this.parentNode.dataset.pswpWidth = this.naturalWidth;this.parentNode.dataset.pswpHeight = this.naturalHeight;" >
+        </a></div>
+  </div><div class="e-content article-entry" itemprop="articleBody"><blockquote
+          class="alert-blockquote warning"
+          id="outdate-blockquote"
+          style="display: none;"
+        >
+          <p class="alert-heading">WARNING</p>
+          <p></p>
+        </blockquote><div style="text-align:center; font-size:16px;">
+
+  <blockquote class="alert-blockquote caution">
+    <p class="alert-heading">
+      Caution
+    </p>
+    <p><p>Learning C++ can seriously harm your mental health and that of your loved ones.</p></p>
+  </blockquote>
+
+</div>
+<blockquote>
+<p>C++ 的许多设计决策根源于我对强迫人按某种特定方式行事的极度厌恶。历史上一些最坏的灾难就起因于理想主义者们试图强迫人们“做某些对他们最好的事情”。这种理想主义不仅导致了对无辜者的伤害,也迷惑和腐化了施展权利的理想主义者自身。我还发现,当经验和实验与其教义或理论出现不寻常的冲突时,理想主义者往往有忽略它们的倾向。在理想出问题的地方,甚至权威人士也准备赞成的时候,我则趋向于提供一些支持,使程序员有自己选择的权力&hellip;<br></p>
+<div style="text-align:right; font-size:16px;"> 摘自 Bjarne Stroustrup's《C++语言的设计与演化》裘宗燕译</div>
+&nbsp;
+</blockquote>
+<div class="multi">
+<ul>
+<li><a href="https://142857.red/book/">小彭老师现代 C++ 大典，我也能看得懂！</a></li>
+<li><a href="https://coolshell.cn/">陈皓大佬_左耳朵耗子</a></li>
+<li><a href="https://blog.codingnow.com/">风云</a></li>
+<li><a href="https://preshing.com/">Jeff Preshing</a></li>
+<li><a href="https://functionalcpp.wordpress.com/">Daniel Park</a></li>
+<li><a href="https://www.justsoftwaresolutions.co.uk/blog/">Anthony Williams</a></li>
+<li><a href="https://bannalia.blogspot.com/">Joaquín M López Muñoz</a></li>
+<li><a href="https://scottmeyers.blogspot.com/">Scott Meyers</a></li>
+<li><a href="https://www.stroustrup.com/bs_faq.html">Bjarne Stroustrup</a></li>
+</ul>
+</div>
+<p>给以上以及未列出的大佬们致以最高敬意。这里的一系列<code>C++</code>相关的内容是我瞎写丢博客上，以便个人查阅之用&hellip;
+<br><br></p>
+<p>上一次学Cxx还是刚上大学，随大流想考一个计算机二级证书，觉得office主要是文字处理没有意思，这门语言早在中学时代就刻入把名字刻在我脑袋里了，毕竟当时手机上玩我的世界首页都会飘着一行“<span style="color:#ffee97"><em>Build with C++</em></span>”。清澈愚蠢的我随大流整了本大名鼎鼎的谭浩强《C++程序设计》, 学了两章就被诸如<code>i*(i+=--i)</code>、<code>a=(a++)+(++a)</code>的窒息语法吓到，随后开始对各种写法排列组合。虽然最后还是拿到证书，我对整个计算机技术的学习也到此为止了(毕竟考试的其实很简单，真没有什么动力再玩这些花式trick了<span class="mysecret" title="你发现了一个秘密">(当时稍微知道计算机学生们天天在用电路做加法乘法二进制呢，怎么能把大学当成小学来读！来自高考数学上不了100分的老子的鄙视</span></p>
+<p>之后莫名走入物理学的花花世界，开开心心地学了一段时间，各种真假难辨的物理理论充斥我的脑袋，让我深感自己只是物理学的观光者，没有坚定信念和探险精神 <del>practical的方向与academic资源</del>，期间<code>Python</code>、<code>Julia</code>、<code>Rust</code>等编程语言都有接触，虽然身为LHAASO组成员，我一直想绕着<code>C++</code>和<code>Root</code>走，足见当年心理阴影之深。今天回想起来，已经是时过境迁，兜兜转转回到了<code>True or False</code>的比特世界 <del>世界上又多了个普通转行物理人，却少了个高级程序员(；′⌒`)</del> 现在回来重学Cxx，好处是AI领路、Cxx标准更新、工具链换掉了一批，网络上各种学习资源随手可得，其它语言的学习也让我重新认识了Cxx是多么强大的存在。毕竟这么多年过去，当年奇怪写法的遗毒也在我脑中消退了，不好说是好事还是坏事&hellip;</p>
+<blockquote>
+<p>欲买桂花同载酒，终不似，少年游&hellip;&hellip;</p>
+</blockquote>
+<h2 id="从编译工具开始">
+<a class="header-anchor" href="#%e4%bb%8e%e7%bc%96%e8%af%91%e5%b7%a5%e5%85%b7%e5%bc%80%e5%a7%8b"></a>
+从编译工具开始
+</h2><p>由于历史原因，Cxx不能像其它语言一样方便地执行&hellip;<del>对于数值计算来说Julia比C++好用多力</del></p>
+<ul>
+<li>静态库：链接后会直接把里面所有的代码都合并生成到可执行程序中</li>
+<li>动态库：链接后仅将其中导出的函数提供给可执行程序用，实际运行过程中还是会单独加载这个动态库 (长.so .dll这样的</li>
+</ul>
+<p>总之已经可以尽量不要去管太多细节的东西了，除非需要展示自己有20年Cxx功力o((&gt;ω&lt; ))o</p>
+<p>Visual Studio里面一套东西还没搞明白怎么配置的，先用着Vscode吧 ＞︿＜&hellip;</p>
+<p><code>Cmake</code>有些学不明白，但是有AI工具加持，对于个人学习来写小项目已经不是问题了</p>
+<p>现在有好用的<code>Xmake</code>，不用是(≧∀≦)ゞ笨蛋！</p>
+<p><code>Xmake</code>通过<strong>描述域、脚本域</strong>两种不同的配置方式，隔离 80% 的简单配置以及 20% 的复杂配置，集成了<code>Lua</code>的脚本功能，还有更强的封装 <a href="https://coolshell.cn/articles/10739.html">陈皓大佬的lua教程</a></p>
+<ul>
+<li>描述域：使用 set_xx、add_xxx 等配置接口进行的配置区域</li>
+<li>脚本域：使用 on_xx、after_xxx 和 before_xxx 等配置接口的内部区域</li>
+</ul>
+<p>为了优化编译速度，我们不需要编译每个源文件都去重复预处理一遍里面的头文件，可以把大部分项目常用的头文件放置在统一的头文件中预先编译，在链接阶段直接复用 <code>Xmake 使用 set_pcxxheader(&quot;src/stdafx.h&quot;)</code></p>
+<p><a id="xmake_module">无痛使用Cxx20的module</a></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-lua" data-lang="lua"><span class="line"><span class="ln"> 1</span><span class="cl">  <span class="n">add_rules</span><span class="p">(</span><span class="s2">&#34;mode.debug&#34;</span><span class="p">,</span> <span class="s2">&#34;mode.release&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">  <span class="n">set_version</span><span class="p">(</span><span class="s2">&#34;0.0.1&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">  <span class="n">set_languages</span><span class="p">(</span><span class="s2">&#34;cxx20&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">
+</span></span><span class="line hl"><span class="ln"> 5</span><span class="cl">  <span class="n">add_requires</span><span class="p">(</span><span class="s2">&#34;fmt&#34;</span><span class="p">,</span> <span class="s2">&#34;catch2&#34;</span><span class="p">)</span>
+</span></span><span class="line hl"><span class="ln"> 6</span><span class="cl">  <span class="n">set_policy</span><span class="p">(</span><span class="s2">&#34;build.c++.modules&#34;</span><span class="p">,</span> <span class="kc">true</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">  <span class="n">target</span><span class="p">(</span><span class="s2">&#34;mathlib&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">      <span class="n">set_kind</span><span class="p">(</span><span class="s2">&#34;static&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">      <span class="n">add_files</span><span class="p">(</span><span class="s2">&#34;src/mathlib/*.cppm&#34;</span><span class="p">,</span> <span class="p">{</span><span class="n">public</span> <span class="o">=</span> <span class="kc">true</span><span class="p">})</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">
+</span></span><span class="line"><span class="ln">12</span><span class="cl">  <span class="n">target</span><span class="p">(</span><span class="s2">&#34;practice&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl">      <span class="n">set_kind</span><span class="p">(</span><span class="s2">&#34;binary&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl">      <span class="n">add_files</span><span class="p">(</span><span class="s2">&#34;src/*.cpp&#34;</span><span class="p">)</span>
+</span></span><span class="line hl"><span class="ln">15</span><span class="cl">      <span class="n">add_deps</span><span class="p">(</span><span class="s2">&#34;mathlib&#34;</span><span class="p">)</span>
+</span></span><span class="line hl"><span class="ln">16</span><span class="cl">      <span class="n">add_packages</span><span class="p">(</span><span class="s2">&#34;fmt&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">17</span><span class="cl">
+</span></span><span class="line"><span class="ln">18</span><span class="cl">  <span class="n">target</span><span class="p">(</span><span class="s2">&#34;tests&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">19</span><span class="cl">      <span class="n">set_kind</span><span class="p">(</span><span class="s2">&#34;binary&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">20</span><span class="cl">      <span class="n">add_files</span><span class="p">(</span><span class="s2">&#34;tests/*.cpp&#34;</span><span class="p">)</span>
+</span></span><span class="line hl"><span class="ln">21</span><span class="cl">      <span class="n">add_deps</span><span class="p">(</span><span class="s2">&#34;mathlib&#34;</span><span class="p">)</span>
+</span></span><span class="line hl"><span class="ln">22</span><span class="cl">      <span class="c1">-- 添加 include 路径</span>
+</span></span><span class="line hl"><span class="ln">23</span><span class="cl">      <span class="n">add_includedirs</span><span class="p">(</span><span class="s2">&#34;src&#34;</span><span class="p">)</span>
+</span></span><span class="line hl"><span class="ln">24</span><span class="cl">      <span class="n">add_packages</span><span class="p">(</span><span class="s2">&#34;catch2&#34;</span><span class="p">)</span>
+</span></span></code></pre></div><h2 id="关于生态兼容">
+<a class="header-anchor" href="#%e5%85%b3%e4%ba%8e%e7%94%9f%e6%80%81%e5%85%bc%e5%ae%b9"></a>
+关于生态兼容
+</h2><div style="text-align:center; font-size:16px;">
+<p><strong>终端输入<code>xmake lua</code>打开<code>REPL</code></strong></p>
+</div>
+<ul>
+<li><code>xmake lua xmake_modules/mymod.lua hello</code> 直接绕过编译调试单个脚本</li>
+<li><code>xmake lua lib.detect.find_tool gcc</code> 调用模块检查编译工具链/使用模块命令</li>
+<li><code>xmake lua find_packages zlib</code> 查找本地安装包<code>zlib</code></li>
+</ul>
+<p>xmake 提供了 <code>$(varname)</code> 的语法支持在配置字符串中<mark style="background-color:lightgreen">直接传递内置变量</mark>
+<code>$(env varname)</code> 内置变量，在字符串中<mark style="background-color:lightgreen">获取指定环境变量</mark>
+<code>xmake l os.getenvs</code> 以打印环境变量</p>
+<ul>
+<li>$(buildir)：实际构建输出目录</li>
+<li>$(tmpdir)：临时目录</li>
+<li>$(curdir)：当前运行目录</li>
+<li>$(scriptdir)：当前 xmake.lua 配置脚本所在目录</li>
+<li>$(programdir)：xmake 安装程序的 lua 脚本根目录</li>
+</ul>
+<p><code>$(shell command)</code> 内置变量的方式，在描述域配置中快速执行 shell 命令，并嵌入执行输出结果到配置字符串中</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-lua" data-lang="lua"><span class="line"><span class="cl"><span class="n">target</span><span class="p">(</span><span class="s2">&#34;hello&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">set_kind</span><span class="p">(</span><span class="s2">&#34;binary&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">add_files</span><span class="p">(</span><span class="s2">&#34;src/*.cpp&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">if</span> <span class="n">is_plat</span><span class="p">(</span><span class="s2">&#34;linux&#34;</span><span class="p">)</span> <span class="kr">then</span>
+</span></span><span class="line"><span class="cl">        <span class="n">add_ldflags</span><span class="p">(</span><span class="s2">&#34;$(shell pkg-config --libs sqlite3)&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">end</span>
+</span></span></code></pre></div><p>只要是在 <code>xmake f/config</code> 配置命令中的所有参数选项配置，都可以通过内置变量的方式来获取使用，可以通过<code>xmake f --help</code>来查看配置菜单列表获取到，比较常用的有<code>$(plat)</code>、<code>$(arch)</code>、<code>$(host)</code>和<code>$(mode)</code>&hellip;</p>
+<p><code>Xmake</code>可以直接生成<code>CMakelists.txt</code>，但<code>CMake</code>还是得学，学外语好啊(</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">xmake project -k makefile
+</span></span><span class="line"><span class="cl">xmake project -k cmake
+</span></span></code></pre></div><div style="overflow: auto;">
+`Xmake`有Vscode插件，适合脑容量非常小，一点命令都记不住的我<img src="/images/touhou/Cirno_stupid.jpg" style="float: right; margin-right: 2em;" alt="呆呆的Cirno" width="250" />
+<p>下载插件后 <kbd>Shift + Ctrl + p</kbd> 打开一个输入命令的窗口，直接<code>Xmake create</code> 就能根据模板选择创建项目了</p>
+<p><a href="#xmake_module">上面有个基础模板可以写Cxx20的module</a>，至少在我的设备上各种用法是可以的(</p>
+<p>我觉得基本上来说，这些工具封装一层大佬才会用的<a href="https://www.bilibili.com/video/BV1qT421a7zj/?spm_id_from=333.1387.upload.video_card.click&amp;vd_source=f419ef507f48d57b890b78d141046076">命令行设置参数</a></p>
+</div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-lua" data-lang="lua"><span class="line"><span class="cl"><span class="n">add_rules</span><span class="p">(</span><span class="s2">&#34;mode.debug&#34;</span><span class="p">,</span> <span class="s2">&#34;mode.release&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">target</span><span class="p">(</span><span class="s2">&#34;quickapp&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">add_rules</span><span class="p">(</span><span class="s2">&#34;qt.quickapp&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">add_headerfiles</span><span class="p">(</span><span class="s2">&#34;src/*.h&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">add_files</span><span class="p">(</span><span class="s2">&#34;src/*.cpp&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">add_files</span><span class="p">(</span><span class="s2">&#34;src/qml.qrc&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">add_frameworks</span><span class="p">(</span><span class="s2">&#34;QtXml&#34;</span><span class="p">)</span> <span class="c1">-- 添加依赖库QtXml</span>
+</span></span></code></pre></div><p><code>add_framework</code>可以配置除QtGUI、QtCore等基础库之外的额外Qt依赖</p>
+<p><code>add_links</code> 仅仅只会简单地将库以 <code>-lQtGui</code> 方式来链接；而 <code>add_frameworks</code>主要用于添加 QT 相关库，除了会添加 <code>-lQtGui</code> 之外，还会添加 <code>-I/xxx/QtGui</code> 等头文件搜索路径，以及链接搜索路径，另外还会添加对应的 <code>-DQT_XML_LIB</code> 宏定义：比起手动 <code>add_links</code>、<code>add_includedirs</code> 更加的方便且跨平台</p>
+<h2 id="record">
+<a class="header-anchor" href="#record"></a>
+Record
+</h2><p>我大概会努力保持笔记在Cxx20，虽然我已经记不得基础语法了(</p>
+<p>TBD</p>
+</div>
+    <footer class="article-footer"><div class="sponsor-wrapper">
+  <div class="sponsor-button">
+    <div class="sponsor-icon rotate"></div>
+    <div class="sponsor-title">赞助</div>
+    <div class="sponsor-icon rotate"></div>
+  </div><div class="sponsor-tip">能有人看就十分感谢啦！</div></div><div class="share-wrapper"><a href="https://connect.qq.com/widget/shareqq/index.html?url=http://localhost:1313/post/cxx/cxx_0/&amp;title=%e4%bb%8e%e8%b4%9f%e5%bc%80%e5%a7%8b%e7%9a%84C&#43;&#43;%e5%ad%a6%e4%b9%a0&amp;desc=CAUTIONLearning%20C&#43;&#43;%20can%20seriously%20harm%20your%20mental%20health%20and%20that%20of%20your%20loved%20ones.&amp;source=http://localhost:1313/" target="_blank" rel="noopener noreferrer" title="从负开始的C&#43;&#43;学习">
+      <div class="share-icon icon icon-qq"></div>
+    </a><a href="https://twitter.com/intent/tweet?url=http://localhost:1313/post/cxx/cxx_0/&amp;text=%e4%bb%8e%e8%b4%9f%e5%bc%80%e5%a7%8b%e7%9a%84C&#43;&#43;%e5%ad%a6%e4%b9%a0&amp;via=http://localhost:1313/" target="_blank" rel="noopener noreferrer" title="从负开始的C&#43;&#43;学习">
+      <div class="share-icon icon icon-twitter"></div>
+    </a><a href="javascript:;"  title="从负开始的C&#43;&#43;学习">
+      <div class="share-icon icon icon-weixin"><div id="share-weixin">
+            <div class="share-weixin-dom">
+              <div class="share-weixin-content">
+                <img id="share-weixin-banner"> 
+                <div id="share-weixin-title"></div>
+                <div id="share-weixin-desc"></div>
+              </div>
+              <div class="share-weixin-qrcode">
+                <div class="share-weixin-info">
+                  <div id="share-weixin-author"></div>
+                  <div id="share-weixin-theme">Powered By hugo-theme-reimu</div>
+                </div>
+                <img id="share-weixin-qr" >
+              </div>
+            </div>
+            <div class="share-weixin-canvas"></div>
+          </div></div>
+    </a></div><ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in">
+      <a
+        class="article-tag-list-link"
+        href="/tags/cxx"
+        rel="tag"
+        >CXX</a
+      >
+    </li></ul>
+</footer>
+  </div><nav
+    id="article-nav"
+    aria-label="Article navigation"
+    data-aos="fade-up"
+  ><div class="article-nav-link-wrap left"><img
+            data-src="https://raw.githubusercontent.com/Pygamelion/Mottos/refs/heads/master/Figures/Art/TH/bg22.webp"
+            data-sizes="auto"
+            alt="Blog Hello World"
+            class="lazyload"
+          /><a
+          href="/post/hello/"
+          aria-label="前一篇:Blog Hello World"
+          title="前一篇:Blog Hello World"
+        ></a>
+        <div class="article-nav-caption">前一篇</div>
+        <h3 class="article-nav-title">Blog Hello World</h3>
+      </div><div class="article-nav-link-wrap right"><img
+            data-src="https://raw.githubusercontent.com/Pygamelion/Mottos/refs/heads/master/Figures/Art/TH/bg4.webp"
+            data-sizes="auto"
+            alt="rubbish"
+            class="lazyload"
+          /><a
+          href="/post/mind/miscellaneous/"
+          aria-label="后一篇:rubbish"
+          title="后一篇:rubbish"
+        ></a>
+        <div class="article-nav-caption">后一篇</div>
+        <h3 class="article-nav-title">rubbish</h3>
+      </div></nav></article><section id="comments" data-aos="fade-up">
+<div class="comment-header"><h2 class="comment-title">说些什么吧！</h2>
+  <div class="comment-selector">
+    <div class="comment-selector-wrap"><div class="selector-item" data-selector="giscus">
+          <span>giscus</span>
+        </div></div>
+  </div>
+</div>
+
+<div class="comment-content"><div class="comment giscus-comment" data-aos="fade-up"
+     >
+    </div></div>
+</section></section>
+        </div><footer id="footer" aria-label="Site footer">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div id="footer-info"><div>
+      <span class="icon-copyright"></span>2025<span class="footer-info-sep rotate"></span>
+      Yabusame Houlen
+    </div><div>
+        基于&nbsp;<a
+          href="https://gohugo.io/"
+          target="_blank"
+          rel="noopener nofollow noreferrer"
+          >Hugo</a
+        >&nbsp; Theme.<a
+          href="https://github.com/D-Sketon/hugo-theme-reimu"
+          target="_blank"
+          rel="noopener nofollow noreferrer"
+          >Reimu</a
+        >
+      </div><div>
+        <span class="icon-brush"
+          >&nbsp;7.7k</span
+        >
+        &nbsp;|&nbsp;
+        <span class="icon-coffee">&nbsp;00:17</span>
+      </div><div>
+        <span class="icon-eye"></span>
+        <span id="busuanzi_container_site_pv"
+          >总访问量&nbsp;<span
+            id="busuanzi_value_site_pv"
+          ></span
+        ></span>
+        &nbsp;|&nbsp;
+        <span class="icon-user"></span>
+        <span id="busuanzi_container_site_uv"
+          >总访客量&nbsp;<span
+            id="busuanzi_value_site_uv"
+          ></span
+        ></span>
+      </div></div>
+</footer>
+<div class="sidebar-top">
+            <div class="sidebar-top-taichi rotate"></div>
+            <div class="arrow-up"></div>
+          </div><div id="mask" class="hide"></div>
+      </div><nav id="mobile-nav" aria-label="Mobile navigation">
+  <div class="sidebar-wrap"><div class="sidebar-toc-sidebar"><h3 class="toc-title">文章目录</h3>
+<div class="sidebar-toc-wrapper toc-div-class">
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#从编译工具开始">从编译工具开始</a></li>
+    <li><a href="#关于生态兼容">关于生态兼容</a></li>
+    <li><a href="#record">Record</a></li>
+  </ul>
+</nav>
+</div></div>
+        <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img
+    data-src="/avatar/avatar.jpg"
+    data-sizes="auto"
+    alt="Yabusame Houlen"
+    class="lazyload"
+  />
+  <div class="sidebar-author-name">Yabusame Houlen</div>
+  <div class="sidebar-description">少女折寿中...</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div><div class="sidebar-state-number">4</div>
+  </div>
+  <a class="sidebar-state-category" href="/categories/" aria-label="sidebar-state-category-link">
+    <div>分类</div>
+    <div class="sidebar-state-number">
+      3
+    </div>
+  </a>
+  <a class="sidebar-state-tag" href="/tags/" aria-label="sidebar-state-tag-link">
+    <div>标签</div>
+    <div class="sidebar-state-number">3</div>
+  </a>
+</div>
+<div class="sidebar-social"><div class="icon-bilibili sidebar-social-icon">
+      <a
+        href="https://space.bilibili.com/312577459"
+        itemprop="url"
+        target="_blank"
+        aria-label="bilibili"
+        rel="noopener nofollow noreferrer"
+      ></a>
+    </div><div class="icon-github sidebar-social-icon">
+      <a
+        href="https://github.com/Pygamelion"
+        itemprop="url"
+        target="_blank"
+        aria-label="github"
+        rel="noopener nofollow noreferrer"
+      ></a>
+    </div><div class="icon-steam sidebar-social-icon">
+      <a
+        href="https://steamcommunity.com/profiles/76561198908551093"
+        itemprop="url"
+        target="_blank"
+        aria-label="steam"
+        rel="noopener nofollow noreferrer"
+      ></a>
+    </div></div>
+<div class="sidebar-menu"><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/"
+        aria-label="首页"
+      ></a>
+      <div class='sidebar-menu-icon icon '>&#x1F704;</div>
+      <div class="sidebar-menu-link">首页</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/archives"
+        aria-label="归档"
+      ></a>
+      <div class='sidebar-menu-icon icon '>&#x1F702;</div>
+      <div class="sidebar-menu-link">归档</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/resource"
+        aria-label="站点"
+      ></a>
+      <div class='sidebar-menu-icon icon '>&#x1F703;</div>
+      <div class="sidebar-menu-link">站点</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/about"
+        aria-label="收录"
+      ></a>
+      <div class='sidebar-menu-icon icon '>&#x1F701;</div>
+      <div class="sidebar-menu-link">收录</div>
+    </div></div>
+</div></div><div class="sidebar-btn-wrapper">
+        <div class="sidebar-toc-btn current"></div>
+        <div class="sidebar-common-btn"></div>
+      </div></nav>
+</div><div class="site-search">
+        <div class="reimu-popup popup">
+          <div class="reimu-search">
+            <div class="reimu-search-input-icon"></div>
+            <div id="reimu-search-input"></div>
+            <div class="popup-btn-close"></div>
+          </div>
+          <div class="reimu-results">
+            <div id="reimu-stats"></div>
+            <div id="reimu-hits"></div>
+            <div id="reimu-pagination" class="reimu-pagination"></div>
+          </div>
+          <img class="reimu-bg" src="/images/reimu.png" />
+        </div>
+      </div><meting-js
+        theme="var(--color-link)"
+        id="13552043145"server="netease"type="playlist"fixed="true"autoplay="false"order="random"volume="0.33"mutex="true"list-folded="false"lrc-type="1">
+      </meting-js><script
+    src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js"
+    integrity="sha384-3gT/vsepWkfz/ff7PpWNUeMzeWoH3cDhm/A8jM7ouoAK0/fP/9bcHHR5kHq2nf&#43;e" crossorigin="anonymous"></script><script
+    src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js"
+    integrity="sha384-J08i8An/QeARD9ExYpvphB8BsyOj3Gh2TSh1aLINKO3L0cMSH2dN3E22zFoXEi0Q" crossorigin="anonymous"></script><script
+    src="https://npm.webcache.cn/material-theme@1.0.0/dist/material-theme.umd.js"
+    integrity="sha384-vLev0II0HKFaxkcm&#43;/7kX5IGwVFBASkGchU311wmU/veIj2bB0UcBkQbW6yw2asK" crossorigin="anonymous"></script><script src="/js/main.js" ></script><script src="/js/aos.js" ></script><script>
+    var aosInit = () => {
+      AOS.init({
+        duration: 1000,
+        easing: "ease",
+        once: true,
+        offset: 50,
+      });
+    };
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", aosInit);
+    } else {
+      aosInit();
+    }
+  </script><script src="/js/pjax_main.js" data-pjax></script><script>
+    var ALGOLIA_CONFIG = {
+      logo: '\/images\/algolia_logo.svg',
+      algolia: {
+        applicationID: "V7IFV85DDX",
+        apiKey: "677c3dabccc843ba0b14e4a71e5150f2",
+        indexName: "Pygamelion_Site",
+        hits: {
+          "per_page": parseInt("15")
+        },
+        labels: {
+          "input_placeholder": '搜索.....',
+          "hits_empty": '未发现与 「${query}」相关内容',
+          "hits_stats": '找到${hits}条结果（用时 ${time} ms）'
+        }
+      }
+    };
+  </script><script
+    src="https://npm.webcache.cn/algoliasearch@4.17.1/dist/algoliasearch-lite.umd.js"
+    deferintegrity="sha384-xvLS0jfKuoREs7pqkRI/OI8GcqohO5S&#43;jQz7ZBtQXnsXmD&#43;9jDOOY4cL6dCPzlrk" crossorigin="anonymous"></script><script
+    src="https://npm.webcache.cn/@reimujs/instantsearch.js@4.57.0-beta.1/dist/instantsearch.production.min.js"
+    deferintegrity="sha384-aagKMe8nkqaP2DYQc8kkYOL5l&#43;M5Q2WH/Uhr4teOh0Ybp0RZj0kUSDm45qPikMjK" crossorigin="anonymous"></script><script src="/js/algolia_search.js" ></script><script
+    src="https://npm.webcache.cn/mouse-firework@0.1.1/dist/index.umd.js"
+    integrity="sha384-8LyaidD9GPxQQgLJO/WRw/O2h3BoNq/ApI/ecpvM6RsrCz2qP2ppBXUKihP4V/2d" crossorigin="anonymous"></script><script>
+  if (! false  || !window.matchMedia('(max-width: 768px)').matches) {
+    if (window.firework) {
+      const options = JSON.parse("{\"excludeelements\":[\"a\",\"button\"],\"particles\":[{\"colors\":[\"var(--red-1)\",\"var(--red-2)\",\"var(--red-3)\",\"var(--red-4)\"],\"duration\":[1200,1800],\"easing\":\"easeOutExpo\",\"move\":[\"emit\"],\"number\":20,\"shape\":\"circle\",\"shapeOptions\":{\"alpha\":[0.3,0.5],\"radius\":[12,28]}},{\"colors\":[\"var(--red-0)\"],\"duration\":[1200,1800],\"easing\":\"easeOutExpo\",\"move\":[\"diffuse\"],\"number\":1,\"shape\":\"circle\",\"shapeOptions\":{\"alpha\":[0.2,0.5],\"lineWidth\":6,\"radius\":20}}]}");
+      options.excludeElements = options.excludeelements;
+      delete options.excludeelements;
+      window.firework(options);
+    }
+  }
+</script><script
+    src="https://npm.webcache.cn/theme-shokax-pjax@0.0.3/dist/index.umd.js"
+    integrity="sha384-xneY1WY8hOfUzswrE4CrYq35N4BdVcxqxwHPr9zawE/jMSCxD&#43;jAPU55x/jj3wlf" crossorigin="anonymous"></script><script src="/js/pjax.js" ></script><script
+    src="https://npm.webcache.cn/live2d-widgets@0.9.0/autoload.js"
+    deferintegrity="sha384-poTN7wN/SqNhQqo3jdFeX20ikddWeFGkUkDEzsKjgH/ez8aQLn81oI0Cw6q5xNyB" crossorigin="anonymous"></script>
+
+<div id="lazy-script">
+  <div><script data-pjax>
+        window.REIMU_POST = {
+          author: "Yabusame Houlen",
+          title: "从负开始的C\u002b\u002b学习",
+          url: "http:\/\/localhost:1313\/post\/cxx\/cxx_0\/",
+          description: "CAUTIONLearning C\u002b\u002b can seriously harm your mental health and that of your loved ones.",
+          cover: "https:\/\/raw.githubusercontent.com\/Pygamelion\/Mottos\/refs\/heads\/master\/Figures\/Art\/TH\/kaguya.jpg",
+        };
+      </script><script src="/js/insert_highlight.js" data-pjax></script><script src="/js/tabs.js" data-pjax></script><script type="module" data-pjax>const PhotoSwipeLightbox = (await safeImport("https:\/\/npm.webcache.cn\/photoswipe@5.4.4\/dist\/photoswipe-lightbox.esm.min.js", "sha384-DiL6M\/gG\u002bwmTxmCRZyD1zee6lIhawn5TGvED0FOh7fXcN9B0aZ9dexSF\/N6lrZi\/")).default;const initPswp = (gallery, children) => {
+          if (_$$(`${gallery} ${children}`).length > 0) {
+            new PhotoSwipeLightbox({
+              gallery,
+              children,pswpModule: () => safeImport("https:\/\/npm.webcache.cn\/photoswipe@5.4.4\/dist\/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8\u002boTJ7m3DfYEWX1fu1scuS4\u002bs")}).init();
+          }
+        }
+        const pswp = () => {
+          initPswp('.article-entry', 'a.article-gallery-item');
+          initPswp('.article-gallery', 'a.article-gallery-item');
+          window.lightboxStatus = 'done';
+          window.removeEventListener('lightbox:ready', pswp);
+        }
+        if(window.lightboxStatus === 'ready') {
+          pswp()
+        } else {
+          window.addEventListener('lightbox:ready', pswp);
+        }
+      </script><script data-pjax>
+  var loadScript = (src, integrity) => {
+    const script = document.createElement('script');
+    script.src = src;
+    if (integrity) script.integrity = integrity;
+    script.crossOrigin = 'anonymous';
+    return script;
+  };
+  var commentConfigKeys = ['valine', 'waline', 'twikoo', 'gitalk', 'giscus', 'disqus'];
+  var commentConfig = {giscus: {
+      enable: true,
+      load: () => {
+        const container = document.querySelector('.giscus-comment');
+        if (!container) return;
+        container.style.display = 'block';
+
+        
+        const existingScript = container.querySelector('script[src*="giscus.app/client.js"]');
+        if (existingScript) existingScript.remove();
+        const existingFrame = document.querySelector('iframe.giscus-frame');
+        if (existingFrame) existingFrame.remove();
+
+        
+        const giscusScript = document.createElement('script');
+        const domMode = document.documentElement.getAttribute("data-theme");
+
+        const docLang = document.documentElement.lang || 'en';
+        const langBase = docLang.split('-')[0];
+        const supportedLangs = ['ar', 'be', 'bg', 'ca', 'cs', 'da', 'de', 'en', 
+        'eo', 'es', 'eu', 'fa', 'fr', 'gr', 'hbs', 'he', 'hu', 'id', 'it', 'ja', 
+        'kh', 'ko', 'nl', 'pl', 'pt', 'ro', 'ru', 'th', 'tr', 'uk', 'uz', 'vi', 'zh-CN', 'zh-HK', 'zh-TW'];
+        const giscusLang = supportedLangs.includes(docLang) ? docLang : supportedLangs.includes(langBase) ? langBase : 'en';
+
+        giscusScript.src = 'https://giscus.app/client.js';
+        giscusScript.setAttribute('data-repo', 'Pygamelion\/Pygamelion.github.io');
+        giscusScript.setAttribute('data-repo-id', 'R_kgDOQLjdww');
+        giscusScript.setAttribute('data-category', 'Announcements');
+        giscusScript.setAttribute('data-category-id', 'DIC_kwDOQLjdw84Cxa_A');
+        giscusScript.setAttribute('data-mapping', '0');
+        giscusScript.setAttribute('data-strict', '0');
+        giscusScript.setAttribute('data-reactions-enabled', '1');
+        giscusScript.setAttribute('data-emit-metadata', '0');
+        giscusScript.setAttribute('data-input-position', 'bottom');
+        giscusScript.setAttribute('data-theme', domMode === 'dark' ? 'dark' : 'light');
+        giscusScript.setAttribute('data-lang', giscusLang);
+        giscusScript.setAttribute('crossorigin', 'anonymous');
+        giscusScript.async = true;
+        container.appendChild(giscusScript);
+        document.body.addEventListener('light-theme-set', () => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: { setConfig: { theme: 'light' } } }, 'https://giscus.app');
+        });
+        document.body.addEventListener('dark-theme-set', () => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: { setConfig: { theme: 'dark' } } }, 'https://giscus.app');
+        });
+      }
+    },};
+  commentConfig.enable = commentConfigKeys.some(key => commentConfig?.[key]?.enable);
+
+  var defaultComment = '';
+  if (commentConfig.enable) {
+    
+    var savedCommentType = localStorage.getItem('commentType');
+    
+    
+    if (savedCommentType) {
+      if (commentConfig[savedCommentType]?.enable) {
+        defaultComment = savedCommentType;
+      }
+    }
+    
+    
+    if (!defaultComment) {
+      var configDefault = 'giscus';
+      if (commentConfig[configDefault]?.enable) {
+        defaultComment = configDefault;
+      }
+    }
+    
+    
+    if (!defaultComment) {
+      defaultComment = commentConfigKeys.find(sys => commentConfig?.[sys]?.enable) || '';
+    }
+  }
+
+  function loadComments() {
+    if (!commentConfig.enable) return;
+    
+    const loadedComments = {
+      valine: false,
+      waline: false,
+      twikoo: false,
+      gitalk: false,
+      giscus: false
+    };
+
+    
+    const hideAllComments = () => {
+      const commentContainers = document.querySelectorAll('.comment');
+      commentContainers.forEach(container => {
+        container.style.display = 'none';
+      });
+    };
+
+    
+    const loadCommentSystem = (type) => {
+      if (loadedComments[type]) {
+        
+        document.querySelector(`.${type}-comment`).style.display = 'block';
+        return;
+      }
+
+      
+      commentConfig[type]?.load();
+      loadedComments[type] = true;
+    };
+
+    
+    const changeActiveCommentItems = (item) => {
+      const commentItems = document.querySelectorAll('.selector-item');
+      for (let i = 0; i < commentItems.length; i++) {
+        commentItems[i].classList.remove('active');
+      }
+      item.classList.add('active');
+
+      
+      const commentType = item.getAttribute('data-selector');
+
+      
+      hideAllComments();
+
+      
+      loadCommentSystem(commentType);
+    };
+
+    const commentInit = () => {
+      
+      const commentItems = document.querySelectorAll('.selector-item');
+      for (let item of commentItems) {
+        item.addEventListener('click', () => {
+          
+          const commentType = item.getAttribute('data-selector');
+          window.localStorage.setItem('commentType', commentType);
+          
+          changeActiveCommentItems(item);
+        });
+      }
+
+      
+      if (defaultComment) {
+        const defaultSelectorItem = document.querySelector(`[data-selector="${defaultComment}"]`);
+        if (!defaultSelectorItem) return;
+        defaultSelectorItem.style.display = 'block';
+        defaultSelectorItem.classList.add('active');
+        loadCommentSystem(defaultComment);
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', commentInit);
+    } else {
+      commentInit();
+    }
+  };
+  loadComments();
+</script><script
+    src="https://npm.webcache.cn/qrcode@1.5.1/build/qrcode.js"
+    deferdata-pjaxintegrity="sha384-VT1EeewTCEXgndcPMQ0PzV&#43;uVFYjxFIjmAA7s5gcMX9t4Dt5TD&#43;OVQIn7NJWIXn7" crossorigin="anonymous"></script><script
+    src="https://npm.webcache.cn/@zumer/snapdom@1.9.14/dist/snapdom.min.js"
+    deferdata-pjaxintegrity="sha384-OEQ&#43;fJp/Mvi2uzBREXybtxryJvLytWapuHu4EE6LPwTKUwATYcc55tPPcZTzVcmx" crossorigin="anonymous"></script><script
+    src="https://npm.webcache.cn/katex@0.16.24/dist/katex.min.js"
+    data-pjaxintegrity="sha384-MWNUH0WmtsYGhn2cbH6ELRCbf9LG3QDqCC&#43;gqPB3IBNO35xjZK3Ejb6oONRpDbPg" crossorigin="anonymous"></script><script
+    src="https://npm.webcache.cn/katex@0.16.24/dist/contrib/auto-render.min.js"
+    data-pjaxintegrity="sha384-hCXGrW6PitJEwbkoStFjeJxv&#43;fSOOQKOPbJxSfM6G5sWZjAyWhXiTIIAmQqnlLlh" crossorigin="anonymous"></script><script data-pjax>
+          var renderMath = () => {
+            if (!window.renderMathInElement) return;
+            window.renderMathInElement(_$("article"), {
+              delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "\\[", right: "\\]", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+              ],
+            });
+          };
+          if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", renderMath, { once: true });
+          } else {
+            renderMath();
+          }
+        </script></div>
+</div><script data-pjax>
+    var updateTime = _$('#post-update-time')?.innerHTML;
+
+    if (updateTime) {
+      const update = new Date(updateTime);
+      const now = new Date();
+      const diff = now - update;
+      const days = diff / 86400000;
+      const { daysago: daysAgo, message: template } = window.siteConfig.outdate;
+      if (days >= daysAgo) {
+        let message = `This article was last updated on ${updateTime}. Please note that the content may no longer be applicable.`;
+        if (typeof template === 'string') {
+          message = template.replace(/{time}/, updateTime);
+        } else if (typeof template === 'object') {
+          const lang = document.documentElement.lang;
+          const messageKey = Object.keys(template).find(key => key.toLowerCase() === lang.toLowerCase());
+          if (messageKey && template[messageKey]) {
+            message = template[messageKey].replace(/{time}/, updateTime);
+          }
+        }
+        const blockquote = _$('#outdate-blockquote');
+        if (blockquote) {
+          blockquote.querySelectorAll('p')[1].innerText = message;
+          blockquote.style.display = 'flow-root';
+        }
+      }
+    }
+  </script><script
+    src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js"
+    asyncintegrity="sha384-0M75wtSkhjIInv4coYlaJU83&#43;OypaRCIq2SukQVQX04eGTCBXJDuWAbJet56id&#43;S" crossorigin="anonymous"></script><script src="/js/service_worker.js" ></script><script>
+  const reimuCopyright = String.raw`
+   ______     ______     __     __    __     __  __    
+  /\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+  \ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+   \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+    \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                    
+  `;
+  console.log(String.raw`%c ${reimuCopyright}`, "color: #ff5252;");
+  console.log(
+    "%c Theme.Reimu" + " %c https://github.com/D-Sketon/hugo-theme-reimu ",
+    "color: white; background: #ff5252; padding:5px 0;",
+    "padding:4px;border:1px solid #ff5252;",
+  );
+</script><script
+    src="https://npm.webcache.cn/aplayer@1.10.1/dist/APlayer.min.js"
+    integrity="sha384-gdGYZwHnfJM54evoZhpO0s6ZF5BQiybkiyW7VXr&#43;h5UfruuRL/aORyw&#43;5&#43;HZoU6e" crossorigin="anonymous"></script><script>
+    if (! false  || !window.matchMedia('(max-width: 768px)').matches) {
+      if (window.matchMedia('(max-width: 959px)').matches) {
+        const meting = _$('meting-js');
+        if (meting) {
+          meting.setAttribute('fixed', 'true');
+          const aside = meting.parentNode?.parentNode;
+          if (aside?.tagName === 'ASIDE') {
+            meting.parentNode.removeChild(meting);
+            document.body.appendChild(meting);
+          }
+        }
+      }
+      const script = document.createElement('script');
+      script.src = "https:\/\/npm.webcache.cn\/meting@2.0.1\/dist\/Meting.min.js";
+      script.integrity = "sha384-ASVlpKF80A22OXTK3tfEjZm1EL6uFMKIC4p8\u002b0maanw1S\/IyB\u002bY4JG\u002bZDU7GpKE8";
+      script.crossOrigin = "anonymous";
+      document.body.appendChild(script);
+    }
+  </script><script
+    src="https://npm.webcache.cn/pangu@4.0.7/dist/browser/pangu.min.js"
+    integrity="sha384-HeUHqi0nVsPUm/E0ss7OfnIV/yD96JWB8ehZvUuoVax9DpNHL17jj9pdfXHzqDxm" crossorigin="anonymous"></script><script data-pjax>
+    if (document.readyState === "loading") {
+      document.addEventListener('DOMContentLoaded', () => {
+        pangu?.spacingPage();
+      });
+    } else {
+      pangu?.spacingPage();
+    }
+  </script></body>
+</html>

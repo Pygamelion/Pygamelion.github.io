@@ -10,12 +10,18 @@ data-theme-mode="auto"
   404 Page not found | Yabusame Houlen
 </title>
 <meta name="description" content="少女折寿中..."/><script>
-  window.siteConfig = JSON.parse("{\"anchor_icon\":null,\"base\":\"http://localhost:1313/\",\"clipboard\":{\"copyright\":{\"content\":\"本文版权：本博客所有文章除特别声明外，均采用 BY-NC-SA 许可协议。转载请注明出处！\",\"count\":200,\"enable\":false,\"license_type\":\"by-nc-sa\"},\"fail\":\"ERROR(ﾟ⊿ﾟ)ﾂ\",\"success\":\"(*^▽^*)\"},\"code_block\":{\"expand\":25},\"icon_font\":\"4552607_0khxww3tj3q9\",\"outdate\":{\"daysago\":180,\"enable\":true,\"message\":\"本文最后更新于 {time}，请注意文中内容可能已经发生变化。\"}}");
+  window.siteConfig = JSON.parse("{\"anchor_icon\":null,\"base\":\"http://localhost:1313/\",\"clipboard\":{\"copyright\":{\"content\":\"本文版权：本博客所有文章除特别声明外，均采用 BY-NC-SA 许可协议。转载请注明出处！\",\"count\":200,\"enable\":true,\"license_type\":\"by-nc-sa\"},\"fail\":\"ERROR(ﾟ⊿ﾟ)ﾂ\",\"success\":\"(*^▽^*)\"},\"code_block\":{\"expand\":25},\"icon_font\":\"4552607_4k4bc36ef96\",\"outdate\":{\"daysago\":180,\"enable\":true,\"message\":\"本文最后更新于 {time}，请注意文中内容可能已经发生变化。\"}}");
   
   window.siteConfig.swPath = '\/sw.js';
   
 </script>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+    rel="preload"
+    as="style"
+    crossorigin
+    href="https://fontsapi.zeoseven.com/292/main/result.css"
+    onload="this.rel='stylesheet'"
+  /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link
   rel="preload"
   as="style"
@@ -29,7 +35,7 @@ data-theme-mode="auto"
 />
 <link
     rel="preload"
-    href="//at.alicdn.com/t/c/font_4552607_0khxww3tj3q9.woff2"
+    href="//at.alicdn.com/t/c/font_4552607_4k4bc36ef96.woff2"
     as="font"
     type="font/woff2"
     crossorigin="anonymous"
@@ -72,26 +78,37 @@ data-theme-mode="auto"
     integrity="sha384-GMRP93c6Hkz9JVKGAuRR3nTS7M07RwPgTFenXiosjq2VbVgvdDNcz1g6Mkj8AONa" crossorigin="anonymous"/><link
     rel="stylesheet"
     href="https://npm.webcache.cn/aplayer@1.10.1/dist/APlayer.min.css"
-    integrity="sha384-tLMkTWh2pfXNWGFlUS0w1TFtRG5xZ9lPWFOooj&#43;vDDLIL&#43;xBGQU/voDBY5XE2lVh" crossorigin="anonymous"/></head>
+    integrity="sha384-tLMkTWh2pfXNWGFlUS0w1TFtRG5xZ9lPWFOooj&#43;vDDLIL&#43;xBGQU/voDBY5XE2lVh" crossorigin="anonymous"/>
+<style>
+  .two {
+    columns: 2;
+    column-gap: 2rem;
+  }
+  .multi {
+    columns: 3;
+    column-gap: 2rem;
+  }
+</style>
+</head>
 <body><div id="container">
     <div id="wrap">
       <div id="header-nav">
   <nav id="main-nav" aria-label="Primary navigation"><a class="main-nav-link-wrap" href="/">
-        <div class='main-nav-icon icon rotate'>&#xe62b;</div>
+        <div class='main-nav-icon icon '>&#x1F704;</div>
         <span class="main-nav-link">首页</span>
       </a><a class="main-nav-link-wrap" href="/archives">
-        <div class='main-nav-icon icon rotate'>&#xe62b;</div>
+        <div class='main-nav-icon icon '>&#x1F702;</div>
         <span class="main-nav-link">归档</span>
       </a><a class="main-nav-link-wrap" href="/resource">
-        <div class='main-nav-icon icon rotate'>&#xe62b;</div>
-        <span class="main-nav-link">网站索引</span>
+        <div class='main-nav-icon icon '>&#x1F703;</div>
+        <span class="main-nav-link">站点</span>
       </a><a class="main-nav-link-wrap" href="/about">
-        <div class='main-nav-icon icon rotate'>&#xe62b;</div>
-        <span class="main-nav-link">奇怪收录</span>
+        <div class='main-nav-icon icon '>&#x1F701;</div>
+        <span class="main-nav-link">收录</span>
       </a><a id="main-nav-toggle" class="nav-icon" aria-label="Toggle navigation" role="button"></a>
   </nav>
   <nav id="sub-nav" aria-label="Secondary navigation"><a id="nav-search-btn" class="nav-icon popup-trigger" title="搜索" aria-label="搜索"></a></nav></div>
-<header id="header" aria-label="Site header"><picture></picture><img  fetchpriority="high" src="/images/banner.webp" alt=""><div id="header-outer">
+<header id="header" aria-label="Site header"><picture></picture><img crossorigin="anonymous" fetchpriority="high" src="/images/astro_banner.jpg" alt=""><div id="header-outer">
     <div id="header-title"><a href="/" id="logo">
           <h1 data-aos="slide-up">4 0 4 (ﾟ⊿ﾟ)ﾂ</h1>
         </a><h2 id="subtitle-wrap" data-aos="slide-down">
@@ -118,7 +135,9 @@ data-theme-mode="auto"
     src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js"
     integrity="sha384-3gT/vsepWkfz/ff7PpWNUeMzeWoH3cDhm/A8jM7ouoAK0/fP/9bcHHR5kHq2nf&#43;e" crossorigin="anonymous"></script><script
     src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js"
-    integrity="sha384-J08i8An/QeARD9ExYpvphB8BsyOj3Gh2TSh1aLINKO3L0cMSH2dN3E22zFoXEi0Q" crossorigin="anonymous"></script><script src="/js/main.js" ></script><script src="/js/aos.js" ></script><script>
+    integrity="sha384-J08i8An/QeARD9ExYpvphB8BsyOj3Gh2TSh1aLINKO3L0cMSH2dN3E22zFoXEi0Q" crossorigin="anonymous"></script><script
+    src="https://npm.webcache.cn/material-theme@1.0.0/dist/material-theme.umd.js"
+    integrity="sha384-vLev0II0HKFaxkcm&#43;/7kX5IGwVFBASkGchU311wmU/veIj2bB0UcBkQbW6yw2asK" crossorigin="anonymous"></script><script src="/js/main.js" ></script><script src="/js/aos.js" ></script><script>
     var aosInit = () => {
       AOS.init({
         duration: 1000,
@@ -158,7 +177,7 @@ data-theme-mode="auto"
     integrity="sha384-8LyaidD9GPxQQgLJO/WRw/O2h3BoNq/ApI/ecpvM6RsrCz2qP2ppBXUKihP4V/2d" crossorigin="anonymous"></script><script>
   if (! false  || !window.matchMedia('(max-width: 768px)').matches) {
     if (window.firework) {
-      const options = JSON.parse("{\"excludeelements\":[\"a\",\"button\"],\"particles\":[{\"colors\":[\"var(--red-1)\",\"var(--red-2)\",\"var(--red-3)\",\"var(--red-4)\"],\"duration\":[1200,1800],\"easing\":\"easeOutExpo\",\"move\":[\"emit\"],\"number\":20,\"shape\":\"circle\",\"shapeOptions\":{\"alpha\":[0.3,0.5],\"radius\":[16,32]}},{\"colors\":[\"var(--red-0)\"],\"duration\":[1200,1800],\"easing\":\"easeOutExpo\",\"move\":[\"diffuse\"],\"number\":1,\"shape\":\"circle\",\"shapeOptions\":{\"alpha\":[0.2,0.5],\"lineWidth\":6,\"radius\":20}}]}");
+      const options = JSON.parse("{\"excludeelements\":[\"a\",\"button\"],\"particles\":[{\"colors\":[\"var(--red-1)\",\"var(--red-2)\",\"var(--red-3)\",\"var(--red-4)\"],\"duration\":[1200,1800],\"easing\":\"easeOutExpo\",\"move\":[\"emit\"],\"number\":20,\"shape\":\"circle\",\"shapeOptions\":{\"alpha\":[0.3,0.5],\"radius\":[12,28]}},{\"colors\":[\"var(--red-0)\"],\"duration\":[1200,1800],\"easing\":\"easeOutExpo\",\"move\":[\"diffuse\"],\"number\":1,\"shape\":\"circle\",\"shapeOptions\":{\"alpha\":[0.2,0.5],\"lineWidth\":6,\"radius\":20}}]}");
       options.excludeElements = options.excludeelements;
       delete options.excludeelements;
       window.firework(options);
@@ -177,9 +196,9 @@ data-theme-mode="auto"
           title: "404 Page not found",
           url: "http:\/\/localhost:1313\/404.html",
           description: "",
-          cover: "http:\/\/localhost:1313\/images\/banner.webp",
+          cover: "http:\/\/localhost:1313\/images\/astro_banner.jpg",
         };
-      </script><script src="/js/insert_highlight.js" data-pjax></script><script type="module" data-pjax>const PhotoSwipeLightbox = (await safeImport("https:\/\/npm.webcache.cn\/photoswipe@5.4.4\/dist\/photoswipe-lightbox.esm.min.js", "sha384-DiL6M\/gG\u002bwmTxmCRZyD1zee6lIhawn5TGvED0FOh7fXcN9B0aZ9dexSF\/N6lrZi\/")).default;const initPswp = (gallery, children) => {
+      </script><script src="/js/insert_highlight.js" data-pjax></script><script src="/js/tabs.js" data-pjax></script><script type="module" data-pjax>const PhotoSwipeLightbox = (await safeImport("https:\/\/npm.webcache.cn\/photoswipe@5.4.4\/dist\/photoswipe-lightbox.esm.min.js", "sha384-DiL6M\/gG\u002bwmTxmCRZyD1zee6lIhawn5TGvED0FOh7fXcN9B0aZ9dexSF\/N6lrZi\/")).default;const initPswp = (gallery, children) => {
           if (_$$(`${gallery} ${children}`).length > 0) {
             new PhotoSwipeLightbox({
               gallery,
@@ -205,7 +224,7 @@ data-theme-mode="auto"
     script.crossOrigin = 'anonymous';
     return script;
   };
-  var commentConfigKeys = ['valine', 'waline', 'twikoo', 'gitalk', 'giscus'];
+  var commentConfigKeys = ['valine', 'waline', 'twikoo', 'gitalk', 'giscus', 'disqus'];
   var commentConfig = {giscus: {
       enable: true,
       load: () => {
@@ -256,7 +275,7 @@ data-theme-mode="auto"
           iframe.contentWindow.postMessage({ giscus: { setConfig: { theme: 'dark' } } }, 'https://giscus.app');
         });
       }
-    }};
+    },};
   commentConfig.enable = commentConfigKeys.some(key => commentConfig?.[key]?.enable);
 
   var defaultComment = '';
@@ -273,7 +292,7 @@ data-theme-mode="auto"
     
     
     if (!defaultComment) {
-      var configDefault = 'waline';
+      var configDefault = 'giscus';
       if (commentConfig[configDefault]?.enable) {
         defaultComment = configDefault;
       }
