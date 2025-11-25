@@ -12,12 +12,32 @@
     
     <copyright>本博客所有文章除特别声明外，均采用 BY-NC-SA 许可协议。转载请注明出处！</copyright>
     
-    <lastBuildDate>Tue, 18 Nov 2025 11:00:00 -0700</lastBuildDate>
+    <lastBuildDate>Tue, 25 Nov 2025 11:00:00 +0800</lastBuildDate>
     
     
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss&#43;xml" />
     
 
+    
+    
+
+    <item>
+      <title>rubbish</title>
+      <link>http://localhost:1313/post/mind/miscellaneous/</link>
+      <pubDate>Wed, 15 Oct 2025 11:00:00 &#43;0800</pubDate>
+      <author>yabusamehour@outlook.com (Yabusame Houlen)</author>
+      <guid>http://localhost:1313/post/mind/miscellaneous/</guid>
+      <description>
+        <![CDATA[<h1>rubbish</h1><p>作者：Yabusame Houlen（yabusamehour@outlook.com）</p>
+        
+          <div style="text-align:left; padding-left:10%"><a><i>Weird Trush Can</i></a><i>......Present day, Present time......HAHAHAHA</i></div>
+        
+        <hr><p>本文2025-10-15首发于<a href='http://localhost:1313/'>11-D Space</a>，最后修改于2025-11-25</p>]]>
+      </description>
+      
+        <category>Mind</category>
+      
+    </item>
     
     
 
@@ -80,20 +100,21 @@
     
 
     <item>
-      <title>rubbish</title>
-      <link>http://localhost:1313/post/mind/miscellaneous/</link>
-      <pubDate>Wed, 15 Oct 2025 11:00:00 &#43;0800</pubDate>
+      <title>Julia 符号计算</title>
+      <link>http://localhost:1313/post/sciml/julia_symbolics/</link>
+      <pubDate>Fri, 10 Oct 2025 11:00:00 &#43;0800</pubDate>
       <author>yabusamehour@outlook.com (Yabusame Houlen)</author>
-      <guid>http://localhost:1313/post/mind/miscellaneous/</guid>
+      <guid>http://localhost:1313/post/sciml/julia_symbolics/</guid>
       <description>
-        <![CDATA[<h1>rubbish</h1><p>作者：Yabusame Houlen（yabusamehour@outlook.com）</p>
+        <![CDATA[<h1>Julia 符号计算</h1><p>作者：Yabusame Houlen（yabusamehour@outlook.com）</p>
         
-          <div style="text-align:left; padding-left:10%"><a><i>Weird Trush Can</i></a><i>......Present day, Present time......HAHAHAHA</i></div>
+          <div style="text-align:left; font-size:16px;">
+<p>今天同学与我讨论微分几何相关的东西，他不喜欢各种指标运算喜欢具体写出来╯︿╰，我便推荐了之前在网络上收藏的资料。<a href="https://chaoskey.github.io/notes/docs/diffgeo/0070/">这篇博客</a>作者的很多内容，写得比教科书好理解很多，只是我看他计划长期维护，但是上次更新还是五年前（可能觉得没什么必要吧~~ 我来更新一下：现在有<code>Symbolics.jl</code>，应该不用通过<code>Pycall</code>去调用<code>Python</code>了(≧∀≦)ゞ，并且有个Sciml的社区支持，以后搞些数值计算也会容易些</p>
         
-        <hr><p>本文2025-10-15首发于<a href='http://localhost:1313/'>11-D Space</a>，最后修改于2025-11-05</p>]]>
+        <hr><p>本文2025-10-10首发于<a href='http://localhost:1313/'>11-D Space</a>，最后修改于2025-11-11</p>]]>
       </description>
       
-        <category>Mind</category>
+        <category>Programming</category>
       
     </item>
     

@@ -1,0 +1,1487 @@
+<!doctype html>
+<html
+  lang="zh-cn" 
+  data-theme-mode="auto"
+  >
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8" />
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1, shrink-to-fit=no"
+/><title>
+  Julia 符号计算 | Yabusame Houlen
+</title>
+<meta name="description" content="少女折寿中..."/><script>
+  window.siteConfig = JSON.parse("{\"anchor_icon\":null,\"base\":\"http://localhost:1313/\",\"clipboard\":{\"copyright\":{\"content\":\"本文版权：本博客所有文章除特别声明外，均采用 BY-NC-SA 许可协议。转载请注明出处！\",\"count\":200,\"enable\":true,\"license_type\":\"by-nc-sa\"},\"fail\":\"ERROR(ﾟ⊿ﾟ)ﾂ\",\"success\":\"(*^▽^*)\"},\"code_block\":{\"expand\":32},\"icon_font\":\"4552607_4k4bc36ef96\",\"outdate\":{\"daysago\":180,\"enable\":true,\"message\":\"本文最后更新于 {time}，请注意文中内容可能已经发生变化。\"}}");
+  
+  window.siteConfig.swPath = '\/sw.js';
+  
+</script>
+<link
+    rel="preload"
+    as="style"
+    crossorigin
+    href="https://fontsapi.zeoseven.com/292/main/result.css"
+    onload="this.rel='stylesheet'"
+  /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  rel="preload"
+  as="style"
+  href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7cNoto%20Serif%20SC:400,400italic,700,700italic%7c&amp;display=swap"
+/>
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7cNoto%20Serif%20SC:400,400italic,700,700italic%7c&amp;display=swap"
+  media="print"
+  onload="this.media='all'"
+/>
+<link
+    rel="preload"
+    href="//at.alicdn.com/t/c/font_4552607_4k4bc36ef96.woff2"
+    as="font"
+    type="font/woff2"
+    crossorigin="anonymous"
+  /><link rel="stylesheet" href="/css/loader.css" />
+<meta property="og:type" content="website" />
+  <meta property="og:title" content="Julia 符号计算 | Yabusame Houlen" />
+  <meta
+    property="og:description"
+    content="少女折寿中..."
+  />
+  <meta property="og:url" content="http://localhost:1313/post/sciml/julia_symbolics/" />
+  <meta
+    property="og:site_name"
+    content="11-D Space"
+  />
+  <meta
+    property="og:image"
+    content="/images/reimu_bkg.jpg"
+  />
+  <meta property="article:author" content="Yabusame Houlen" />
+  <meta property="article:published_time" content="2025-10-10T11:00:00&#43;08:00" />
+  <meta property="article:modified_time" content="2025-11-11T11:00:00&#43;08:00" /><meta property="article:tag" content="Julia" /><meta name="twitter:card" content="summary" />
+  <meta name="twitter:image" content="/images/reimu_bkg.jpg" />
+<link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/css/main.css" />
+<link
+    rel="preload"
+    as="style"
+    href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css"
+    integrity="sha384-IfxC36XL/toUyJ939C73PcgMuRzAZuIzZxE38drsmO5p6jD7ei&#43;Zx/1oA/0l8ysE" crossorigin="anonymous"onload="this.onload=null;this.rel='stylesheet'"
+  /><link
+    rel="preload"
+    as="style"
+    href="https://npm.webcache.cn/katex@0.16.24/dist/katex.min.css"
+    integrity="sha384-tTgKLjMYmJr94v8qu2PE5MUGSMbyN2xiH266JUB3gpm8vnnJywd1dWSOEfrFz&#43;YI" crossorigin="anonymous"onload="this.onload=null;this.rel='stylesheet'"
+  /><script
+    src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js"
+    integrity="sha384-k6YtvFUEIuEFBdrLKJ3YAUbBki333tj1CSUisai5Cswsg9wcLNaPzsTHDswp4Az8" crossorigin="anonymous"></script><link
+    rel="stylesheet"
+    href="https://npm.webcache.cn/@reimujs/aos@0.1.2/dist/aos.css"
+    integrity="sha384-GMRP93c6Hkz9JVKGAuRR3nTS7M07RwPgTFenXiosjq2VbVgvdDNcz1g6Mkj8AONa" crossorigin="anonymous"/><link
+    rel="stylesheet"
+    href="https://npm.webcache.cn/aplayer@1.10.1/dist/APlayer.min.css"
+    integrity="sha384-tLMkTWh2pfXNWGFlUS0w1TFtRG5xZ9lPWFOooj&#43;vDDLIL&#43;xBGQU/voDBY5XE2lVh" crossorigin="anonymous"/>
+<style>
+  .two {
+    columns: 2;
+    column-gap: 2rem;
+  }
+  .multi {
+    columns: 3;
+    column-gap: 2rem;
+  }
+</style>
+</head>
+  <body><div id='loader'>
+    <div class="loading-left-bg loading-bg"></div>
+    <div class="loading-right-bg loading-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi rotate"><svg width="150" height="150" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="https://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+            <path d="M303.5 432A80 80 0 0 1 291.5 592A80 80 0 0 1 303.5 432z" fill="var(--red-1, #ff5252)" />
+            <path d="M512 65A447 447 0 0 1 512 959L512 929A417 417 0 0 0 512 95A417 417 0 0 0 512 929L512 959A447 447 0 0 1 512 65z 
+          M512 95A417 417 0 0 1 929 512A208.5 208.5 0 0 1 720.5 720.5L720.5 592A80 80 0 0 0 720.5 432A80 80 0 0 0 720.5 592L720.5 720.5A208.5 208.5 0 0 1 512 512A208.5 208.5 0 0 0 303.5 303.5A208.5 208.5 0 0 0 95 512A417 417 0 0 1 512 95z" fill="var(--red-1, #ff5252)" />
+          </svg></div><div class="loading-word">少女祈祷中...</div>
+    </div>
+  </div>
+  </div>
+  <script>
+    var time = null;
+    var loaderEl = document.getElementById('loader');
+    var startLoading = () => {
+      time = Date.now();
+      loaderEl.classList.remove("loading");
+    }
+    var hideLoader = () => {
+      document.body.style.overflow = 'auto';
+      loader.classList.add('loading');
+    };
+
+    var endLoading = () => {
+      if (!time) {
+        hideLoader();
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          hideLoader();
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+    loaderEl.addEventListener('click', endLoading);
+  </script><div id="copy-tooltip"></div>
+<div id="lang-tooltip">
+本文章没有找到对应的语言版本
+</div>
+<div id="heatmap-tooltip"></div><div class="notification-wrapper">
+    <h1>发现新版本</h1>
+    <p>网站好像有新内容，是否更新(ﾟ⊿ﾟ)ﾂ？</p>
+    <div class="notification-btn">
+      <button id="notification-update-btn">更新</button>
+      <button id="notification-close-btn">取消</button>
+    </div>
+  </div><div id="container">
+      <div id="wrap"><div id="header-nav">
+  <nav id="main-nav" aria-label="Primary navigation"><a class="main-nav-link-wrap" href="/">
+        <div class='main-nav-icon icon '>&#x1F704;</div>
+        <span class="main-nav-link">首页</span>
+      </a><a class="main-nav-link-wrap" href="/archives">
+        <div class='main-nav-icon icon '>&#x1F702;</div>
+        <span class="main-nav-link">归档</span>
+      </a><a class="main-nav-link-wrap" href="/resource">
+        <div class='main-nav-icon icon '>&#x1F703;</div>
+        <span class="main-nav-link">站点</span>
+      </a><a class="main-nav-link-wrap" href="/about">
+        <div class='main-nav-icon icon '>&#x1F701;</div>
+        <span class="main-nav-link">收录</span>
+      </a><a id="main-nav-toggle" class="nav-icon" aria-label="Toggle navigation" role="button"></a>
+  </nav>
+  <nav id="sub-nav" aria-label="Secondary navigation"><a id="nav-search-btn" class="nav-icon popup-trigger" title="搜索" aria-label="搜索"></a></nav></div>
+<header id="header" aria-label="Site header"><picture></picture>
+    <img crossorigin="anonymous" fetchpriority="high" src="/images/reimu_bkg.jpg" alt="Julia 符号计算"><div id="header-outer">
+    <div id="header-title"><span id="logo">
+            <h1 data-aos="slide-up">Julia 符号计算</h1>
+          </span><h2 id="subtitle-wrap" data-aos="slide-down"><span id="subtitle"><div style="text-align:left; font-size:16px;">
+<p>今天同学与我讨论微分几何相关的东西，他不喜欢各种指标运算喜欢具体写出来╯︿╰，我便推荐了之前在网络上收藏的资料。<a href="https://chaoskey.github.io/notes/docs/diffgeo/0070/">这篇博客</a>作者的很多内容，写得比教科书好理解很多，只是我看他计划长期维护，但是上次更新还是五年前（可能觉得没什么必要吧~~ 我来更新一下：现在有<code>Symbolics.jl</code>，应该不用通过<code>Pycall</code>去调用<code>Python</code>了(≧∀≦)ゞ，并且有个Sciml的社区支持，以后搞些数值计算也会容易些</p></span></h2></div>
+  </div>
+</header><div id="content"
+          aria-label="Page content"
+          
+          class="sidebar-right"  ><aside id="sidebar" aria-label="Sidebar"><div class="sidebar-wrapper-container sticky"><div class="sidebar-wrapper">
+    <div
+      class="sidebar-wrap"
+      data-aos="fade-up"
+    ><div class="sidebar-toc-sidebar"><h3 class="toc-title">文章目录</h3>
+<div class="sidebar-toc-wrapper toc-div-class">
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#使用环境">使用环境</a></li>
+    <li><a href="#张量的变换">张量的变换</a></li>
+    <li><a href="#子流形上的诱导度规">子流形上的诱导度规</a></li>
+    <li><a href="#christoffel-symbol">Christoffel symbol</a></li>
+    <li><a href="#黎曼曲率张量">黎曼曲率张量</a></li>
+    <li><a href="#里奇张量">里奇张量</a></li>
+    <li><a href="#killing-矢量场">killing 矢量场</a></li>
+    <li><a href="#levi-civita记号">Levi-Civita记号</a></li>
+  </ul>
+</nav>
+</div></div>
+          <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img
+    data-src="/avatar/avatar.jpg"
+    data-sizes="auto"
+    alt="Yabusame Houlen"
+    class="lazyload"
+  />
+  <div class="sidebar-author-name">Yabusame Houlen</div>
+  <div class="sidebar-description">少女折寿中...</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div><div class="sidebar-state-number">5</div>
+  </div>
+  <a class="sidebar-state-category" href="/categories/" aria-label="sidebar-state-category-link">
+    <div>分类</div>
+    <div class="sidebar-state-number">
+      3
+    </div>
+  </a>
+  <a class="sidebar-state-tag" href="/tags/" aria-label="sidebar-state-tag-link">
+    <div>标签</div>
+    <div class="sidebar-state-number">4</div>
+  </a>
+</div>
+<div class="sidebar-social"><div class="icon-bilibili sidebar-social-icon">
+      <a
+        href="https://space.bilibili.com/312577459"
+        itemprop="url"
+        target="_blank"
+        aria-label="bilibili"
+        rel="noopener nofollow noreferrer"
+      ></a>
+    </div><div class="icon-github sidebar-social-icon">
+      <a
+        href="https://github.com/Pygamelion"
+        itemprop="url"
+        target="_blank"
+        aria-label="github"
+        rel="noopener nofollow noreferrer"
+      ></a>
+    </div><div class="icon-steam sidebar-social-icon">
+      <a
+        href="https://steamcommunity.com/profiles/76561198908551093"
+        itemprop="url"
+        target="_blank"
+        aria-label="steam"
+        rel="noopener nofollow noreferrer"
+      ></a>
+    </div></div>
+<div class="sidebar-menu"><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/"
+        aria-label="首页"
+      ></a>
+      <div class='sidebar-menu-icon icon '>&#x1F704;</div>
+      <div class="sidebar-menu-link">首页</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/archives"
+        aria-label="归档"
+      ></a>
+      <div class='sidebar-menu-icon icon '>&#x1F702;</div>
+      <div class="sidebar-menu-link">归档</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/resource"
+        aria-label="站点"
+      ></a>
+      <div class='sidebar-menu-icon icon '>&#x1F703;</div>
+      <div class="sidebar-menu-link">站点</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/about"
+        aria-label="收录"
+      ></a>
+      <div class='sidebar-menu-icon icon '>&#x1F701;</div>
+      <div class="sidebar-menu-link">收录</div>
+    </div></div>
+</div><div class="sidebar-btn-wrapper" style="position:static">
+            <div class="sidebar-toc-btn current"></div>
+            <div class="sidebar-common-btn"></div>
+          </div></div>
+  </div><div class="sidebar-widget"></div></div></aside>
+<section id="main" aria-label="Main content"><article
+  class="h-entry article"
+  itemscope
+  itemtype="https://schema.org/BlogPosting"
+>
+  <div
+    class="article-inner"
+    data-aos="fade-up"
+  >
+    <div class="article-meta"><div class="article-date">
+  <span
+    class="article-date-link icon-calendar"
+    data-aos="zoom-in"
+  >
+    <time datetime="2025-10-10 11:00:00 &#43;0800 CST" itemprop="datePublished"
+      >2025-10-10</time
+    >
+    <time style="display: none;" id="post-update-time"
+      >2025-11-11</time
+    >
+  </span></div>
+<div class="article-category"><a
+      class="article-category-link"
+      href="/categories/programming"
+      data-aos="zoom-in"
+      >PROGRAMMING</a
+    ></div>
+</div><div class="hr-line"></div><div class="article-gallery">
+    <div class="article-gallery-photos"><a class="article-gallery-img article-gallery-item" href="https://raw.githubusercontent.com/Pygamelion/Mottos/refs/heads/master/Figures/Techology/Big_Julia.png" target="_blank">
+          <img src="https://raw.githubusercontent.com/Pygamelion/Mottos/refs/heads/master/Figures/Techology/Big_Julia.png" itemprop="image" alt="gallery" onload="this.parentNode.dataset.pswpWidth = this.naturalWidth;this.parentNode.dataset.pswpHeight = this.naturalHeight;" >
+        </a></div>
+  </div><div class="e-content article-entry" itemprop="articleBody"><blockquote
+          class="alert-blockquote warning"
+          id="outdate-blockquote"
+          style="display: none;"
+        >
+          <p class="alert-heading">WARNING</p>
+          <p></p>
+        </blockquote><div style="text-align:left; font-size:16px;">
+<p>今天同学与我讨论微分几何相关的东西，他不喜欢各种指标运算喜欢具体写出来╯︿╰，我便推荐了之前在网络上收藏的资料。<a href="https://chaoskey.github.io/notes/docs/diffgeo/0070/">这篇博客</a>作者的很多内容，写得比教科书好理解很多，只是我看他计划长期维护，但是上次更新还是五年前（可能觉得没什么必要吧~~ 我来更新一下：现在有<code>Symbolics.jl</code>，应该不用通过<code>Pycall</code>去调用<code>Python</code>了(≧∀≦)ゞ，并且有个Sciml的社区支持，以后搞些数值计算也会容易些</p>
+</div>
+<p>这里的内容只是对<a href="https://chaoskey.github.io/notes/">原作者</a>代码的更新和转述，我只是换新包验算的，总之代码归原作者，错了的内容我也不负责(0^◇^0)/</p>
+<h2 id="使用环境">
+<a class="header-anchor" href="#%e4%bd%bf%e7%94%a8%e7%8e%af%e5%a2%83"></a>
+使用环境
+</h2><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">    Julia 1.12
+</span></span><span class="line"><span class="cl">    Platform Info:
+</span></span><span class="line"><span class="cl">    OS: Windows <span class="o">(</span>x86_64-w64-mingw32<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    CPU: <span class="m">16</span> × AMD Ryzen <span class="m">7</span> 8845H w/ Radeon 780M Graphics
+</span></span><span class="line"><span class="cl">    WORD_SIZE: <span class="m">64</span>
+</span></span><span class="line"><span class="cl">    LLVM: libLLVM-18.1.7 <span class="o">(</span>ORCJIT, znver3<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    GC: Built with stock GC
+</span></span><span class="line"><span class="cl">    Threads: <span class="m">1</span> default, <span class="m">1</span> interactive, <span class="m">1</span> GC <span class="o">(</span>on <span class="m">16</span> virtual cores<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">### 用到的几个包</span>
+</span></span><span class="line"><span class="cl">    <span class="o">[</span>8be319e6<span class="o">]</span> Chain v1.0.0
+</span></span><span class="line"><span class="cl">    <span class="o">[</span>23fbe1c1<span class="o">]</span> Latexify v0.16.10
+</span></span><span class="line"><span class="cl">    <span class="o">[</span>0c5d862f<span class="o">]</span> Symbolics v6.55.0
+</span></span></code></pre></div><p>在使用之后的代码前导入这些包应该就行了&hellip;</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-julia" data-lang="julia"><span class="line"><span class="cl"><span class="k">using</span> <span class="n">Chain</span> <span class="c">### 个人习惯</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="n">LinearAlgebra</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="n">Symbolics</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="n">Symbolics</span><span class="o">:</span> <span class="n">derivative</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="n">Symbolics</span><span class="o">.</span><span class="n">Rewriters</span> <span class="c">### 用于化简...</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="n">Latexify</span><span class="o">:</span> <span class="n">latexify</span>  <span class="c">### Latex输出</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="张量的变换">
+<a class="header-anchor" href="#%e5%bc%a0%e9%87%8f%e7%9a%84%e5%8f%98%e6%8d%a2"></a>
+张量的变换
+</h2><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-julia" data-lang="julia"><span class="line"><span class="cl"><span class="c">## 定义符号变量</span>
+</span></span><span class="line"><span class="cl"><span class="nd">@variables</span> <span class="n">r</span> <span class="n">θ</span> <span class="n">φ</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Cartesian → Spherical 变换</span>
+</span></span><span class="line"><span class="cl"><span class="n">X</span> <span class="o">=</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="n">r</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">θ</span><span class="p">)</span> <span class="o">*</span> <span class="n">cos</span><span class="p">(</span><span class="n">φ</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="n">r</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">θ</span><span class="p">)</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">φ</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="n">r</span> <span class="o">*</span> <span class="n">cos</span><span class="p">(</span><span class="n">θ</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">Q</span> <span class="o">=</span> <span class="p">[</span><span class="n">r</span><span class="p">,</span> <span class="n">θ</span><span class="p">,</span> <span class="n">φ</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># 欧氏度规 g_ij = δ_ij</span>
+</span></span><span class="line"><span class="cl"><span class="n">g</span> <span class="o">=</span> <span class="n">I</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>     <span class="c"># 3×3 单位矩阵</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># 球坐标度规 h = Mᵀ * g * M</span>
+</span></span><span class="line"><span class="cl"><span class="n">h</span> <span class="o">=</span> <span class="n">M</span><span class="o">&#39;</span> <span class="o">*</span> <span class="n">g</span> <span class="o">*</span> <span class="n">M</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>照理来说不应该直接带入 cos, 但是类似<code>cos(θ)*sin(φ)^2 + cos(θ)*cos(φ)^2</code>的表达式它不化简(ˉ▽￣～) 我没搞懂怎么使用<code>@rule/@acrule</code>化简三角表达式&hellip; 也许是现在的版本原因，文档示例怎么还有点错&hellip;总之直接带入也挺方便的</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-julia" data-lang="julia"><span class="line"><span class="cl"><span class="nd">@chain</span> <span class="n">h</span> <span class="k">begin</span>
+</span></span><span class="line"><span class="cl">    <span class="nd">@.</span> <span class="n">substitute</span><span class="p">(</span><span class="n">_</span><span class="p">,</span> <span class="n">cos</span><span class="p">(</span><span class="n">φ</span><span class="p">)</span><span class="o">^</span><span class="mi">2</span> <span class="o">=&gt;</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">sin</span><span class="p">(</span><span class="n">φ</span><span class="p">)</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nd">@.</span> <span class="n">simplify</span><span class="p">(</span><span class="n">_</span><span class="p">;</span> <span class="n">expand</span><span class="o">=</span><span class="nb">true</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">latexify</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div>$$
+    \begin{equation}
+    \left[
+    \begin{array}{ccc}
+    1 & 0 & 0 \\
+    0 & r^{2} & 0 \\
+    0 & 0 & \sin^{2}\left( \theta \right) r^{2} \\
+    \end{array}
+    \right]
+    \end{equation}
+$$<h2 id="子流形上的诱导度规">
+<a class="header-anchor" href="#%e5%ad%90%e6%b5%81%e5%bd%a2%e4%b8%8a%e7%9a%84%e8%af%b1%e5%af%bc%e5%ba%a6%e8%a7%84"></a>
+子流形上的诱导度规
+</h2><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-julia" data-lang="julia"><span class="line"><span class="cl"><span class="n">X</span> <span class="o">=</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="n">r</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">θ</span><span class="p">)</span> <span class="o">*</span> <span class="n">cos</span><span class="p">(</span><span class="n">φ</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="n">r</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">θ</span><span class="p">)</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">φ</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="n">r</span> <span class="o">*</span> <span class="n">cos</span><span class="p">(</span><span class="n">θ</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># 球面只有两个参数， r是常量，所以不在坐标列表中</span>
+</span></span><span class="line"><span class="cl"><span class="n">Q</span> <span class="o">=</span> <span class="p">[</span><span class="n">θ</span><span class="p">,</span> <span class="n">φ</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">g</span> <span class="o">=</span> <span class="n">I</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">M</span> <span class="o">=</span> <span class="n">Symbolics</span><span class="o">.</span><span class="n">jacobian</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Q</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">h</span> <span class="o">=</span> <span class="n">transpose</span><span class="p">(</span><span class="n">M</span><span class="p">)</span> <span class="o">*</span> <span class="n">g</span> <span class="o">*</span> <span class="n">M</span>
+</span></span><span class="line"><span class="cl"><span class="nd">@chain</span> <span class="n">h</span> <span class="k">begin</span>
+</span></span><span class="line"><span class="cl">    <span class="c">### 目前三角函数简化支持仍然不好(https://github.com/JuliaSymbolics/Symbolics.jl/issues/1285)</span>
+</span></span><span class="line"><span class="cl">    <span class="nd">@.</span> <span class="n">substitute</span><span class="p">(</span><span class="n">_</span><span class="p">,</span> <span class="n">cos</span><span class="p">(</span><span class="n">φ</span><span class="p">)</span><span class="o">^</span><span class="mi">2</span> <span class="o">=&gt;</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">sin</span><span class="p">(</span><span class="n">φ</span><span class="p">)</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nd">@.</span> <span class="n">expand</span>
+</span></span><span class="line"><span class="cl">    <span class="nd">@.</span> <span class="n">simplify</span>
+</span></span><span class="line"><span class="cl">    <span class="n">latexify</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div>$$
+    \begin{equation}
+    \left[
+    \begin{array}{cc}
+    r^{2} & 0 \\
+    0 & \sin^{2}\left( \theta \right) r^{2} \\
+    \end{array}
+    \right]
+    \end{equation}
+$$<h2 id="christoffel-symbol">
+<a class="header-anchor" href="#christoffel-symbol"></a>
+Christoffel symbol
+</h2><p>$ds² = z^{\frac{1}{2}}(-dt^2 + dz^2) + z(dx^2 + dy^2)$ 的克氏符在 ${t,x,y,z}$ 系的分量</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-julia" data-lang="julia"><span class="line"><span class="cl"><span class="c"># 坐标变量</span>
+</span></span><span class="line"><span class="cl"><span class="nd">@variables</span> <span class="n">t</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span>
+</span></span><span class="line"><span class="cl"><span class="n">X</span> <span class="o">=</span> <span class="p">[</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># 度规张量及其逆</span>
+</span></span><span class="line"><span class="cl"><span class="n">g</span> <span class="o">=</span> <span class="n">I</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="o">.*</span> <span class="p">[</span><span class="o">-</span><span class="n">z</span><span class="o">^</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span> <span class="o">//</span> <span class="mi">2</span><span class="p">),</span> <span class="n">z</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">z</span><span class="o">^</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)]</span>
+</span></span><span class="line"><span class="cl"><span class="n">gi</span> <span class="o">=</span> <span class="n">inv</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># 根据度规计算克氏符</span>
+</span></span><span class="line"><span class="cl"><span class="n">Γ</span> <span class="o">=</span> <span class="n">sum</span><span class="p">([</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="mi">1</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">gi</span><span class="p">[</span><span class="n">σ</span><span class="p">,</span> <span class="n">ρ</span><span class="p">]</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">derivative</span><span class="p">(</span><span class="n">g</span><span class="p">[</span><span class="n">υ</span><span class="p">,</span> <span class="n">ρ</span><span class="p">],</span> <span class="n">X</span><span class="p">[</span><span class="n">μ</span><span class="p">])</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">        <span class="n">derivative</span><span class="p">(</span><span class="n">g</span><span class="p">[</span><span class="n">μ</span><span class="p">,</span> <span class="n">ρ</span><span class="p">],</span> <span class="n">X</span><span class="p">[</span><span class="n">υ</span><span class="p">])</span> <span class="o">-</span>
+</span></span><span class="line"><span class="cl">        <span class="n">derivative</span><span class="p">(</span><span class="n">g</span><span class="p">[</span><span class="n">μ</span><span class="p">,</span> <span class="n">υ</span><span class="p">],</span> <span class="n">X</span><span class="p">[</span><span class="n">ρ</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>  <span class="c"># 公式部分</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">μ</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="mi">4</span><span class="p">,</span> <span class="n">υ</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="mi">4</span><span class="p">,</span> <span class="n">σ</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="mi">4</span><span class="p">]</span>   <span class="c"># 三重数组生成指标</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">ρ</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="mi">4</span><span class="p">)</span> <span class="o">.|&gt;</span> <span class="n">simplify</span>  <span class="c"># 缩并求和指标</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># 显示所有分量（剔除了0分量和对称分量）</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Symbolics</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="kt">Symbol</span><span class="p">(</span><span class="s">&#34;Γ^{</span><span class="si">$σ</span><span class="s">}_{</span><span class="si">$μ$υ</span><span class="s">}&#34;</span><span class="p">))</span> <span class="o">~</span> <span class="n">Γ</span><span class="p">[</span><span class="n">μ</span><span class="p">,</span> <span class="n">υ</span><span class="p">,</span> <span class="n">σ</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">μ</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="mi">4</span><span class="p">,</span> <span class="n">υ</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="mi">4</span><span class="p">,</span> <span class="n">σ</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="mi">4</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">!</span><span class="n">iszero</span><span class="p">(</span><span class="n">Γ</span><span class="p">[</span><span class="n">μ</span><span class="p">,</span> <span class="n">υ</span><span class="p">,</span> <span class="n">σ</span><span class="p">])</span> <span class="o">&amp;&amp;</span> <span class="n">μ</span> <span class="o">&lt;=</span> <span class="n">υ</span>
+</span></span><span class="line"><span class="cl"><span class="p">]</span> <span class="o">|&gt;</span> <span class="n">latexify</span><span class="o">|&gt;</span> <span class="n">show</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>下划线不知道怎么弄成下标，手动排了一下把多余的<code>\frac</code>合并了：
+</p>
+$$
+    \begin{equation}
+    \begin{aligned}
+        \mathtt{\Gamma^{1}_{14}} &= \frac{-1}{4 z}\\
+        \mathtt{\Gamma^{2}_{24}} &= \frac{1}{2 z}\\
+        \mathtt{\Gamma^{3}_{34}} &= \frac{1}{2 z}\\
+        \mathtt{\Gamma^{4}_{11}} &= \frac{-1}{4 z}\\
+        \mathtt{\Gamma^{4}_{22}} &=  - \frac{1}{2} \sqrt{z}\\
+        \mathtt{\Gamma^{4}_{33}} &=  - \frac{1}{2} \sqrt{z} \\
+        \mathtt{\Gamma^{4}_{44}} &= \frac{-1}{4 z}\\
+    \end{aligned}
+    \end{equation}
+$$<h2 id="黎曼曲率张量">
+<a class="header-anchor" href="#%e9%bb%8e%e6%9b%bc%e6%9b%b2%e7%8e%87%e5%bc%a0%e9%87%8f"></a>
+黎曼曲率张量
+</h2><p>跟着上面计算结果，计算黎曼曲率(ง •_•)ง</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-julia" data-lang="julia"><span class="line"><span class="cl"><span class="n">R</span> <span class="o">=</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="n">derivative</span><span class="p">(</span><span class="n">Γ</span><span class="p">[</span><span class="n">μ</span><span class="p">,</span> <span class="n">σ</span><span class="p">,</span> <span class="n">ρ</span><span class="p">],</span> <span class="n">X</span><span class="p">[</span><span class="n">υ</span><span class="p">])</span> <span class="o">-</span>
+</span></span><span class="line"><span class="cl">    <span class="n">derivative</span><span class="p">(</span><span class="n">Γ</span><span class="p">[</span><span class="n">υ</span><span class="p">,</span> <span class="n">σ</span><span class="p">,</span> <span class="n">ρ</span><span class="p">],</span> <span class="n">X</span><span class="p">[</span><span class="n">μ</span><span class="p">])</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sum</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Γ</span><span class="p">[</span><span class="n">μ</span><span class="p">,</span> <span class="n">σ</span><span class="p">,</span> <span class="n">λ</span><span class="p">]</span> <span class="o">*</span> <span class="n">Γ</span><span class="p">[</span><span class="n">υ</span><span class="p">,</span> <span class="n">λ</span><span class="p">,</span> <span class="n">ρ</span><span class="p">]</span> <span class="o">-</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Γ</span><span class="p">[</span><span class="n">υ</span><span class="p">,</span> <span class="n">σ</span><span class="p">,</span> <span class="n">λ</span><span class="p">]</span> <span class="o">*</span> <span class="n">Γ</span><span class="p">[</span><span class="n">μ</span><span class="p">,</span> <span class="n">λ</span><span class="p">,</span> <span class="n">ρ</span><span class="p">]</span>  <span class="c"># 公式部分</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">λ</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="mi">4</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span> <span class="c"># 第3、4项的缩并求和指标</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">μ</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="mi">4</span><span class="p">,</span> <span class="n">υ</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="mi">4</span><span class="p">,</span> <span class="n">σ</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="mi">4</span><span class="p">,</span> <span class="n">ρ</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="mi">4</span><span class="p">]</span> <span class="c"># 四重数组生成指标</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># 显示所有分量（剔除了０分量和反对称分量）</span>
+</span></span><span class="line"><span class="cl"><span class="n">sqrt_rule</span> <span class="o">=</span> <span class="nd">@rule</span> <span class="n">sqrt</span><span class="p">((</span><span class="o">~</span><span class="n">x</span><span class="p">)</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="o">~</span><span class="n">x</span>
+</span></span><span class="line"><span class="cl"><span class="nd">@chain</span> <span class="k">begin</span>
+</span></span><span class="line"><span class="cl">    <span class="p">[</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Symbolics</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="kt">Symbol</span><span class="p">(</span><span class="s">&#34;R_{</span><span class="si">$μ$υ$σ</span><span class="s">}^{</span><span class="si">$ρ</span><span class="s">}&#34;</span><span class="p">))</span> <span class="o">~</span> <span class="n">R</span><span class="p">[</span><span class="n">μ</span><span class="p">,</span> <span class="n">υ</span><span class="p">,</span> <span class="n">σ</span><span class="p">,</span> <span class="n">ρ</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">μ</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="mi">4</span><span class="p">,</span> <span class="n">υ</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="mi">4</span><span class="p">,</span> <span class="n">σ</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="mi">4</span><span class="p">,</span> <span class="n">ρ</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="mi">4</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="o">!</span><span class="n">iszero</span><span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="n">μ</span><span class="p">,</span> <span class="n">υ</span><span class="p">,</span> <span class="n">σ</span><span class="p">,</span> <span class="n">ρ</span><span class="p">])</span> <span class="o">&amp;&amp;</span> <span class="n">μ</span> <span class="o">&lt;=</span> <span class="n">υ</span>
+</span></span><span class="line"><span class="cl">    <span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="nd">@.</span> <span class="n">substitute</span><span class="p">(</span><span class="n">_</span><span class="p">,</span> <span class="n">z</span> <span class="o">=&gt;</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">z</span><span class="p">)</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="c">### 简化子表达式的方法，翻翻 julia discourse 有差不多的问题</span>
+</span></span><span class="line"><span class="cl">    <span class="n">simplify</span><span class="o">.</span><span class="p">(</span><span class="n">_</span><span class="p">;</span> <span class="n">rewriter</span><span class="o">=</span><span class="n">Rewriters</span><span class="o">.</span><span class="n">Prewalk</span><span class="p">(</span><span class="n">Rewriters</span><span class="o">.</span><span class="n">PassThrough</span><span class="p">(</span><span class="n">sqrt_rule</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">    <span class="n">latexify</span>
+</span></span><span class="line"><span class="cl">    <span class="n">show</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>下划线不知道怎么弄成下标，手动排了一下把多余的<code>\frac</code>合并了(vscode 大法好)：
+</p>
+$$
+    \begin{equation}
+    \begin{aligned}
+    \mathtt{R_{122}^{1}} &= \frac{-1}{8 \sqrt{z}} \\
+    \mathtt{R_{133}^{1}} &= \frac{-1}{8 \sqrt{z}} \\
+    \mathtt{R_{144}^{1}} &= \frac{1}{4 \left( \sqrt{z} \right)^{4}} \\
+    \mathtt{R_{121}^{2}} &= \frac{-1}{8 \left( \sqrt{z} \right)^{4}} \\    
+    \mathtt{R_{233}^{2}} &= \frac{1}{4 \sqrt{z}} \\
+    \mathtt{R_{244}^{2}} &= \frac{-1}{8 \left( \sqrt{z} \right)^{4}} \\
+    \mathtt{R_{131}^{3}} &= \frac{-1}{8 \left( \sqrt{z} \right)^{4}} \\    
+    \mathtt{R_{232}^{3}} &= \frac{-1}{4\sqrt{z}} \\
+    \mathtt{R_{344}^{3}} &= \frac{-1}{8 \left( \sqrt{z} \right)^{4}} \\
+    \mathtt{R_{141}^{4}} &= \frac{1}{4 \left( \sqrt{z} \right)^{4}} \\
+    \mathtt{R_{242}^{4}} &= \frac{1}{8 \sqrt{z}} \\
+    \mathtt{R_{343}^{4}} &= \frac{1}{8 \sqrt{z}}
+    \end{aligned}
+    \end{equation}
+$$<h2 id="里奇张量">
+<a class="header-anchor" href="#%e9%87%8c%e5%a5%87%e5%bc%a0%e9%87%8f"></a>
+里奇张量
+</h2><p>继续计算里奇张量(✿◠‿◠)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-julia" data-lang="julia"><span class="line"><span class="cl"><span class="n">rational_rule</span> <span class="o">=</span> <span class="nd">@rule</span> <span class="mi">0</span> <span class="o">//</span> <span class="mi">1</span> <span class="o">=&gt;</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl"><span class="n">RR</span> <span class="o">=</span> <span class="nd">@chain</span> <span class="k">begin</span>
+</span></span><span class="line"><span class="cl">    <span class="p">[</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sum</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="n">R</span><span class="p">[</span><span class="n">μ</span><span class="p">,</span> <span class="n">υ</span><span class="p">,</span> <span class="n">σ</span><span class="p">,</span> <span class="n">υ</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="n">υ</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="mi">4</span> <span class="c"># 缩并求和指标</span>
+</span></span><span class="line"><span class="cl">        <span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">μ</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="mi">4</span><span class="p">,</span> <span class="n">σ</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="mi">4</span>  <span class="c"># 矩阵生成指标</span>
+</span></span><span class="line"><span class="cl">    <span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="nd">@.</span> <span class="n">substitute</span><span class="p">(</span><span class="n">_</span><span class="p">,</span> <span class="n">z</span> <span class="o">=&gt;</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">z</span><span class="p">)</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">simplify</span><span class="o">.</span><span class="p">(</span><span class="n">_</span><span class="p">;</span> <span class="n">rewriter</span><span class="o">=</span><span class="n">Rewriters</span><span class="o">.</span><span class="n">Prewalk</span><span class="p">(</span><span class="n">Rewriters</span><span class="o">.</span><span class="n">PassThrough</span><span class="p">(</span><span class="n">sqrt_rule</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">    <span class="nd">@.</span> <span class="n">rational_rule</span>
+</span></span><span class="line"><span class="cl">    <span class="n">latexify</span>
+</span></span><span class="line"><span class="cl">    <span class="n">show</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div>$$
+\begin{equation}
+\left[
+\begin{array}{cccc}
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 \\
+\end{array}
+\right]
+\end{equation}
+$$<h2 id="killing-矢量场">
+<a class="header-anchor" href="#killing-%e7%9f%a2%e9%87%8f%e5%9c%ba"></a>
+killing 矢量场
+</h2><p>e.g. 3维欧式空间的2维球面$(S², hₐᵦ)$ killing 矢量场，代码被我折起来了o((&gt;ω&lt; ))o</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-julia" data-lang="julia"><span class="line"><span class="cl"><span class="c"># 待求的Killing矢量场的分量, 使用@syms显示声明它是θ和φ的函数</span>
+</span></span><span class="line"><span class="cl"><span class="n">ξ</span> <span class="o">=</span> <span class="nd">@syms</span> <span class="n">ξ₁</span><span class="p">(</span><span class="n">θ</span><span class="p">,</span> <span class="n">φ</span><span class="p">)</span> <span class="n">ξ₂</span><span class="p">(</span><span class="n">θ</span><span class="p">,</span> <span class="n">φ</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># 坐标变换</span>
+</span></span><span class="line"><span class="cl"><span class="n">X</span> <span class="o">=</span> <span class="p">[</span><span class="n">sin</span><span class="p">(</span><span class="n">θ</span><span class="p">)</span> <span class="o">*</span> <span class="n">cos</span><span class="p">(</span><span class="n">φ</span><span class="p">),</span> <span class="n">sin</span><span class="p">(</span><span class="n">θ</span><span class="p">)</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">φ</span><span class="p">),</span> <span class="n">cos</span><span class="p">(</span><span class="n">θ</span><span class="p">)]</span>
+</span></span><span class="line"><span class="cl"><span class="n">Q</span> <span class="o">=</span> <span class="p">[</span><span class="n">θ</span><span class="p">,</span> <span class="n">φ</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># 三维欧氏度规矩阵</span>
+</span></span><span class="line"><span class="cl"><span class="n">g</span> <span class="o">=</span> <span class="n">I</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># 计算二维球面上的诱导度规矩阵h，及其逆hi</span>
+</span></span><span class="line"><span class="cl"><span class="n">M</span> <span class="o">=</span> <span class="n">Symbolics</span><span class="o">.</span><span class="n">jacobian</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Q</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">h</span> <span class="o">=</span> <span class="n">M</span><span class="o">&#39;</span> <span class="o">*</span> <span class="n">g</span> <span class="o">*</span> <span class="n">M</span>
+</span></span><span class="line"><span class="cl"><span class="n">hi</span> <span class="o">=</span> <span class="n">inv</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># 根据度规计算克氏符</span>
+</span></span><span class="line"><span class="cl"><span class="n">Γ</span> <span class="o">=</span> <span class="nd">@chain</span> <span class="k">begin</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sum</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="p">[</span>
+</span></span><span class="line"><span class="cl">            <span class="p">(</span><span class="mi">1</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">hi</span><span class="p">[</span><span class="n">σ</span><span class="p">,</span> <span class="n">ρ</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">                <span class="n">derivative</span><span class="p">(</span><span class="n">h</span><span class="p">[</span><span class="n">υ</span><span class="p">,</span> <span class="n">ρ</span><span class="p">],</span> <span class="n">Q</span><span class="p">[</span><span class="n">μ</span><span class="p">])</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">                <span class="n">derivative</span><span class="p">(</span><span class="n">h</span><span class="p">[</span><span class="n">μ</span><span class="p">,</span> <span class="n">ρ</span><span class="p">],</span> <span class="n">Q</span><span class="p">[</span><span class="n">υ</span><span class="p">])</span> <span class="o">-</span>
+</span></span><span class="line"><span class="cl">                <span class="n">derivative</span><span class="p">(</span><span class="n">h</span><span class="p">[</span><span class="n">μ</span><span class="p">,</span> <span class="n">υ</span><span class="p">],</span> <span class="n">Q</span><span class="p">[</span><span class="n">ρ</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">            <span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="n">μ</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="mi">2</span><span class="p">,</span> <span class="n">υ</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="mi">2</span><span class="p">,</span> <span class="n">σ</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="mi">2</span>
+</span></span><span class="line"><span class="cl">        <span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">ρ</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nd">@.</span> <span class="n">substitute</span><span class="p">(</span><span class="n">_</span><span class="p">,</span> <span class="n">cos</span><span class="p">(</span><span class="n">φ</span><span class="p">)</span><span class="o">^</span><span class="mi">2</span> <span class="o">=&gt;</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">sin</span><span class="p">(</span><span class="n">φ</span><span class="p">)</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nd">@.</span> <span class="n">expand</span>
+</span></span><span class="line"><span class="cl">    <span class="nd">@.</span> <span class="n">simplify</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># 列出所有独立Killing方程</span>
+</span></span><span class="line"><span class="cl"><span class="n">eqs</span> <span class="o">=</span> <span class="nd">@chain</span> <span class="k">begin</span>
+</span></span><span class="line"><span class="cl">    <span class="p">[</span>
+</span></span><span class="line"><span class="cl">        <span class="mi">0</span> <span class="o">~</span>
+</span></span><span class="line"><span class="cl">            <span class="n">derivative</span><span class="p">(</span><span class="n">sum</span><span class="p">(</span><span class="n">h</span><span class="p">[</span><span class="n">υ</span><span class="p">,</span> <span class="n">ρ</span><span class="p">]</span> <span class="o">*</span> <span class="n">ξ</span><span class="p">[</span><span class="n">ρ</span><span class="p">](</span><span class="n">θ</span><span class="p">,</span> <span class="n">φ</span><span class="p">)</span> <span class="k">for</span> <span class="n">ρ</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="mi">2</span><span class="p">),</span> <span class="n">Q</span><span class="p">[</span><span class="n">μ</span><span class="p">])</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">            <span class="n">derivative</span><span class="p">(</span><span class="n">sum</span><span class="p">(</span><span class="n">h</span><span class="p">[</span><span class="n">μ</span><span class="p">,</span> <span class="n">ρ</span><span class="p">]</span> <span class="o">*</span> <span class="n">ξ</span><span class="p">[</span><span class="n">ρ</span><span class="p">](</span><span class="n">θ</span><span class="p">,</span> <span class="n">φ</span><span class="p">)</span> <span class="k">for</span> <span class="n">ρ</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="mi">2</span><span class="p">),</span> <span class="n">Q</span><span class="p">[</span><span class="n">υ</span><span class="p">])</span> <span class="o">-</span>
+</span></span><span class="line"><span class="cl">            <span class="mi">2</span> <span class="o">*</span> <span class="n">sum</span><span class="p">(</span><span class="n">Γ</span><span class="p">[</span><span class="n">μ</span><span class="p">,</span> <span class="n">υ</span><span class="p">,</span> <span class="n">σ</span><span class="p">]</span> <span class="o">*</span> <span class="n">sum</span><span class="p">(</span><span class="n">h</span><span class="p">[</span><span class="n">σ</span><span class="p">,</span> <span class="n">ρ</span><span class="p">]</span> <span class="o">*</span> <span class="n">ξ</span><span class="p">[</span><span class="n">ρ</span><span class="p">](</span><span class="n">θ</span><span class="p">,</span> <span class="n">φ</span><span class="p">)</span> <span class="k">for</span> <span class="n">ρ</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">for</span> <span class="n">σ</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">μ</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="mi">2</span><span class="p">,</span> <span class="n">υ</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="mi">2</span> <span class="k">if</span> <span class="n">μ</span> <span class="o">≤</span> <span class="n">υ</span>
+</span></span><span class="line"><span class="cl">    <span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="nd">@.</span> <span class="n">substitute</span><span class="p">(</span><span class="n">_</span><span class="p">,</span> <span class="n">cos</span><span class="p">(</span><span class="n">φ</span><span class="p">)</span><span class="o">^</span><span class="mi">2</span> <span class="o">=&gt;</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">sin</span><span class="p">(</span><span class="n">φ</span><span class="p">)</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nd">@.</span> <span class="n">expand</span>
+</span></span><span class="line"><span class="cl">    <span class="nd">@.</span> <span class="n">simplify</span>
+</span></span><span class="line"><span class="cl">    <span class="n">latexify</span>
+</span></span><span class="line"><span class="cl">    <span class="n">show</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div>$$
+\begin{equation}
+\begin{aligned}
+0 &= 2 \frac{\mathrm{d}}{\mathrm{d}\theta} \mathtt{\xi_1}\left( \theta, \varphi \right) \\
+0 &= \frac{\mathrm{d}}{\mathrm{d}\varphi} \mathtt{\xi_1}\left( \theta, \varphi \right) + \sin^{2}\left( \theta \right) \frac{\mathrm{d}}{\mathrm{d}\theta} \mathtt{\xi_2}\left( \theta, \varphi \right) \\
+0 &= \mathtt{\xi_1}\left( \theta, \varphi \right) \sin\left( 2 \theta \right) + 2 \sin^{2}\left( \theta \right) \frac{\mathrm{d}}{\mathrm{d}\varphi} \mathtt{\xi_2}\left( \theta, \varphi \right)
+\end{aligned}
+\end{equation}
+$$<h2 id="levi-civita记号">
+<a class="header-anchor" href="#levi-civita%e8%ae%b0%e5%8f%b7"></a>
+Levi-Civita记号
+</h2><p>不选择单独判断，而是高维矩阵一次性算出来吗？おもしろい ~   (￣ ▽ ￣)” 代码折叠</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-julia" data-lang="julia"><span class="line"><span class="cl"><span class="c">#  三指标Levi-Civita记号</span>
+</span></span><span class="line"><span class="cl"><span class="n">ε₃</span> <span class="o">=</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="n">length</span><span class="p">(</span><span class="kt">Set</span><span class="p">([</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">]))</span> <span class="o">==</span> <span class="mi">3</span><span class="p">)</span> <span class="o">*</span>       <span class="c"># 存在重复指标，取0</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">^</span><span class="p">(</span><span class="n">sum</span><span class="p">([</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">][</span><span class="n">σ</span><span class="p">]</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">][</span><span class="n">ρ</span><span class="p">]</span>      <span class="c"># 计算逆序数，偶数取1，奇数取-1</span>
+</span></span><span class="line"><span class="cl">              <span class="k">for</span> <span class="n">σ</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="mi">3</span><span class="p">,</span> <span class="n">ρ</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="mi">3</span> <span class="k">if</span> <span class="n">σ</span> <span class="o">&lt;</span> <span class="n">ρ</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="mi">3</span><span class="p">,</span> <span class="n">j</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="mi">3</span><span class="p">,</span> <span class="n">k</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="mi">3</span>
+</span></span><span class="line"><span class="cl"><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">#  四维Levi-Civita记号</span>
+</span></span><span class="line"><span class="cl"><span class="n">ε₄</span> <span class="o">=</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="n">length</span><span class="p">(</span><span class="kt">Set</span><span class="p">([</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">l</span><span class="p">]))</span> <span class="o">==</span> <span class="mi">4</span><span class="p">)</span> <span class="o">*</span>       <span class="c">#  存在重复指标，取0</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">^</span><span class="p">(</span><span class="n">sum</span><span class="p">([</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">l</span><span class="p">][</span><span class="n">σ</span><span class="p">]</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">l</span><span class="p">][</span><span class="n">ρ</span><span class="p">]</span>   <span class="c"># 计算逆序数，偶数取1，奇数取-1</span>
+</span></span><span class="line"><span class="cl">              <span class="k">for</span> <span class="n">σ</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="mi">4</span><span class="p">,</span> <span class="n">ρ</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="mi">4</span> <span class="k">if</span> <span class="n">σ</span> <span class="o">&lt;</span> <span class="n">ρ</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="mi">4</span><span class="p">,</span> <span class="n">j</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="mi">4</span><span class="p">,</span> <span class="n">k</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="mi">4</span><span class="p">,</span> <span class="n">l</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="mi">4</span>
+</span></span><span class="line"><span class="cl"><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">### 直接用这个来算嘛...</span>
+</span></span><span class="line"><span class="cl"><span class="nd">@inline</span> <span class="k">function</span> <span class="n">levi_civita_tuple</span><span class="p">(</span><span class="n">tp</span><span class="o">::</span><span class="kt">NTuple</span><span class="p">{</span><span class="kt">N</span><span class="p">,</span><span class="kt">Int</span><span class="p">})</span> <span class="k">where</span> <span class="kt">N</span>
+</span></span><span class="line"><span class="cl">    <span class="c"># 重复检查</span>
+</span></span><span class="line"><span class="cl">    <span class="nd">@inbounds</span> <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ai</span> <span class="o">=</span> <span class="n">tp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">j</span> <span class="k">in</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">:</span><span class="n">N</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">ai</span> <span class="o">==</span> <span class="n">tp</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="kt">Int8</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">end</span>
+</span></span><span class="line"><span class="cl">        <span class="k">end</span>
+</span></span><span class="line"><span class="cl">    <span class="k">end</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c"># 逆序数</span>
+</span></span><span class="line"><span class="cl">    <span class="n">inv</span> <span class="o">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">    <span class="nd">@inbounds</span> <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ai</span> <span class="o">=</span> <span class="n">tp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">j</span> <span class="k">in</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">:</span><span class="n">N</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">ai</span> <span class="o">&gt;</span> <span class="n">tp</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">                <span class="n">inv</span> <span class="o">+=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">            <span class="k">end</span>
+</span></span><span class="line"><span class="cl">        <span class="k">end</span>
+</span></span><span class="line"><span class="cl">    <span class="k">end</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="p">(</span><span class="n">inv</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">?</span> <span class="kt">Int8</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">:</span> <span class="kt">Int8</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>作者最后还有逆变指标和协变指标的计算，有点多了，就留作作业啦(p≧w≦q)<del>我下次一定做</del>(</p>
+</div>
+    <footer class="article-footer"><div class="sponsor-wrapper">
+  <div class="sponsor-button">
+    <div class="sponsor-icon rotate"></div>
+    <div class="sponsor-title">赞助</div>
+    <div class="sponsor-icon rotate"></div>
+  </div><div class="sponsor-tip">能有人看就十分感谢啦！</div></div><div class="share-wrapper"><a href="https://connect.qq.com/widget/shareqq/index.html?url=http://localhost:1313/post/sciml/julia_symbolics/&amp;title=Julia%20%e7%ac%a6%e5%8f%b7%e8%ae%a1%e7%ae%97&amp;desc=%0d%e4%bb%8a%e5%a4%a9%e5%90%8c%e5%ad%a6%e4%b8%8e%e6%88%91%e8%ae%a8%e8%ae%ba%e5%be%ae%e5%88%86%e5%87%a0%e4%bd%95%e7%9b%b8%e5%85%b3%e7%9a%84%e4%b8%9c%e8%a5%bf%ef%bc%8c%e4%bb%96%e4%b8%8d%e5%96%9c%e6%ac%a2%e5%90%84%e7%a7%8d%e6%8c%87%e6%a0%87%e8%bf%90%e7%ae%97%e5%96%9c%e6%ac%a2%e5%85%b7%e4%bd%93%e5%86%99%e5%87%ba%e6%9d%a5%e2%95%af%ef%b8%bf%e2%95%b0%ef%bc%8c%e6%88%91%e4%be%bf%e6%8e%a8%e8%8d%90%e4%ba%86%e4%b9%8b%e5%89%8d%e5%9c%a8%e7%bd%91%e7%bb%9c%e4%b8%8a%e6%94%b6%e8%97%8f%e7%9a%84%e8%b5%84%e6%96%99%e3%80%82%e8%bf%99%e7%af%87%e5%8d%9a%e5%ae%a2%e4%bd%9c%e8%80%85%e7%9a%84%e5%be%88%e5%a4%9a%e5%86%85%e5%ae%b9%ef%bc%8c%e5%86%99%e5%be%97%e6%af%94%e6%95%99%e7%a7%91%e4%b9%a6%e5%a5%bd%e7%90%86%e8%a7%a3%e5%be%88%e5%a4%9a%ef%bc%8c%e5%8f%aa%e6%98%af%e6%88%91%e7%9c%8b%e4%bb%96%e8%ae%a1%e5%88%92%e9%95%bf%e6%9c%9f%e7%bb%b4%e6%8a%a4%ef%bc%8c%e4%bd%86%e6%98%af%e4%b8%8a%e6%ac%a1%e6%9b%b4%e6%96%b0%e8%bf%98%e6%98%af%e4%ba%94%e5%b9%b4%e5%89%8d%ef%bc%88%e5%8f%af%e8%83%bd%e8%a7%89%e5%be%97%e6%b2%a1%e4%bb%80%e4%b9%88%e5%bf%85%e8%a6%81%e5%90%a7~~%20%e6%88%91%e6%9d%a5%e6%9b%b4%e6%96%b0%e4%b8%80%e4%b8%8b%ef%bc%9a%e7%8e%b0%e5%9c%a8%e6%9c%89Symbolics.jl%ef%bc%8c%e5%ba%94%e8%af%a5%e4%b8%8d%e7%94%a8%e9%80%9a%e8%bf%87Pycall%e5%8e%bb%e8%b0%83%e7%94%a8Python%e4%ba%86%28%e2%89%a7%e2%88%80%e2%89%a6%29%e3%82%9e%ef%bc%8c%e5%b9%b6%e4%b8%94%e6%9c%89%e4%b8%aaSciml%e7%9a%84%e7%a4%be%e5%8c%ba%e6%94%af%e6%8c%81%ef%bc%8c%e4%bb%a5%e5%90%8e%e6%90%9e%e4%ba%9b%e6%95%b0%e5%80%bc%e8%ae%a1%e7%ae%97%e4%b9%9f%e4%bc%9a%e5%ae%b9%e6%98%93%e4%ba%9b%0a&amp;source=http://localhost:1313/" target="_blank" rel="noopener noreferrer" title="Julia 符号计算">
+      <div class="share-icon icon icon-qq"></div>
+    </a><a href="https://twitter.com/intent/tweet?url=http://localhost:1313/post/sciml/julia_symbolics/&amp;text=Julia%20%e7%ac%a6%e5%8f%b7%e8%ae%a1%e7%ae%97&amp;via=http://localhost:1313/" target="_blank" rel="noopener noreferrer" title="Julia 符号计算">
+      <div class="share-icon icon icon-twitter"></div>
+    </a><a href="javascript:;"  title="Julia 符号计算">
+      <div class="share-icon icon icon-weixin"><div id="share-weixin">
+            <div class="share-weixin-dom">
+              <div class="share-weixin-content">
+                <img id="share-weixin-banner"> 
+                <div id="share-weixin-title"></div>
+                <div id="share-weixin-desc"></div>
+              </div>
+              <div class="share-weixin-qrcode">
+                <div class="share-weixin-info">
+                  <div id="share-weixin-author"></div>
+                  <div id="share-weixin-theme">Powered By hugo-theme-reimu</div>
+                </div>
+                <img id="share-weixin-qr" >
+              </div>
+            </div>
+            <div class="share-weixin-canvas"></div>
+          </div></div>
+    </a></div><ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in">
+      <a
+        class="article-tag-list-link"
+        href="/tags/julia"
+        rel="tag"
+        >JULIA</a
+      >
+    </li></ul>
+</footer>
+  </div><nav
+    id="article-nav"
+    aria-label="Article navigation"
+    data-aos="fade-up"
+  ><div class="article-nav-link-wrap left"><img
+            data-src="https://raw.githubusercontent.com/Pygamelion/Mottos/refs/heads/master/Figures/Art/TH/kaguya.jpg"
+            data-sizes="auto"
+            alt="从负开始的C&#43;&#43;学习"
+            class="lazyload"
+          /><a
+          href="/post/cxx/cxx_0/"
+          aria-label="前一篇:从负开始的C&#43;&#43;学习"
+          title="前一篇:从负开始的C&#43;&#43;学习"
+        ></a>
+        <div class="article-nav-caption">前一篇</div>
+        <h3 class="article-nav-title">从负开始的C&#43;&#43;学习</h3>
+      </div><div class="article-nav-link-wrap right"><img
+            data-src="https://raw.githubusercontent.com/Pygamelion/Mottos/refs/heads/master/Figures/Art/TH/bg4.webp"
+            data-sizes="auto"
+            alt="rubbish"
+            class="lazyload"
+          /><a
+          href="/post/mind/miscellaneous/"
+          aria-label="后一篇:rubbish"
+          title="后一篇:rubbish"
+        ></a>
+        <div class="article-nav-caption">后一篇</div>
+        <h3 class="article-nav-title">rubbish</h3>
+      </div></nav></article><section id="comments" data-aos="fade-up">
+<div class="comment-header"><h2 class="comment-title">说些什么吧！</h2>
+  <div class="comment-selector">
+    <div class="comment-selector-wrap"><div class="selector-item" data-selector="giscus">
+          <span>giscus</span>
+        </div></div>
+  </div>
+</div>
+
+<div class="comment-content"><div class="comment giscus-comment" data-aos="fade-up"
+     >
+    </div></div>
+</section></section>
+        </div><footer id="footer" aria-label="Site footer">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div id="footer-info"><div>
+      <span class="icon-copyright"></span>2025<span class="footer-info-sep rotate"></span>
+      Yabusame Houlen
+    </div><div>
+        基于&nbsp;<a
+          href="https://gohugo.io/"
+          target="_blank"
+          rel="noopener nofollow noreferrer"
+          >Hugo</a
+        >&nbsp; Theme.<a
+          href="https://github.com/D-Sketon/hugo-theme-reimu"
+          target="_blank"
+          rel="noopener nofollow noreferrer"
+          >Reimu</a
+        >
+      </div><div>
+        <span class="icon-brush"
+          >&nbsp;12.0k</span
+        >
+        &nbsp;|&nbsp;
+        <span class="icon-coffee">&nbsp;00:28</span>
+      </div><div>
+        <span class="icon-eye"></span>
+        <span id="busuanzi_container_site_pv"
+          >总访问量&nbsp;<span
+            id="busuanzi_value_site_pv"
+          ></span
+        ></span>
+        &nbsp;|&nbsp;
+        <span class="icon-user"></span>
+        <span id="busuanzi_container_site_uv"
+          >总访客量&nbsp;<span
+            id="busuanzi_value_site_uv"
+          ></span
+        ></span>
+      </div></div>
+</footer>
+<div class="sidebar-top">
+            <div class="sidebar-top-taichi rotate"></div>
+            <div class="arrow-up"></div>
+          </div><div id="mask" class="hide"></div>
+      </div><nav id="mobile-nav" aria-label="Mobile navigation">
+  <div class="sidebar-wrap"><div class="sidebar-toc-sidebar"><h3 class="toc-title">文章目录</h3>
+<div class="sidebar-toc-wrapper toc-div-class">
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#使用环境">使用环境</a></li>
+    <li><a href="#张量的变换">张量的变换</a></li>
+    <li><a href="#子流形上的诱导度规">子流形上的诱导度规</a></li>
+    <li><a href="#christoffel-symbol">Christoffel symbol</a></li>
+    <li><a href="#黎曼曲率张量">黎曼曲率张量</a></li>
+    <li><a href="#里奇张量">里奇张量</a></li>
+    <li><a href="#killing-矢量场">killing 矢量场</a></li>
+    <li><a href="#levi-civita记号">Levi-Civita记号</a></li>
+  </ul>
+</nav>
+</div></div>
+        <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img
+    data-src="/avatar/avatar.jpg"
+    data-sizes="auto"
+    alt="Yabusame Houlen"
+    class="lazyload"
+  />
+  <div class="sidebar-author-name">Yabusame Houlen</div>
+  <div class="sidebar-description">少女折寿中...</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div><div class="sidebar-state-number">5</div>
+  </div>
+  <a class="sidebar-state-category" href="/categories/" aria-label="sidebar-state-category-link">
+    <div>分类</div>
+    <div class="sidebar-state-number">
+      3
+    </div>
+  </a>
+  <a class="sidebar-state-tag" href="/tags/" aria-label="sidebar-state-tag-link">
+    <div>标签</div>
+    <div class="sidebar-state-number">4</div>
+  </a>
+</div>
+<div class="sidebar-social"><div class="icon-bilibili sidebar-social-icon">
+      <a
+        href="https://space.bilibili.com/312577459"
+        itemprop="url"
+        target="_blank"
+        aria-label="bilibili"
+        rel="noopener nofollow noreferrer"
+      ></a>
+    </div><div class="icon-github sidebar-social-icon">
+      <a
+        href="https://github.com/Pygamelion"
+        itemprop="url"
+        target="_blank"
+        aria-label="github"
+        rel="noopener nofollow noreferrer"
+      ></a>
+    </div><div class="icon-steam sidebar-social-icon">
+      <a
+        href="https://steamcommunity.com/profiles/76561198908551093"
+        itemprop="url"
+        target="_blank"
+        aria-label="steam"
+        rel="noopener nofollow noreferrer"
+      ></a>
+    </div></div>
+<div class="sidebar-menu"><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/"
+        aria-label="首页"
+      ></a>
+      <div class='sidebar-menu-icon icon '>&#x1F704;</div>
+      <div class="sidebar-menu-link">首页</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/archives"
+        aria-label="归档"
+      ></a>
+      <div class='sidebar-menu-icon icon '>&#x1F702;</div>
+      <div class="sidebar-menu-link">归档</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/resource"
+        aria-label="站点"
+      ></a>
+      <div class='sidebar-menu-icon icon '>&#x1F703;</div>
+      <div class="sidebar-menu-link">站点</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/about"
+        aria-label="收录"
+      ></a>
+      <div class='sidebar-menu-icon icon '>&#x1F701;</div>
+      <div class="sidebar-menu-link">收录</div>
+    </div></div>
+</div></div><div class="sidebar-btn-wrapper">
+        <div class="sidebar-toc-btn current"></div>
+        <div class="sidebar-common-btn"></div>
+      </div></nav>
+</div><div class="site-search">
+        <div class="reimu-popup popup">
+          <div class="reimu-search">
+            <div class="reimu-search-input-icon"></div>
+            <div id="reimu-search-input"></div>
+            <div class="popup-btn-close"></div>
+          </div>
+          <div class="reimu-results">
+            <div id="reimu-stats"></div>
+            <div id="reimu-hits"></div>
+            <div id="reimu-pagination" class="reimu-pagination"></div>
+          </div>
+          <img class="reimu-bg" src="/images/reimu.png" />
+        </div>
+      </div><meting-js
+        theme="var(--color-link)"
+        id="13552043145"server="netease"type="playlist"fixed="true"autoplay="false"order="random"volume="0.33"mutex="true"list-folded="false"lrc-type="1">
+      </meting-js><script
+    src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js"
+    integrity="sha384-3gT/vsepWkfz/ff7PpWNUeMzeWoH3cDhm/A8jM7ouoAK0/fP/9bcHHR5kHq2nf&#43;e" crossorigin="anonymous"></script><script
+    src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js"
+    integrity="sha384-J08i8An/QeARD9ExYpvphB8BsyOj3Gh2TSh1aLINKO3L0cMSH2dN3E22zFoXEi0Q" crossorigin="anonymous"></script><script
+    src="https://npm.webcache.cn/material-theme@1.0.0/dist/material-theme.umd.js"
+    integrity="sha384-vLev0II0HKFaxkcm&#43;/7kX5IGwVFBASkGchU311wmU/veIj2bB0UcBkQbW6yw2asK" crossorigin="anonymous"></script><script src="/js/main.js" ></script><script src="/js/aos.js" ></script><script>
+    var aosInit = () => {
+      AOS.init({
+        duration: 1000,
+        easing: "ease",
+        once: true,
+        offset: 50,
+      });
+    };
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", aosInit);
+    } else {
+      aosInit();
+    }
+  </script><script src="/js/pjax_main.js" data-pjax></script><script>
+    var ALGOLIA_CONFIG = {
+      logo: '\/images\/algolia_logo.svg',
+      algolia: {
+        applicationID: "V7IFV85DDX",
+        apiKey: "677c3dabccc843ba0b14e4a71e5150f2",
+        indexName: "Pygamelion_Site",
+        hits: {
+          "per_page": parseInt("15")
+        },
+        labels: {
+          "input_placeholder": '搜索.....',
+          "hits_empty": '未发现与 「${query}」相关内容',
+          "hits_stats": '找到${hits}条结果（用时 ${time} ms）'
+        }
+      }
+    };
+  </script><script
+    src="https://npm.webcache.cn/algoliasearch@4.17.1/dist/algoliasearch-lite.umd.js"
+    deferintegrity="sha384-xvLS0jfKuoREs7pqkRI/OI8GcqohO5S&#43;jQz7ZBtQXnsXmD&#43;9jDOOY4cL6dCPzlrk" crossorigin="anonymous"></script><script
+    src="https://npm.webcache.cn/@reimujs/instantsearch.js@4.57.0-beta.1/dist/instantsearch.production.min.js"
+    deferintegrity="sha384-aagKMe8nkqaP2DYQc8kkYOL5l&#43;M5Q2WH/Uhr4teOh0Ybp0RZj0kUSDm45qPikMjK" crossorigin="anonymous"></script><script src="/js/algolia_search.js" ></script><script
+    src="https://npm.webcache.cn/mouse-firework@0.1.1/dist/index.umd.js"
+    integrity="sha384-8LyaidD9GPxQQgLJO/WRw/O2h3BoNq/ApI/ecpvM6RsrCz2qP2ppBXUKihP4V/2d" crossorigin="anonymous"></script><script>
+  if (! false  || !window.matchMedia('(max-width: 768px)').matches) {
+    if (window.firework) {
+      const options = JSON.parse("{\"excludeelements\":[\"a\",\"button\"],\"particles\":[{\"colors\":[\"var(--red-1)\",\"var(--red-2)\",\"var(--red-3)\",\"var(--red-4)\"],\"duration\":[1200,1800],\"easing\":\"easeOutExpo\",\"move\":[\"emit\"],\"number\":20,\"shape\":\"circle\",\"shapeOptions\":{\"alpha\":[0.3,0.5],\"radius\":[12,28]}},{\"colors\":[\"var(--red-0)\"],\"duration\":[1200,1800],\"easing\":\"easeOutExpo\",\"move\":[\"diffuse\"],\"number\":1,\"shape\":\"circle\",\"shapeOptions\":{\"alpha\":[0.2,0.5],\"lineWidth\":6,\"radius\":20}}]}");
+      options.excludeElements = options.excludeelements;
+      delete options.excludeelements;
+      window.firework(options);
+    }
+  }
+</script><script
+    src="https://npm.webcache.cn/theme-shokax-pjax@0.0.3/dist/index.umd.js"
+    integrity="sha384-xneY1WY8hOfUzswrE4CrYq35N4BdVcxqxwHPr9zawE/jMSCxD&#43;jAPU55x/jj3wlf" crossorigin="anonymous"></script><script src="/js/pjax.js" ></script><script
+    src="https://npm.webcache.cn/live2d-widgets@0.9.0/autoload.js"
+    deferintegrity="sha384-poTN7wN/SqNhQqo3jdFeX20ikddWeFGkUkDEzsKjgH/ez8aQLn81oI0Cw6q5xNyB" crossorigin="anonymous"></script>
+
+<div id="lazy-script">
+  <div><script data-pjax>
+        window.REIMU_POST = {
+          author: "Yabusame Houlen",
+          title: "Julia 符号计算",
+          url: "http:\/\/localhost:1313\/post\/sciml\/julia_symbolics\/",
+          description: "\r今天同学与我讨论微分几何相关的东西，他不喜欢各种指标运算喜欢具体写出来╯︿╰，我便推荐了之前在网络上收藏的资料。这篇博客作者的很多内容，写得比教科书好理解很多，只是我看他计划长期维护，但是上次更新还是五年前（可能觉得没什么必要吧~~ 我来更新一下：现在有Symbolics.jl，应该不用通过Pycall去调用Python了(≧∀≦)ゞ，并且有个Sciml的社区支持，以后搞些数值计算也会容易些\n",
+          cover: "http:\/\/localhost:1313\/images\/reimu_bkg.jpg",
+        };
+      </script><script src="/js/insert_highlight.js" data-pjax></script><script src="/js/tabs.js" data-pjax></script><script type="module" data-pjax>const PhotoSwipeLightbox = (await safeImport("https:\/\/npm.webcache.cn\/photoswipe@5.4.4\/dist\/photoswipe-lightbox.esm.min.js", "sha384-DiL6M\/gG\u002bwmTxmCRZyD1zee6lIhawn5TGvED0FOh7fXcN9B0aZ9dexSF\/N6lrZi\/")).default;const initPswp = (gallery, children) => {
+          if (_$$(`${gallery} ${children}`).length > 0) {
+            new PhotoSwipeLightbox({
+              gallery,
+              children,pswpModule: () => safeImport("https:\/\/npm.webcache.cn\/photoswipe@5.4.4\/dist\/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8\u002boTJ7m3DfYEWX1fu1scuS4\u002bs")}).init();
+          }
+        }
+        const pswp = () => {
+          initPswp('.article-entry', 'a.article-gallery-item');
+          initPswp('.article-gallery', 'a.article-gallery-item');
+          window.lightboxStatus = 'done';
+          window.removeEventListener('lightbox:ready', pswp);
+        }
+        if(window.lightboxStatus === 'ready') {
+          pswp()
+        } else {
+          window.addEventListener('lightbox:ready', pswp);
+        }
+      </script><script data-pjax>
+  var loadScript = (src, integrity) => {
+    const script = document.createElement('script');
+    script.src = src;
+    if (integrity) script.integrity = integrity;
+    script.crossOrigin = 'anonymous';
+    return script;
+  };
+  var commentConfigKeys = ['valine', 'waline', 'twikoo', 'gitalk', 'giscus', 'disqus'];
+  var commentConfig = {giscus: {
+      enable: true,
+      load: () => {
+        const container = document.querySelector('.giscus-comment');
+        if (!container) return;
+        container.style.display = 'block';
+
+        
+        const existingScript = container.querySelector('script[src*="giscus.app/client.js"]');
+        if (existingScript) existingScript.remove();
+        const existingFrame = document.querySelector('iframe.giscus-frame');
+        if (existingFrame) existingFrame.remove();
+
+        
+        const giscusScript = document.createElement('script');
+        const domMode = document.documentElement.getAttribute("data-theme");
+
+        const docLang = document.documentElement.lang || 'en';
+        const langBase = docLang.split('-')[0];
+        const supportedLangs = ['ar', 'be', 'bg', 'ca', 'cs', 'da', 'de', 'en', 
+        'eo', 'es', 'eu', 'fa', 'fr', 'gr', 'hbs', 'he', 'hu', 'id', 'it', 'ja', 
+        'kh', 'ko', 'nl', 'pl', 'pt', 'ro', 'ru', 'th', 'tr', 'uk', 'uz', 'vi', 'zh-CN', 'zh-HK', 'zh-TW'];
+        const giscusLang = supportedLangs.includes(docLang) ? docLang : supportedLangs.includes(langBase) ? langBase : 'en';
+
+        giscusScript.src = 'https://giscus.app/client.js';
+        giscusScript.setAttribute('data-repo', 'Pygamelion\/Pygamelion.github.io');
+        giscusScript.setAttribute('data-repo-id', 'R_kgDOQLjdww');
+        giscusScript.setAttribute('data-category', 'Announcements');
+        giscusScript.setAttribute('data-category-id', 'DIC_kwDOQLjdw84Cxa_A');
+        giscusScript.setAttribute('data-mapping', '0');
+        giscusScript.setAttribute('data-strict', '0');
+        giscusScript.setAttribute('data-reactions-enabled', '1');
+        giscusScript.setAttribute('data-emit-metadata', '0');
+        giscusScript.setAttribute('data-input-position', 'bottom');
+        giscusScript.setAttribute('data-theme', domMode === 'dark' ? 'dark' : 'light');
+        giscusScript.setAttribute('data-lang', giscusLang);
+        giscusScript.setAttribute('crossorigin', 'anonymous');
+        giscusScript.async = true;
+        container.appendChild(giscusScript);
+        document.body.addEventListener('light-theme-set', () => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: { setConfig: { theme: 'light' } } }, 'https://giscus.app');
+        });
+        document.body.addEventListener('dark-theme-set', () => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: { setConfig: { theme: 'dark' } } }, 'https://giscus.app');
+        });
+      }
+    },};
+  commentConfig.enable = commentConfigKeys.some(key => commentConfig?.[key]?.enable);
+
+  var defaultComment = '';
+  if (commentConfig.enable) {
+    
+    var savedCommentType = localStorage.getItem('commentType');
+    
+    
+    if (savedCommentType) {
+      if (commentConfig[savedCommentType]?.enable) {
+        defaultComment = savedCommentType;
+      }
+    }
+    
+    
+    if (!defaultComment) {
+      var configDefault = 'giscus';
+      if (commentConfig[configDefault]?.enable) {
+        defaultComment = configDefault;
+      }
+    }
+    
+    
+    if (!defaultComment) {
+      defaultComment = commentConfigKeys.find(sys => commentConfig?.[sys]?.enable) || '';
+    }
+  }
+
+  function loadComments() {
+    if (!commentConfig.enable) return;
+    
+    const loadedComments = {
+      valine: false,
+      waline: false,
+      twikoo: false,
+      gitalk: false,
+      giscus: false
+    };
+
+    
+    const hideAllComments = () => {
+      const commentContainers = document.querySelectorAll('.comment');
+      commentContainers.forEach(container => {
+        container.style.display = 'none';
+      });
+    };
+
+    
+    const loadCommentSystem = (type) => {
+      if (loadedComments[type]) {
+        
+        document.querySelector(`.${type}-comment`).style.display = 'block';
+        return;
+      }
+
+      
+      commentConfig[type]?.load();
+      loadedComments[type] = true;
+    };
+
+    
+    const changeActiveCommentItems = (item) => {
+      const commentItems = document.querySelectorAll('.selector-item');
+      for (let i = 0; i < commentItems.length; i++) {
+        commentItems[i].classList.remove('active');
+      }
+      item.classList.add('active');
+
+      
+      const commentType = item.getAttribute('data-selector');
+
+      
+      hideAllComments();
+
+      
+      loadCommentSystem(commentType);
+    };
+
+    const commentInit = () => {
+      
+      const commentItems = document.querySelectorAll('.selector-item');
+      for (let item of commentItems) {
+        item.addEventListener('click', () => {
+          
+          const commentType = item.getAttribute('data-selector');
+          window.localStorage.setItem('commentType', commentType);
+          
+          changeActiveCommentItems(item);
+        });
+      }
+
+      
+      if (defaultComment) {
+        const defaultSelectorItem = document.querySelector(`[data-selector="${defaultComment}"]`);
+        if (!defaultSelectorItem) return;
+        defaultSelectorItem.style.display = 'block';
+        defaultSelectorItem.classList.add('active');
+        loadCommentSystem(defaultComment);
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', commentInit);
+    } else {
+      commentInit();
+    }
+  };
+  loadComments();
+</script><script
+    src="https://npm.webcache.cn/qrcode@1.5.1/build/qrcode.js"
+    deferdata-pjaxintegrity="sha384-VT1EeewTCEXgndcPMQ0PzV&#43;uVFYjxFIjmAA7s5gcMX9t4Dt5TD&#43;OVQIn7NJWIXn7" crossorigin="anonymous"></script><script
+    src="https://npm.webcache.cn/@zumer/snapdom@1.9.14/dist/snapdom.min.js"
+    deferdata-pjaxintegrity="sha384-OEQ&#43;fJp/Mvi2uzBREXybtxryJvLytWapuHu4EE6LPwTKUwATYcc55tPPcZTzVcmx" crossorigin="anonymous"></script><script
+    src="https://npm.webcache.cn/katex@0.16.24/dist/katex.min.js"
+    data-pjaxintegrity="sha384-MWNUH0WmtsYGhn2cbH6ELRCbf9LG3QDqCC&#43;gqPB3IBNO35xjZK3Ejb6oONRpDbPg" crossorigin="anonymous"></script><script
+    src="https://npm.webcache.cn/katex@0.16.24/dist/contrib/auto-render.min.js"
+    data-pjaxintegrity="sha384-hCXGrW6PitJEwbkoStFjeJxv&#43;fSOOQKOPbJxSfM6G5sWZjAyWhXiTIIAmQqnlLlh" crossorigin="anonymous"></script><script data-pjax>
+          var renderMath = () => {
+            if (!window.renderMathInElement) return;
+            window.renderMathInElement(_$("article"), {
+              delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "\\[", right: "\\]", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+              ],
+            });
+          };
+          if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", renderMath, { once: true });
+          } else {
+            renderMath();
+          }
+        </script></div>
+</div><script data-pjax>
+    var updateTime = _$('#post-update-time')?.innerHTML;
+
+    if (updateTime) {
+      const update = new Date(updateTime);
+      const now = new Date();
+      const diff = now - update;
+      const days = diff / 86400000;
+      const { daysago: daysAgo, message: template } = window.siteConfig.outdate;
+      if (days >= daysAgo) {
+        let message = `This article was last updated on ${updateTime}. Please note that the content may no longer be applicable.`;
+        if (typeof template === 'string') {
+          message = template.replace(/{time}/, updateTime);
+        } else if (typeof template === 'object') {
+          const lang = document.documentElement.lang;
+          const messageKey = Object.keys(template).find(key => key.toLowerCase() === lang.toLowerCase());
+          if (messageKey && template[messageKey]) {
+            message = template[messageKey].replace(/{time}/, updateTime);
+          }
+        }
+        const blockquote = _$('#outdate-blockquote');
+        if (blockquote) {
+          blockquote.querySelectorAll('p')[1].innerText = message;
+          blockquote.style.display = 'flow-root';
+        }
+      }
+    }
+  </script><script
+    src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js"
+    asyncintegrity="sha384-0M75wtSkhjIInv4coYlaJU83&#43;OypaRCIq2SukQVQX04eGTCBXJDuWAbJet56id&#43;S" crossorigin="anonymous"></script><script src="/js/service_worker.js" ></script><script>
+  const reimuCopyright = String.raw`
+   ______     ______     __     __    __     __  __    
+  /\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+  \ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+   \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+    \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                    
+  `;
+  console.log(String.raw`%c ${reimuCopyright}`, "color: #ff5252;");
+  console.log(
+    "%c Theme.Reimu" + " %c https://github.com/D-Sketon/hugo-theme-reimu ",
+    "color: white; background: #ff5252; padding:5px 0;",
+    "padding:4px;border:1px solid #ff5252;",
+  );
+</script><script
+    src="https://npm.webcache.cn/aplayer@1.10.1/dist/APlayer.min.js"
+    integrity="sha384-gdGYZwHnfJM54evoZhpO0s6ZF5BQiybkiyW7VXr&#43;h5UfruuRL/aORyw&#43;5&#43;HZoU6e" crossorigin="anonymous"></script><script>
+    if (! false  || !window.matchMedia('(max-width: 768px)').matches) {
+      if (window.matchMedia('(max-width: 959px)').matches) {
+        const meting = _$('meting-js');
+        if (meting) {
+          meting.setAttribute('fixed', 'true');
+          const aside = meting.parentNode?.parentNode;
+          if (aside?.tagName === 'ASIDE') {
+            meting.parentNode.removeChild(meting);
+            document.body.appendChild(meting);
+          }
+        }
+      }
+      const script = document.createElement('script');
+      script.src = "https:\/\/npm.webcache.cn\/meting@2.0.1\/dist\/Meting.min.js";
+      script.integrity = "sha384-ASVlpKF80A22OXTK3tfEjZm1EL6uFMKIC4p8\u002b0maanw1S\/IyB\u002bY4JG\u002bZDU7GpKE8";
+      script.crossOrigin = "anonymous";
+      document.body.appendChild(script);
+    }
+  </script><script
+    src="https://npm.webcache.cn/pangu@4.0.7/dist/browser/pangu.min.js"
+    integrity="sha384-HeUHqi0nVsPUm/E0ss7OfnIV/yD96JWB8ehZvUuoVax9DpNHL17jj9pdfXHzqDxm" crossorigin="anonymous"></script><script data-pjax>
+    if (document.readyState === "loading") {
+      document.addEventListener('DOMContentLoaded', () => {
+        pangu?.spacingPage();
+      });
+    } else {
+      pangu?.spacingPage();
+    }
+  </script></body>
+</html>
