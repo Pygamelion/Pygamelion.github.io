@@ -176,10 +176,9 @@
   <nav id="TableOfContents">
   <ul>
     <li><a href="#从编译工具开始">从编译工具开始</a></li>
-    <li><a href="#使用与生态兼容">使用与生态兼容</a></li>
-    <li><a href="#定义与初始化">定义与初始化</a></li>
-    <li><a href="#关于可见性">关于可见性</a></li>
-    <li><a href="#编译设置">编译设置</a></li>
+    <li><a href="#一大堆工具链">一大堆工具链</a></li>
+    <li><a href="#可见性和命名空间">可见性和命名空间</a></li>
+    <li><a href="#代码组织方式">代码组织方式</a></li>
     <li><a href="#record">Record</a></li>
   </ul>
 </nav>
@@ -342,7 +341,7 @@
 </div>
 <p>给以上以及未列出的大佬们致以最高敬意。这里的一系列<code>C++</code>相关的内容是我瞎写丢博客上，以便个人查阅之用&hellip;
 <br><br></p>
-<p>上一次学Cxx还是刚上大学，随大流想考一个计算机二级证书，觉得office主要是文字处理没有意思，这门语言早在中学时代就刻入把名字刻在我脑袋里了，毕竟当时手机上玩我的世界首页都会飘着一行“<span style="color:#ffee97"><em>Build with C++</em></span>”。清澈愚蠢的我随大流整了本大名鼎鼎的谭浩强《C++程序设计》, 学了两章就被诸如<code>i*(i+=--i)</code>、<code>a=(a++)+(++a)</code>的窒息语法吓到，随后开始对各种写法排列组合。虽然最后还是拿到证书，我对整个计算机技术的学习也到此为止了(毕竟考试的其实很简单，真没有什么动力再玩这些花式trick了<span class="mysecret" title="你发现了一个秘密">(当时稍微知道计算机学生们天天在用电路做加法乘法二进制呢，怎么能把大学当成小学来读！来自高考数学上不了100分的老子的鄙视</span></p>
+<p>上一次学Cxx还是刚上大学，随大流想考一个计算机二级证书，觉得office主要是文字处理没有意思，这门语言早在中学时代就刻入把名字刻在我脑袋里了，毕竟当时手机上玩我的世界首页都会飘着一行“<span style="color:#ffee97"><em>Build with C++</em></span>”。清澈愚蠢的我随大流整了本大名鼎鼎的谭浩强《C++程序设计》, 学了两章就被诸如<code>i*(i+=--i)</code>、<code>a=(a++)+(++a)</code>的窒息语法劝退，随后开始对各种写法排列组合。虽然最后还是拿到证书，我对整个计算机技术的学习也到此为止了(毕竟考试的其实很简单，真没有什么动力再玩这些花式trick了<span class="mysecret" title="你发现了一个秘密">(当时稍微知道计算机学生们天天在用电路做加法乘法二进制呢，怎么能把大学当成小学来读！来自高考数学上不了100分的劳资的鄙视</span></p>
 <p>之后莫名走入物理学的花花世界，开开心心地学了一段时间，各种真假难辨的物理理论充斥我的脑袋，让我深感自己只是物理学的观光者，没有坚定信念和探险精神 <del>practical的方向与academic资源</del>，期间<code>Python</code>、<code>Julia</code>、<code>Rust</code>等编程语言都有接触，虽然身为LHAASO组成员，我一直想绕着<code>C++</code>和<code>Root</code>走，足见当年心理阴影之深。今天回想起来，已经是时过境迁，兜兜转转回到了<code>True or False</code>的比特世界 <del>世界上又多了个普通转行物理人，却少了个高级程序员(；′⌒`)</del> 现在回来重学Cxx，好处是AI领路、Cxx标准更新、工具链换掉了一批，网络上各种学习资源随手可得，其它语言的学习也让我重新认识了Cxx是多么强大的存在。毕竟这么多年过去，当年奇怪写法的遗毒也在我脑中消退了，不好说是好事还是坏事&hellip;</p>
 <blockquote>
 <p>欲买桂花同载酒，终不似，少年游&hellip;&hellip;</p>
@@ -352,20 +351,23 @@
 从编译工具开始
 </h2><p>由于沉重的历史包袱，Cxx不能像其它语言一样方便地执行&hellip;<del>对于数值计算来说Julia比C++好用多力</del></p>
 <ul>
-<li>静态库：链接后会直接把里面所有的代码都合并生成到可执行程序中</li>
-<li>动态库：链接后仅将其中导出的函数提供给可执行程序用，实际运行过程中还是会单独加载这个动态库 (长.so .dll这样的</li>
+<li>静态库：链接后会直接把里面所有的代码都合并生成到可执行程序中（长.a .lib这样的</li>
+<li>动态库：链接后仅将其中导出的函数提供给可执行程序用，实际运行过程中加载这个动态库 (长.so .dll .dylib这样的</li>
 </ul>
-<p>总之已经可以尽量不要去管太多细节的东西了，除非需要展示自己有20年Cxx功力o((&gt;ω&lt; ))o</p>
+<p>总之已经可以尽量不要去管太多细节的东西了，除非需要展示自己有<mark style="background-color:yellow">30年Cxx功力o((&gt;ω&lt; ))o</mark></p>
 <p>Visual Studio里面一套东西还没搞明白怎么配置的，先用着Vscode吧 ＞︿＜&hellip;</p>
-<p><code>Cmake</code>有些学不明白，但是有AI工具加持，对于个人学习来写小项目已经不是问题了</p>
-<p>现在有好用的<code>Xmake</code>，不用是(≧∀≦)ゞ笨蛋！</p>
-<p><code>Xmake</code>通过<strong>描述域、脚本域</strong>两种不同的配置方式，隔离 80% 的简单配置以及 20% 的复杂配置，集成了<code>Lua</code>的脚本功能，还有更强的封装 <a href="https://coolshell.cn/articles/10739.html">陈皓大佬的lua教程</a></p>
+<p><code>Cmake</code>有些学不明白，但是有AI工具加持，直接生成常用模板，至少对于我个人学习来写小项目已经不是问题了</p>
+<div style="text-align:center; font-size:16px;">
+<p><strong>现在有好用的<code>Xmake</code>，不用是(≧∀≦)ゞ笨蛋！</strong></p>
+</div>
+<p><code>Xmake</code>通过<strong>描述域、脚本域</strong>两种不同的配置方式，隔离 80% 的简单配置以及 20% 的复杂配置，集成了<code>Lua</code>的脚本功能，还有更强的封装(尤其是OS和文件操作) <a href="https://coolshell.cn/articles/10739.html">陈皓大佬的lua教程</a></p>
 <ul>
 <li>描述域：使用 set_xx、add_xxx 等配置接口进行的配置区域</li>
 <li>脚本域：使用 on_xx、after_xxx 和 before_xxx 等配置接口的内部区域</li>
 </ul>
-<p>为了优化编译速度，我们不需要编译每个源文件都去重复预处理一遍里面的头文件，可以把大部分项目常用的头文件放置在统一的头文件中预先编译，在链接阶段直接复用 <code>Xmake 使用 set_pcxxheader(&quot;src/stdafx.h&quot;)</code></p>
-<p><a id="xmake_module">无痛使用Cxx20的module</a></p>
+<p><code>Xmake</code> 支持检测头文件、库接口、编译器特性和一些自定义检测，多看<a href="https://xmake.io/zh/">文档</a>多学习🤪</p>
+<p>由于历史原因，在编译器编译每个源文件的<code>C++</code>代码的时候，都需要预处理一遍所有被引入的头文件，为了优化编译速度，可以把大部分项目常用的头文件放置在统一的头文件中预先编译，在链接阶段直接复用 <code>Xmake 的使用:在target后面增加一行 set_pcxxheader(&quot;src/stdafx.h&quot;)</code> ( 对于<code>C</code>项目<code>set_pcheader</code>&hellip;</p>
+<p><a id="xmake_module">据说Xmake能无痛使用Cxx20的module</a></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -420,10 +422,11 @@
 </span></span><span class="line hl"><span class="cl">      <span class="n">add_packages</span><span class="p">(</span><span class="s2">&#34;catch2&#34;</span><span class="p">)</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="使用与生态兼容">
-<a class="header-anchor" href="#%e4%bd%bf%e7%94%a8%e4%b8%8e%e7%94%9f%e6%80%81%e5%85%bc%e5%ae%b9"></a>
-使用与生态兼容
-</h2><div style="text-align:center; font-size:16px;">
+</div><h2 id="一大堆工具链">
+<a class="header-anchor" href="#%e4%b8%80%e5%a4%a7%e5%a0%86%e5%b7%a5%e5%85%b7%e9%93%be"></a>
+一大堆工具链
+</h2><p>使用<code>xmake show</code> 以显示 xmake 版本和当前 project 信息，<code>xmake show -t</code>显示target信息&hellip;</p>
+<div style="text-align:center; font-size:16px;">
 <p><strong>终端输入<code>xmake lua</code>打开<code>REPL</code></strong></p>
 </div>
 <ul>
@@ -431,9 +434,9 @@
 <li><code>xmake lua lib.detect.find_tool gcc</code> 调用模块检查编译工具链/使用模块命令</li>
 <li><code>xmake lua find_packages zlib</code> 查找本地安装包<code>zlib</code></li>
 </ul>
-<p>xmake 提供了 <code>$(varname)</code> 的语法支持在配置字符串中<mark style="background-color:lightgreen">直接传递内置变量</mark>
-<code>$(env varname)</code> 内置变量，在字符串中<mark style="background-color:lightgreen">获取指定环境变量</mark>
-<code>xmake l os.getenvs</code> 以打印环境变量</p>
+<p>xmake 提供了 <code>$(varname)</code> 的语法支持在配置字符串中<mark style="background-color:lightgreen">直接传递内置变量</mark></p>
+<p><code>$(env varname)</code> 内置变量，在字符串中<mark style="background-color:lightgreen">获取指定环境变量</mark></p>
+<p><code>xmake l os.getenvs</code> 以打印环境变量</p>
 <ul>
 <li>$(buildir)：实际构建输出目录</li>
 <li>$(tmpdir)：临时目录</li>
@@ -454,9 +457,21 @@
 </span></span><span class="line"><span class="cl">xmake project -k cmake
 </span></span></code></pre></div><div style="overflow: auto;">
 `Xmake`有Vscode插件，适合脑容量非常小，一点命令都记不住的我<img src="/images/touhou/Cirno_stupid.jpg" style="float: right; margin-right: 2em;" alt="呆呆的Cirno" width="250" />
-<p>下载插件后 <kbd>Shift + Ctrl + p</kbd> 打开一个输入命令的窗口，直接<code>Xmake create</code> 就能根据模板选择创建项目了</p>
-<p><a href="#xmake_module">上面有个基础模板可以写Cxx20的module</a>，至少在我的设备上各种用法是可以的(</p>
-<p>我觉得基本上来说，这些工具封装一层大佬才会用的<a href="https://www.bilibili.com/video/BV1qT421a7zj/?spm_id_from=333.1387.upload.video_card.click&amp;vd_source=f419ef507f48d57b890b78d141046076">命令行设置参数</a></p>
+<p>下载插件后 <kbd>Shift + Ctrl + p</kbd> 打开一个输入命令的窗口，直接<code>Xmake create</code> 就能根据模板选择创建项目了
+<a href="#xmake_module">上面有个基础模板可以写Cxx20的module</a>，至少在我的设备上各种用法是可以的(都五年过去了Vscode的<code>C/C++</code>插件<a href="https://github.com/microsoft/vscode-cpptools/issues/6302">还是不能找到module</a></p>
+<p>Vscode的<code>C/C++</code>插件自带了一个<code>Clang-tidy.exe</code>，能够在设置中搜索<code>code analysis</code>给插件传递一些参数或者在目录中写<code>.clang-tidy</code>文件来<a href="#clang_tidy">对代码进行检查</a>，还有其它的工具&hellip;这些工具封装一层大佬才会用的<a href="https://www.bilibili.com/video/BV1qT421a7zj/?spm_id_from=333.1387.upload.video_card.click&amp;vd_source=f419ef507f48d57b890b78d141046076">命令行设置参数</a></p>
+</div>
+<div style="text-align:center; font-size:16px;">
+<p><strong>Xmake 和 Vscode C/C++ intellisence</strong></p>
+</div>
+<p>Vscode的Xmake插件生成编译命令供代码编辑器读取</p>
+<blockquote>
+<p>先使用 <kbd>Shift + Ctrl + p</kbd> 命令面板中的<code>C/C++: Edit Configuration</code>来生成一个<code>c_cpp_properties.json</code><br>
+再使用<kbd>Shift + Ctrl + p</kbd>命令面板中的<code>Xmake: UpdateIntellisence</code>生成编译命令文件<code>compile_commands.json</code><br>
+将其地址加入<code>c_cpp_properties.json</code>中以实现 <span style="color:red">intellisence</span>（module用<code>LLVM Clang+Vscode Clang插件</code>才找得到&hellip;</p>
+</blockquote>
+<div style="text-align:center; font-size:16px;">
+<p><strong>Xmake Qt 魔法</strong></p>
 </div>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-lua" data-lang="lua"><span class="line"><span class="cl"><span class="n">add_rules</span><span class="p">(</span><span class="s2">&#34;mode.debug&#34;</span><span class="p">,</span> <span class="s2">&#34;mode.release&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
@@ -468,20 +483,278 @@
 </span></span><span class="line"><span class="cl">    <span class="n">add_frameworks</span><span class="p">(</span><span class="s2">&#34;QtXml&#34;</span><span class="p">)</span> <span class="c1">-- 添加依赖库QtXml</span>
 </span></span></code></pre></div><p><code>add_framework</code>可以配置除QtGUI、QtCore等基础库之外的额外Qt依赖</p>
 <p><code>add_links</code> 仅仅只会简单地将库以 <code>-lQtGui</code> 方式来链接；而 <code>add_frameworks</code>主要用于添加 QT 相关库，除了会添加 <code>-lQtGui</code> 之外，还会添加 <code>-I/xxx/QtGui</code> 等头文件搜索路径，以及链接搜索路径，另外还会添加对应的 <code>-DQT_XML_LIB</code> 宏定义：比起手动 <code>add_links</code>、<code>add_includedirs</code> 更加的方便且跨平台</p>
-<h2 id="定义与初始化">
-<a class="header-anchor" href="#%e5%ae%9a%e4%b9%89%e4%b8%8e%e5%88%9d%e5%a7%8b%e5%8c%96"></a>
-定义与初始化
-</h2><h2 id="关于可见性">
-<a class="header-anchor" href="#%e5%85%b3%e4%ba%8e%e5%8f%af%e8%a7%81%e6%80%a7"></a>
-关于可见性
-</h2><h2 id="编译设置">
-<a class="header-anchor" href="#%e7%bc%96%e8%af%91%e8%ae%be%e7%bd%ae"></a>
-编译设置
-</h2><h2 id="record">
+<div style="text-align:center; font-size:16px;">
+<p><strong>Clang-tidy大法┗|｀O′|┛ 好~~</strong></p>
+</div>
+<p><a href="https://releases.llvm.org/21.1.0/tools/clang/tools/extra/docs/clang-tidy/index.html">一大堆参数</a>看得我头晕眼花😵，总之把下面的代码塞到了Vscode设置里，以后有需要再改( <a id="clang_tidy">​</a></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl">  <span class="s2">&#34;C_Cpp.codeAnalysis.clangTidy.enabled&#34;</span><span class="err">:</span> <span class="kc">true</span><span class="err">,</span>
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;C_Cpp.codeAnalysis.clangTidy.checks.enabled&#34;</span><span class="err">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">      <span class="s2">&#34;clang-analyzer-*&#34;</span><span class="p">,</span> <span class="c1">// 这个是默认开启的，设置不影响
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="s2">&#34;cppcoreguidelines-*&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="s2">&#34;modernize-*&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="s2">&#34;performance-*&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="s2">&#34;readability-*&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="p">]</span><span class="err">,</span>
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;C_Cpp.codeAnalysis.clangTidy.checks.disabled&#34;</span><span class="err">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">      <span class="s2">&#34;-cppcoreguidelines-avoid-magic-numbers&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="s2">&#34;-modernize-use-trailing-return-type&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="s2">&#34;-readability-magic-numbers&#34;</span><span class="p">,</span>    
+</span></span><span class="line"><span class="cl">  <span class="p">]</span>
+</span></span></code></pre></div><p>或者可以写一个<code>.clang-tidy</code>文件，注意要一次完全写对，否则直接不显示，也不报错(╬▔皿▔)╯据我实验，必须开启父类选项，再关闭某一个选项，否则就白关闭啦！</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">Checks</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    -*,
+</span></span></span><span class="line"><span class="cl"><span class="s2">    modernize-*,
+</span></span></span><span class="line"><span class="cl"><span class="s2">    -modernize-use-trailing-return-type,
+</span></span></span><span class="line"><span class="cl"><span class="s2">    cppcoreguidelines-*,
+</span></span></span><span class="line"><span class="cl"><span class="s2">    readability-*,
+</span></span></span><span class="line"><span class="cl"><span class="s2">    -readability-magic-numbers,
+</span></span></span><span class="line"><span class="cl"><span class="s2">    performance-*,
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">WarningsAsErrors</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">HeaderFilterRegex</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">FormatStyle</span><span class="p">:</span><span class="w"> </span><span class="l">none</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">CheckOptions</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>{<span class="nt">key: hicpp-signed-bitwise.IgnorePositiveIntegerLiterals, value</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;true&#39;</span>}<span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>{<span class="nt">key: readability-redundant-member-init.IgnoreBaseInCopyConstructors,value</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;true&#39;</span>}<span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">]</span><span class="w">
+</span></span></span></code></pre></div><div style="text-align:center; font-size:16px;">
+<span style="color:blue">这些东西能够限制过度自由的<code>Cxx</code>，让我冷静地coding防止我控制不住自己 ~</span>
+</div>
+<h2 id="可见性和命名空间">
+<a class="header-anchor" href="#%e5%8f%af%e8%a7%81%e6%80%a7%e5%92%8c%e5%91%bd%e5%90%8d%e7%a9%ba%e9%97%b4"></a>
+可见性和命名空间
+</h2><ul>
+<li>无链接 → 函数里面的<code>local variables</code></li>
+<li>内部链接 → 显式使用<code>static</code> 关键字或者<code>匿名namespace</code>下的东西，这个文件私有，其它文件不可见</li>
+<li>外部链接 → 全局变量这样的东西，可以跨文件访问</li>
+<li>模块链接 → <code>Cxx20</code>的模块中，显式<code>export</code>的符号会被模块外部访问</li>
+</ul>
+<blockquote>
+<p><code>inline</code> 关键字现在的主要目的是允许同一个符号在多个翻译单元中出现多个定义，同时不违反 ODR（One Definition Rule）<code>inline</code> 负责处理ODR问题，<code>static</code> 才负责内部链接，两个关键字可以一起使用<code>static inline int wtf = 2;</code></p>
+</blockquote>
+<p>为了防止命名冲突，可以狠狠嵌套命名空间 <del>命名空间同时也能起到让函数的实现和<code>#include</code>顺序强相关的作用</del></p>
+<div style="text-align:center; font-size:16px;">
+<p><code>prefix::literally::everything::all::the::time();</code></p>
+</div>
+<p><span style="text-decoration: underline; text-decoration-color: red; text-decoration-thickness: 2px;">建议是每个项目只有一个独立的顶级命名空间</span>，<code>inline</code>能在命名空间中起到<mark style="background-color:yellow">符号穿透</mark>的作用</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">namespace</span> <span class="n">Lib</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">inline</span> <span class="k">namespace</span> <span class="n">v2</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">void</span> <span class="nf">foo</span><span class="p">()</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">namespace</span> <span class="n">v1</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">void</span> <span class="nf">foo</span><span class="p">()</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Lib</span><span class="o">::</span><span class="n">foo</span><span class="p">();</span>     <span class="c1">// 默认使用 v2
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">Lib</span><span class="o">::</span><span class="n">v1</span><span class="o">::</span><span class="n">foo</span><span class="p">();</span> <span class="c1">// 显式使用旧版本
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><span style="color:red">宏不属于任何命名空间</span>，<code>namespace</code>对<code>#define</code>的宏完全没有作用，因此导致<code>#include 头文件</code>顺序敏感 (核心原因)</p>
+<h2 id="代码组织方式">
+<a class="header-anchor" href="#%e4%bb%a3%e7%a0%81%e7%bb%84%e7%bb%87%e6%96%b9%e5%bc%8f"></a>
+代码组织方式
+</h2><p>头文件<code>.h</code>或<code>.hpp</code>；源文件<code>.cpp</code>，通常情况下，我们会使用头文件来分离声明和定义: 声明放在头文件中，而实现放在 C++ 文件中。 如果 C++ 文件中的实现发生任何更改，就不需要重新编译包含相应实现的用户代码</p>
+<p>由于<code>#include</code>这样的语句只是单纯的文本复制粘贴，不参与编译语义的理解，<code>#progma once</code>这样的header guard<strong>只能阻止同一翻译单元内重复的代码被编译多次</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#if !defined(HEADERFILE_H)
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define HEADERFILE_H
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>  <span class="c1">// 在这个里面写头文件
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// 据我的clang-tidy(开启了&#34;portability-*&#34;)提示这样写更跨平台？
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#endif </span><span class="c1">// HEADERFILE_H
+</span></span></span></code></pre></div><p>头文件太多的话编译比较慢、<code>#include</code>顺序也很重要，据说还是和<a href="#macro">万恶的宏有关</a></p>
+<div style="text-align:center; font-size:16px;">
+<p>尽量用 <a href="#xmake_module">模块</a></p>
+</div>
+<div style="text-align:center; font-size:16px;">
+<pre class="mermaid">
+  %%{ init: { 'flowchart': { 'nodeSpacing': 5, 'rankSpacing': 50 } } }%%
+flowchart LR
+ subgraph module定义
+    direction TB
+     dummy[ ]
+     comp1
+     comp2
+     comp3 
+     comp4 
+     comp5 
+    end
+A[用来写预处理指令和 #include 库头文件] -->|optional| comp1[modules; // 全局模组片段] 
+B[定义模组名/导入其它模组] --> comp2["export module 模组名; 
+import 其它模组;"] 
+C[模组导出的东西可以被其它编译单元使用] --> comp3[export 命名空间,函数,类;] 
+D[其它编译单元不可见] --> comp4[没有export导出
+ 的代码部分] 
+E[模组内部的私有代码] --> comp5[module :private；// 私有] 
+style dummy fill:none,stroke:none
+style A fill:none,stroke:none
+style B fill:none,stroke:none
+style C fill:none,stroke:none
+style D fill:none,stroke:none
+style E fill:none,stroke:none
+style comp1 fill:#fff0b3,stroke:#333,stroke-width:1px
+style comp2 fill:#ffd9d9,stroke:#333,stroke-width:1px
+style comp3 fill:#d9e0ff,stroke:#333,stroke-width:1px
+style comp4 fill:#c0c0c0,stroke:#333,stroke-width:1px
+</pre></div>
+<blockquote>
+<p>模块可以使用<code>.</code>来防止命名上的问题 ~ e.g. <code>learn.mathlib</code></p>
+</blockquote>
+<p>虽然模块和命名空间完全正交(<del>俗称没有关系</del>)，但是为了防止导出之后名字冲突，干脆一个模块自带一个命名空间去写&hellip;</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">module</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 在这里先#include，应该是完全向后兼容的 ？ 
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 仅在这里预处理指令才起作用
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;cstdint&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="c1">// 后面就可以 import 其它 module 了
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">export</span> <span class="n">module</span> <span class="n">mathlib</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">export</span> <span class="k">namespace</span> <span class="n">mathlib</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">add</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">a</span> <span class="o">&lt;&lt;</span> <span class="n">b</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;\n&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="mi">3</span> <span class="o">+</span> <span class="mi">4</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kt">uint32_t</span> <span class="nf">factorial</span><span class="p">(</span><span class="kt">uint32_t</span> <span class="n">number</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">number</span> <span class="o">&lt;=</span> <span class="mi">1</span> <span class="o">?</span> <span class="nl">number</span> <span class="p">:</span> <span class="n">factorial</span><span class="p">(</span><span class="n">number</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">number</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="c1">// namespace mathlib
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 然后现在就有了导入代码的三种写法(
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#include</span> <span class="cpf">&lt;headerfile&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="n">import</span> <span class="o">&lt;</span><span class="n">header_unit</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="n">modulefile</span><span class="p">;</span>
+</span></span></code></pre></div><p><code>Cxx</code>标准保证除了C头文件外，所有的标准库都能够被<code>import</code>，但是并不是所有的第三方库都是<code>header unit</code>，好像取决于它们的实现方式&hellip;(以下内容摘录到这里，留待实际使用时踩坑)</p>
+<p>模组的名字和模组文件的名字可以不一致，<mark style="background-color:lightgreen">小小的module组成大module</mark>，以便用户使用时根据需要取用~</p>
+<p>子module组成大module和<code>inline namespace</code>有点像：在大模块中使用<code>export import 子模块</code>可以将子模块的<code>export</code>内容提升到外部空间，不复制具体实现，用户能直接访问，但是在语义控制上，子module的方式更加方便管理</p>
+<ul>
+<li><code>export import 子module</code>写法只会传播<code>export</code>的符号，不会传播具体实现细节&hellip;这个写法<code>header unit</code>好像不能用</li>
+<li><code>module</code> 要是太大了还是建议划分接口模块<code>.cppm/.ixx</code>和<code>.cpp</code>实现(Module Implementation Unit)，实现的<code>.cpp</code>必须有<code>module module_name</code>代表这是对module的实现，实现的<code>.cpp</code>不处理<code>export</code></li>
+<li>一个大模块也可以拆成几个部分，<code>export module &lt;主要module&gt;:&lt;划分module&gt;</code>这来定义一个部分，然后在主模块里拼接起来 <code>export import:&lt;划分module&gt;</code>，划分的部分不能被直接<code>import</code> <del>这才是使用的最主要原因：不给你们用小部件🤣</del></li>
+</ul>
+<p>使用<code>module:private</code>，可以将声明和定义分离到单个模块文件中，如果对实现的任何更改<span style="color:red">在语义上不会影响用户代码</span>，编译器 <span style="color:red">可能不需要</span> 重新导入这些更改(查阅<a href="https://en.cppreference.com/w/cpp/language/modules.html">cppreference</a>)尝试过后发现发现也许是美好的幻想？如果编译工具能够只比较接口部分、不关心实现就行？现在如果<code>module</code>太大还是尽可能将模块分为接口模块和实现模块</p>
+<p><a href="#header_sep">使用<code>module:private</code>定义与实现分离减少修改后重新编译的可能性?</a></p>
+<div class="highlight line-numbers"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">export</span> <span class="n">module</span> <span class="n">basic_math</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">export</span> <span class="kt">int</span> <span class="nf">Operation</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nl">module</span> <span class="p">:</span><span class="k">private</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">Operation</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">x</span><span class="o">-</span><span class="n">y</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>总之<code>module</code>至少有语义上的好处吧？ <code>private ≈ static</code> 提供模块的当前文件内更精细的可见性控制</p>
+<ul>
+<li><code>module</code>们可以以任何顺序导入，有更加精细的使用和控制方法，语义上的封装性更好</li>
+<li>预处理器的任何指令不会影响<code>imported header unit</code>, 不会像<code>#include 头文件</code>一样被宏影响了</li>
+</ul>
+<div style="text-align:center; font-size:16px;">
+<p><strong>编译一下module</strong></p>
+</div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1">## 编译模块接口并生成 IFC 和 OBJ</span>
+</span></span><span class="line"><span class="cl">cl /std:c++latest /EHsc /c mathlib.cppm /interface
+</span></span><span class="line"><span class="cl"><span class="c1">## 编译 main.cpp，并导入模块接口</span>
+</span></span><span class="line"><span class="cl">cl /std:c++latest /EHsc /c main.cpp /module:reference mathlib.ifc
+</span></span><span class="line"><span class="cl"><span class="c1">## 链接</span>
+</span></span><span class="line"><span class="cl">cl /std:c++latest main.obj mathlib.obj
+</span></span></code></pre></div><p>编译<code>main.cpp</code>时编译器会自动搜索同目录下<code>.ifc</code>文件，所以这里只需要两步(
+<code>/EHsc</code>启用 C++ 异常机制，假定不会抛出结构化异常（如 Windows SEH），并且 catch(&hellip;) 不会捕获这些异常&hellip; from OpenAI</p>
+<p>使用<code>module</code>前需要<code>import 模块名</code>，然后通过命名空间访问模块导出内容<code>模块名::导出内容</code>。据说模块编译出来之后是跨不了编译器版本的，它有一套自己的<code>binary module interface</code></p>
+<h2 id="record">
 <a class="header-anchor" href="#record"></a>
 Record
-</h2><p><code>Cxx</code>之难，难于上青天。我大概会努力保持笔记在Cxx20，虽然我已经记不得基础语法了(</p>
-<p>TBD</p>
+</h2><p><a href="https://www.youtube.com/watch?v=7fGB-hjc2Gc">Cxx是有史以来最糟糕的语言</a>，如视频中所说，它的很多设计都是为了保证“向后兼容性”，而非更加现代、更符合人体工程学</p>
+<div style="text-align:center; font-size:16px;">
+<p>(╯‵□′)╯︵┻━┻</p>
+</div>
+<p><code>Cxx</code>之难，难于上青天~我大概会努力保持笔记在Cxx20的程度，虽然我已经记不得基础语法了(</p>
+<div class="roll">
+    <div class="roll-button" onclick="rollTagRoulette()">🔮</div>
+    <div class="roll-tags"><span class="ready removing"></span></div>
+</div>
+
+<script>
+var rollTagRoulette = () => {
+    
+    var tags = "GCC, MSVC, Clang".split(",");
+    var tag = document.querySelector('.roll-tags');
+    tag.innerHTML = '';
+
+    var interval = setInterval(function () {
+        var span = document.createElement('span');
+        span.classList.add('ready');
+        span.classList.add('blur');
+        span.innerText = tags[Math.floor(Math.random() * tags.length)];
+        tag.appendChild(span);
+        spans = tag.querySelectorAll('span');
+        for (var i = 0; i < spans.length; i++) {
+            spans[i].classList.add('removing');
+        }
+    }, 200);
+    
+    setTimeout(function () {
+        clearInterval(interval);
+        for (var i = 0; i < spans.length-1; i++) {
+            tag.removeChild(spans[i]);
+        }
+        setTimeout(function () {
+            spans[spans.length-1].classList.remove('blur');
+        }, 100);
+    }, 1000);
+}
+
+rollTagRoulette(); 
+</script><link rel="stylesheet" href="/css/tag-roulette.css" />
+
 </div>
     <footer class="article-footer"><div class="sponsor-wrapper">
   <div class="sponsor-button">
@@ -581,10 +854,10 @@ Record
         >
       </div><div>
         <span class="icon-brush"
-          >&nbsp;12.0k</span
+          >&nbsp;15.3k</span
         >
         &nbsp;|&nbsp;
-        <span class="icon-coffee">&nbsp;00:28</span>
+        <span class="icon-coffee">&nbsp;00:34</span>
       </div><div>
         <span class="icon-eye"></span>
         <span id="busuanzi_container_site_pv"
@@ -611,10 +884,9 @@ Record
   <nav id="TableOfContents">
   <ul>
     <li><a href="#从编译工具开始">从编译工具开始</a></li>
-    <li><a href="#使用与生态兼容">使用与生态兼容</a></li>
-    <li><a href="#定义与初始化">定义与初始化</a></li>
-    <li><a href="#关于可见性">关于可见性</a></li>
-    <li><a href="#编译设置">编译设置</a></li>
+    <li><a href="#一大堆工具链">一大堆工具链</a></li>
+    <li><a href="#可见性和命名空间">可见性和命名空间</a></li>
+    <li><a href="#代码组织方式">代码组织方式</a></li>
     <li><a href="#record">Record</a></li>
   </ul>
 </nav>
@@ -790,6 +1062,97 @@ Record
           description: "CAUTIONLearning C\u002b\u002b can seriously harm your mental health and that of your loved ones.",
           cover: "https:\/\/raw.githubusercontent.com\/Pygamelion\/Mottos\/refs\/heads\/master\/Figures\/Art\/TH\/kaguya.jpg",
         };
+      </script><script
+    src="https://npm.webcache.cn/mermaid@11.12.0/dist/mermaid.min.js"
+    data-pjaxintegrity="sha384-o&#43;g/BxPwhi0C3RK7oQBxQuNimeafQ3GE/ST4iT2BxVI4Wzt60SH4pq9iXVYujjaS" crossorigin="anonymous"></script><script
+    src="https://npm.webcache.cn/dompurify@3.2.6/dist/purify.min.js"
+    data-pjaxintegrity="sha384-JEyTNhjM6R1ElGoJns4U2Ln4ofPcqzSsynQkmEc/KGy6336qAZl70tDLufbkla&#43;3" crossorigin="anonymous"></script><script
+    src="https://npm.webcache.cn/svg-pan-zoom@3.6.2/dist/svg-pan-zoom.min.js"
+    data-pjaxintegrity="sha384-GGX4llYprEPGp9w5caepn95YWAEflHnsA5ewt&#43;Y&#43;cBEb95og5cXKllnWKSELlzbx" crossorigin="anonymous"></script><script data-pjax>
+        if (window.mermaid) {
+          
+          const elementCode = '.mermaid'
+          const processElements = (callback) => {
+            const els = _$$(elementCode);
+            if (!els.length) return Promise.resolve();
+            
+            return new Promise((resolve, reject) => {
+              try {
+                els.forEach(callback);
+                resolve();
+              } catch (error) {
+                reject(error);
+              }
+            });
+          };
+          const saveOriginalData = () => processElements(el => {
+            if (!el.getAttribute('data-original-code')) {
+              el.setAttribute('data-original-code', el.innerHTML);
+            }
+          });
+
+          const resetProcessed = () => processElements(el => {
+            const originalCode = el.getAttribute('data-original-code');
+            if (originalCode) {
+              el.removeAttribute('data-processed');
+              el.innerHTML = DOMPurify.sanitize(originalCode);
+            }
+          });
+          const loadMermaid = async (theme) => {
+            window.mermaid.initialize({theme, startOnLoad: false})
+            await window.mermaid.run({querySelector: elementCode, suppressErrors: true})
+            if (window.svgPanZoom) {
+              window.__panZoomList?.forEach(panZoom => {try {panZoom.destroy()} catch {}});
+              window.__panZoomList = [];
+              _$$('.mermaid > svg').forEach(el => {
+                const bbox = el.getBBox();
+                el.setAttribute('height', Math.max(bbox.height, 80));
+                window.__panZoomList.push(window.svgPanZoom(el, {
+                  zoomEnabled: true,
+                  controlIconsEnabled: true,
+                  fit: true,
+                  center: true
+                }));
+              });
+              if (window.__resizeMermaidSvg) {
+                window.removeEventListener('resize', window.__resizeMermaidSvg);
+              }
+              window.__resizeMermaidSvg = () => {
+                try {
+                  window.__panZoomList.forEach(panZoom => {
+                    panZoom.resize();
+                    panZoom.fit();
+                    panZoom.center();
+                  });
+                } catch {
+                  window.removeEventListener('resize', window.__resizeMermaidSvg);
+                  window.__panZoomList = [];
+                }
+              }
+              window.addEventListener('resize', window.__resizeMermaidSvg);
+            }
+          }
+          const initMermaid = async (theme) => {
+            try {
+              await saveOriginalData();
+              await resetProcessed();
+              await loadMermaid(theme);
+            } catch (error) {
+              console.error(error);
+            }
+          };
+          
+          document.body.addEventListener('dark-theme-set', () => initMermaid('dark'));
+          document.body.addEventListener('light-theme-set', () => initMermaid('default'));
+
+          const mode = localStorage.getItem('dark_mode');
+          if (mode === 'auto') {
+            const osMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
+            initMermaid(osMode ? 'dark' : 'default');
+          } else {
+            initMermaid(mode === 'true' ? 'dark' : 'default');
+          }
+        }
       </script><script src="/js/insert_highlight.js" data-pjax></script><script src="/js/tabs.js" data-pjax></script><script type="module" data-pjax>const PhotoSwipeLightbox = (await safeImport("https:\/\/npm.webcache.cn\/photoswipe@5.4.4\/dist\/photoswipe-lightbox.esm.min.js", "sha384-DiL6M\/gG\u002bwmTxmCRZyD1zee6lIhawn5TGvED0FOh7fXcN9B0aZ9dexSF\/N6lrZi\/")).default;const initPswp = (gallery, children) => {
           if (_$$(`${gallery} ${children}`).length > 0) {
             new PhotoSwipeLightbox({

@@ -1932,7 +1932,7 @@ a.article-gallery-item,
   background-color: var(--red-5);
 }
 
-.article-entry details p {
+.article-entry details .details-content {
   margin: 20px 0 0;
   padding: 12px;
   background-color: var(--color-footer-background);
