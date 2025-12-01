@@ -339,8 +339,12 @@
 <li><a href="https://www.stroustrup.com/bs_faq.html">Bjarne Stroustrup</a></li>
 </ul>
 </div>
-<p>给以上以及未列出的大佬们致以最高敬意。这里的一系列<code>C++</code>相关的内容是我瞎写丢博客上，以便个人查阅之用&hellip;
-<br><br></p>
+<p>给以上以及未列出的大佬们致以最高敬意。这里的一系列<code>C++</code>相关的内容是我瞎写丢博客上，以便个人查阅之用&hellip;</p>
+<div class="tabs" id="tab-tab_06adbae8_1764601747226793600">
+		<ul class="nav-tabs center"><li class="tab active"><a class="#tab_06adbae8_1764601747226793600-1">Xmake</a></li><li class="tab"><a class="#tab_06adbae8_1764601747226793600-2">Cmake</a></li><li class="tab"><a class="#tab_06adbae8_1764601747226793600-3">ClangFormat</a></li><li class="tab"><a class="#tab_06adbae8_1764601747226793600-4">ClangTidy</a></li><li class="tab"><a class="#tab_06adbae8_1764601747226793600-5">inline</a></li><li class="tab"><a class="#tab_06adbae8_1764601747226793600-6">namespace</a></li><li class="tab"><a class="#tab_06adbae8_1764601747226793600-7">static</a></li><li class="tab"><a class="#tab_06adbae8_1764601747226793600-8">module</a></li><li class="tab"><a class="#tab_06adbae8_1764601747226793600-9">export</a></li><div class="tab-indicator"></div></ul>
+		<div class="tab-content"><div class="tab-pane active" id="tab_06adbae8_1764601747226793600-1"></div><div class="tab-pane" id="tab_06adbae8_1764601747226793600-2"></div><div class="tab-pane" id="tab_06adbae8_1764601747226793600-3"></div><div class="tab-pane" id="tab_06adbae8_1764601747226793600-4"></div><div class="tab-pane" id="tab_06adbae8_1764601747226793600-5"></div><div class="tab-pane" id="tab_06adbae8_1764601747226793600-6"></div><div class="tab-pane" id="tab_06adbae8_1764601747226793600-7"></div><div class="tab-pane" id="tab_06adbae8_1764601747226793600-8"></div><div class="tab-pane" id="tab_06adbae8_1764601747226793600-9"></div></div>
+	</div><link rel="stylesheet" href="/css/tabs.css" />
+
 <p>上一次学Cxx还是刚上大学，随大流想考一个计算机二级证书，觉得office主要是文字处理没有意思，这门语言早在中学时代就刻入把名字刻在我脑袋里了，毕竟当时手机上玩我的世界首页都会飘着一行“<span style="color:#ffee97"><em>Build with C++</em></span>”。清澈愚蠢的我随大流整了本大名鼎鼎的谭浩强《C++程序设计》, 学了两章就被诸如<code>i*(i+=--i)</code>、<code>a=(a++)+(++a)</code>的窒息语法劝退，随后开始对各种写法排列组合。虽然最后还是拿到证书，我对整个计算机技术的学习也到此为止了(毕竟考试的其实很简单，真没有什么动力再玩这些花式trick了<span class="mysecret" title="你发现了一个秘密">(当时稍微知道计算机学生们天天在用电路做加法乘法二进制呢，怎么能把大学当成小学来读！来自高考数学上不了100分的劳资的鄙视</span></p>
 <p>之后莫名走入物理学的花花世界，开开心心地学了一段时间，各种真假难辨的物理理论充斥我的脑袋，让我深感自己只是物理学的观光者，没有坚定信念和探险精神 <del>practical的方向与academic资源</del>，期间<code>Python</code>、<code>Julia</code>、<code>Rust</code>等编程语言都有接触，虽然身为LHAASO组成员，我一直想绕着<code>C++</code>和<code>Root</code>走，足见当年心理阴影之深。今天回想起来，已经是时过境迁，兜兜转转回到了<code>True or False</code>的比特世界 <del>世界上又多了个普通转行物理人，却少了个高级程序员(；′⌒`)</del> 现在回来重学Cxx，好处是AI领路、Cxx标准更新、工具链换掉了一批，网络上各种学习资源随手可得，其它语言的学习也让我重新认识了Cxx是多么强大的存在。毕竟这么多年过去，当年奇怪写法的遗毒也在我脑中消退了，不好说是好事还是坏事&hellip;</p>
 <blockquote>
@@ -459,8 +463,13 @@
 `Xmake`有Vscode插件，适合脑容量非常小，一点命令都记不住的我<img src="/images/touhou/Cirno_stupid.jpg" style="float: right; margin-right: 2em;" alt="呆呆的Cirno" width="250" />
 <p>下载插件后 <kbd>Shift + Ctrl + p</kbd> 打开一个输入命令的窗口，直接<code>Xmake create</code> 就能根据模板选择创建项目了
 <a href="#xmake_module">上面有个基础模板可以写Cxx20的module</a>，至少在我的设备上各种用法是可以的(都五年过去了Vscode的<code>C/C++</code>插件<a href="https://github.com/microsoft/vscode-cpptools/issues/6302">还是不能找到module</a></p>
-<p>Vscode的<code>C/C++</code>插件自带了一个<code>Clang-tidy.exe</code>，能够在设置中搜索<code>code analysis</code>给插件传递一些参数或者在目录中写<code>.clang-tidy</code>文件来<a href="#clang_tidy">对代码进行检查</a>，还有其它的工具&hellip;这些工具封装一层大佬才会用的<a href="https://www.bilibili.com/video/BV1qT421a7zj/?spm_id_from=333.1387.upload.video_card.click&amp;vd_source=f419ef507f48d57b890b78d141046076">命令行设置参数</a></p>
+<p>Vscode的<code>C/C++</code>插件自带了一个<code>clang-tidy.exe</code>，能够在设置中搜索<code>code analysis</code>给插件传递一些参数或者在目录中写<code>.clang-tidy</code>文件来<a href="#clang_tidy">对代码进行检查</a>，还有其它的工具&hellip;这些工具封装一层大佬才会用的<a href="https://www.bilibili.com/video/BV1qT421a7zj/?spm_id_from=333.1387.upload.video_card.click&amp;vd_source=f419ef507f48d57b890b78d141046076">命令行设置参数</a></p>
 </div>
+<p>插件还自带一个<code>clang-foramt.exe</code>，属于代码格式化的工具，可以在目录中写<code>.clang-format</code>文件来配置，此外<code>Visual Studio</code>好像能导出<code>EditorConfig</code>文件&hellip;希望有朝一日菜菜的我能和他人一起合作写项目</p>
+<blockquote>
+<p><code>clang-format</code> 和 <code>clang-tidy</code> 代表着生产过程中代码的规范需求，代表着现代<code>C++</code>的发展方向，代表着广大开发者的根本利益</p>
+</blockquote>
+<p><code>// NOLINT</code>或者<code>// NOLINTNEXTLINE</code>这样的注释能够控制<code>clang-tidy</code>，<code>// clang-format off/on</code>这样控制<code>clang-format</code> ?</p>
 <div style="text-align:center; font-size:16px;">
 <p><strong>Xmake 和 Vscode C/C++ intellisence</strong></p>
 </div>
@@ -484,7 +493,7 @@
 </span></span></code></pre></div><p><code>add_framework</code>可以配置除QtGUI、QtCore等基础库之外的额外Qt依赖</p>
 <p><code>add_links</code> 仅仅只会简单地将库以 <code>-lQtGui</code> 方式来链接；而 <code>add_frameworks</code>主要用于添加 QT 相关库，除了会添加 <code>-lQtGui</code> 之外，还会添加 <code>-I/xxx/QtGui</code> 等头文件搜索路径，以及链接搜索路径，另外还会添加对应的 <code>-DQT_XML_LIB</code> 宏定义：比起手动 <code>add_links</code>、<code>add_includedirs</code> 更加的方便且跨平台</p>
 <div style="text-align:center; font-size:16px;">
-<p><strong>Clang-tidy大法┗|｀O′|┛ 好~~</strong></p>
+<p><strong>clang-tidy大法┗|｀O′|┛ 好~~</strong></p>
 </div>
 <p><a href="https://releases.llvm.org/21.1.0/tools/clang/tools/extra/docs/clang-tidy/index.html">一大堆参数</a>看得我头晕眼花😵，总之把下面的代码塞到了Vscode设置里，以后有需要再改( <a id="clang_tidy">​</a></p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl">  <span class="s2">&#34;C_Cpp.codeAnalysis.clangTidy.enabled&#34;</span><span class="err">:</span> <span class="kc">true</span><span class="err">,</span>
@@ -854,7 +863,7 @@ rollTagRoulette();
         >
       </div><div>
         <span class="icon-brush"
-          >&nbsp;15.3k</span
+          >&nbsp;15.6k</span
         >
         &nbsp;|&nbsp;
         <span class="icon-coffee">&nbsp;00:34</span>
