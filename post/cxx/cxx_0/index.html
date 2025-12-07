@@ -195,7 +195,7 @@
 </div>
 <div class="sidebar-state">
   <div class="sidebar-state-article">
-    <div>文章</div><div class="sidebar-state-number">5</div>
+    <div>文章</div><div class="sidebar-state-number">6</div>
   </div>
   <a class="sidebar-state-category" href="/categories/" aria-label="sidebar-state-category-link">
     <div>分类</div>
@@ -340,9 +340,9 @@
 </ul>
 </div>
 <p>给以上以及未列出的大佬们致以最高敬意。这里的一系列<code>C++</code>相关的内容是我瞎写丢博客上，以便个人查阅之用&hellip;</p>
-<div class="tabs" id="tab-tab_06adbae8_1764601747226793600">
-		<ul class="nav-tabs center"><li class="tab active"><a class="#tab_06adbae8_1764601747226793600-1">Xmake</a></li><li class="tab"><a class="#tab_06adbae8_1764601747226793600-2">Cmake</a></li><li class="tab"><a class="#tab_06adbae8_1764601747226793600-3">ClangFormat</a></li><li class="tab"><a class="#tab_06adbae8_1764601747226793600-4">ClangTidy</a></li><li class="tab"><a class="#tab_06adbae8_1764601747226793600-5">inline</a></li><li class="tab"><a class="#tab_06adbae8_1764601747226793600-6">namespace</a></li><li class="tab"><a class="#tab_06adbae8_1764601747226793600-7">static</a></li><li class="tab"><a class="#tab_06adbae8_1764601747226793600-8">module</a></li><li class="tab"><a class="#tab_06adbae8_1764601747226793600-9">export</a></li><div class="tab-indicator"></div></ul>
-		<div class="tab-content"><div class="tab-pane active" id="tab_06adbae8_1764601747226793600-1"></div><div class="tab-pane" id="tab_06adbae8_1764601747226793600-2"></div><div class="tab-pane" id="tab_06adbae8_1764601747226793600-3"></div><div class="tab-pane" id="tab_06adbae8_1764601747226793600-4"></div><div class="tab-pane" id="tab_06adbae8_1764601747226793600-5"></div><div class="tab-pane" id="tab_06adbae8_1764601747226793600-6"></div><div class="tab-pane" id="tab_06adbae8_1764601747226793600-7"></div><div class="tab-pane" id="tab_06adbae8_1764601747226793600-8"></div><div class="tab-pane" id="tab_06adbae8_1764601747226793600-9"></div></div>
+<div class="tabs" id="tab-tab_06adbae8_1765127937943592000">
+		<ul class="nav-tabs center"><li class="tab active"><a class="#tab_06adbae8_1765127937943592000-1">Xmake</a></li><li class="tab"><a class="#tab_06adbae8_1765127937943592000-2">Cmake</a></li><li class="tab"><a class="#tab_06adbae8_1765127937943592000-3">ClangFormat</a></li><li class="tab"><a class="#tab_06adbae8_1765127937943592000-4">ClangTidy</a></li><li class="tab"><a class="#tab_06adbae8_1765127937943592000-5">inline</a></li><li class="tab"><a class="#tab_06adbae8_1765127937943592000-6">namespace</a></li><li class="tab"><a class="#tab_06adbae8_1765127937943592000-7">static</a></li><li class="tab"><a class="#tab_06adbae8_1765127937943592000-8">module</a></li><li class="tab"><a class="#tab_06adbae8_1765127937943592000-9">export</a></li><div class="tab-indicator"></div></ul>
+		<div class="tab-content"><div class="tab-pane active" id="tab_06adbae8_1765127937943592000-1"></div><div class="tab-pane" id="tab_06adbae8_1765127937943592000-2"></div><div class="tab-pane" id="tab_06adbae8_1765127937943592000-3"></div><div class="tab-pane" id="tab_06adbae8_1765127937943592000-4"></div><div class="tab-pane" id="tab_06adbae8_1765127937943592000-5"></div><div class="tab-pane" id="tab_06adbae8_1765127937943592000-6"></div><div class="tab-pane" id="tab_06adbae8_1765127937943592000-7"></div><div class="tab-pane" id="tab_06adbae8_1765127937943592000-8"></div><div class="tab-pane" id="tab_06adbae8_1765127937943592000-9"></div></div>
 	</div><link rel="stylesheet" href="/css/tabs.css" />
 
 <p>上一次学Cxx还是刚上大学，随大流想考一个计算机二级证书，觉得office主要是文字处理没有意思，这门语言早在中学时代就刻入把名字刻在我脑袋里了，毕竟当时手机上玩我的世界首页都会飘着一行“<span style="color:#ffee97"><em>Build with C++</em></span>”。清澈愚蠢的我随大流整了本大名鼎鼎的谭浩强《C++程序设计》, 学了两章就被诸如<code>i*(i+=--i)</code>、<code>a=(a++)+(++a)</code>的窒息语法劝退，随后开始对各种写法排列组合。虽然最后还是拿到证书，我对整个计算机技术的学习也到此为止了(毕竟考试的其实很简单，真没有什么动力再玩这些花式trick了<span class="mysecret" title="你发现了一个秘密">(当时稍微知道计算机学生们天天在用电路做加法乘法二进制呢，怎么能把大学当成小学来读！来自高考数学上不了100分的劳资的鄙视</span></p>
@@ -534,18 +534,23 @@
 可见性和命名空间
 </h2><ul>
 <li>无链接 → 函数里面的<code>local variables</code></li>
-<li>内部链接 → 显式使用<code>static</code> 关键字或者<code>匿名namespace</code>下的东西，这个文件私有，其它文件不可见</li>
+<li>内部链接 → 显式使用<code>static</code> 关键字或者<code>匿名namespace</code>下的东西，当前文件私有，其它文件不可见</li>
 <li>外部链接 → 全局变量这样的东西，可以跨文件访问</li>
 <li>模块链接 → <code>Cxx20</code>的模块中，显式<code>export</code>的符号会被模块外部访问</li>
 </ul>
 <blockquote>
-<p><code>inline</code> 关键字现在的主要目的是允许同一个符号在多个翻译单元中出现多个定义，同时不违反 ODR（One Definition Rule）<code>inline</code> 负责处理ODR问题，<code>static</code> 才负责内部链接，两个关键字可以一起使用<code>static inline int wtf = 2;</code></p>
+<p><code>inline</code> 关键字现在的主要目的是允许同一个符号在多个翻译单元中出现多个定义，同时不违反 ODR（One Definition Rule）<code>inline</code> 负责处理ODR问题(模板编程中常用)，<code>static</code> 才负责内部链接，两个关键字可以一起使用<code>static inline int wtf = 2;</code></p>
 </blockquote>
-<p>为了防止命名冲突，可以狠狠嵌套命名空间 <del>命名空间同时也能起到让函数的实现和<code>#include</code>顺序强相关的作用</del></p>
+<blockquote>
+<p>如果是多个文件共享某个函数或者变量，只在一个地方定义，其它地方使用<code>extern</code>声明它，表示它是外部引入的<del>但是你已经完全被<code>inline</code>给替代了鸭</del></p>
+</blockquote>
+<p>为了防止命名冲突，可以狠狠嵌套命名空间然后起别名 <del>命名空间同时也能起到让函数的实现和<code>#include</code>顺序强相关的作用</del></p>
 <div style="text-align:center; font-size:16px;">
-<p><code>prefix::literally::everything::all::the::time();</code></p>
-</div>
-<p><span style="text-decoration: underline; text-decoration-color: red; text-decoration-thickness: 2px;">建议是每个项目只有一个独立的顶级命名空间</span>，<code>inline</code>能在命名空间中起到<mark style="background-color:yellow">符号穿透</mark>的作用</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">prefix</span><span class="o">::</span><span class="n">literally</span><span class="o">::</span><span class="n">everything</span><span class="o">::</span><span class="n">all</span><span class="o">::</span><span class="n">the</span><span class="o">::</span><span class="n">time</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="k">namespace</span> <span class="n">aliasprefix</span> <span class="o">=</span> <span class="n">prefix</span><span class="o">::</span><span class="n">literally</span><span class="o">::</span><span class="n">everything</span><span class="o">::</span><span class="n">all</span><span class="o">::</span><span class="n">the</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">aliasprefix</span><span class="o">::</span><span class="n">time</span><span class="p">();</span>
+</span></span></code></pre></div></div>
+<p>嵌套命名空间允许像创建文件目录一样对代码分层分组，<code>Cxx 17</code>还有对应语法糖<code>namespace A::inline B::C {...}</code> 等价于嵌套写法，但<span style="text-decoration: underline; text-decoration-color: red; text-decoration-thickness: 2px;">建议是每个项目只有一个独立的顶级命名空间</span>，<code>inline</code>能在命名空间中起到<mark style="background-color:yellow">符号穿透</mark>的作用</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -578,7 +583,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><span style="color:red">宏不属于任何命名空间</span>，<code>namespace</code>对<code>#define</code>的宏完全没有作用，因此导致<code>#include 头文件</code>顺序敏感 (核心原因)</p>
+</div><p><span style="color:red">宏不属于任何命名空间</span>，<code>namespace</code>对<code>#define</code>的宏完全没有作用，因此导致<code>#include 头文件</code>顺序敏感 (核心原因，此外某些库会依赖更老版本的库，所以新引入的东西一定要在下面e.g. 先<code>#include &lt;winsock2.h&gt;</code>再<code>#include &lt;windows.h&gt;</code>)</p>
 <h2 id="代码组织方式">
 <a class="header-anchor" href="#%e4%bb%a3%e7%a0%81%e7%bb%84%e7%bb%87%e6%96%b9%e5%bc%8f"></a>
 代码组织方式
@@ -692,7 +697,20 @@ style comp4 fill:#c0c0c0,stroke:#333,stroke-width:1px
 </ul>
 <p>使用<code>module:private</code>，可以将声明和定义分离到单个模块文件中，如果对实现的任何更改<span style="color:red">在语义上不会影响用户代码</span>，编译器 <span style="color:red">可能不需要</span> 重新导入这些更改(查阅<a href="https://en.cppreference.com/w/cpp/language/modules.html">cppreference</a>)尝试过后发现发现也许是美好的幻想？如果编译工具能够只比较接口部分、不关心实现就行？现在如果<code>module</code>太大还是尽可能将模块分为接口模块和实现模块</p>
 <p><a href="#header_sep">使用<code>module:private</code>定义与实现分离减少修改后重新编译的可能性?</a></p>
-<div class="highlight line-numbers"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">export</span> <span class="n">module</span> <span class="n">basic_math</span><span class="p">;</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">export</span> <span class="n">module</span> <span class="n">basic_math</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">export</span> <span class="kt">int</span> <span class="nf">Operation</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
@@ -701,7 +719,9 @@ style comp4 fill:#c0c0c0,stroke:#333,stroke-width:1px
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">x</span><span class="o">-</span><span class="n">y</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p>总之<code>module</code>至少有语义上的好处吧？ <code>private ≈ static</code> 提供模块的当前文件内更精细的可见性控制</p>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>总之<code>module</code>至少有语义上的好处吧？ <code>private ≈ static</code> 提供模块的当前文件内更精细的可见性控制</p>
 <ul>
 <li><code>module</code>们可以以任何顺序导入，有更加精细的使用和控制方法，语义上的封装性更好</li>
 <li>预处理器的任何指令不会影响<code>imported header unit</code>, 不会像<code>#include 头文件</code>一样被宏影响了</li>
@@ -863,10 +883,10 @@ rollTagRoulette();
         >
       </div><div>
         <span class="icon-brush"
-          >&nbsp;15.6k</span
+          >&nbsp;18.6k</span
         >
         &nbsp;|&nbsp;
-        <span class="icon-coffee">&nbsp;00:34</span>
+        <span class="icon-coffee">&nbsp;00:41</span>
       </div><div>
         <span class="icon-eye"></span>
         <span id="busuanzi_container_site_pv"
@@ -912,7 +932,7 @@ rollTagRoulette();
 </div>
 <div class="sidebar-state">
   <div class="sidebar-state-article">
-    <div>文章</div><div class="sidebar-state-number">5</div>
+    <div>文章</div><div class="sidebar-state-number">6</div>
   </div>
   <a class="sidebar-state-category" href="/categories/" aria-label="sidebar-state-category-link">
     <div>分类</div>
