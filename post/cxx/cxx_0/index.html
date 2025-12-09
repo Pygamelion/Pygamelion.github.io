@@ -340,9 +340,9 @@
 </ul>
 </div>
 <p>给以上以及未列出的大佬们致以最高敬意。这里的一系列<code>C++</code>相关的内容是我瞎写丢博客上，以便个人查阅之用&hellip;</p>
-<div class="tabs" id="tab-tab_06adbae8_1765127937943592000">
-		<ul class="nav-tabs center"><li class="tab active"><a class="#tab_06adbae8_1765127937943592000-1">Xmake</a></li><li class="tab"><a class="#tab_06adbae8_1765127937943592000-2">Cmake</a></li><li class="tab"><a class="#tab_06adbae8_1765127937943592000-3">ClangFormat</a></li><li class="tab"><a class="#tab_06adbae8_1765127937943592000-4">ClangTidy</a></li><li class="tab"><a class="#tab_06adbae8_1765127937943592000-5">inline</a></li><li class="tab"><a class="#tab_06adbae8_1765127937943592000-6">namespace</a></li><li class="tab"><a class="#tab_06adbae8_1765127937943592000-7">static</a></li><li class="tab"><a class="#tab_06adbae8_1765127937943592000-8">module</a></li><li class="tab"><a class="#tab_06adbae8_1765127937943592000-9">export</a></li><div class="tab-indicator"></div></ul>
-		<div class="tab-content"><div class="tab-pane active" id="tab_06adbae8_1765127937943592000-1"></div><div class="tab-pane" id="tab_06adbae8_1765127937943592000-2"></div><div class="tab-pane" id="tab_06adbae8_1765127937943592000-3"></div><div class="tab-pane" id="tab_06adbae8_1765127937943592000-4"></div><div class="tab-pane" id="tab_06adbae8_1765127937943592000-5"></div><div class="tab-pane" id="tab_06adbae8_1765127937943592000-6"></div><div class="tab-pane" id="tab_06adbae8_1765127937943592000-7"></div><div class="tab-pane" id="tab_06adbae8_1765127937943592000-8"></div><div class="tab-pane" id="tab_06adbae8_1765127937943592000-9"></div></div>
+<div class="tabs" id="tab-tab_06adbae8_1765302190489598200">
+		<ul class="nav-tabs center"><li class="tab active"><a class="#tab_06adbae8_1765302190489598200-1">Xmake</a></li><li class="tab"><a class="#tab_06adbae8_1765302190489598200-2">Cmake</a></li><li class="tab"><a class="#tab_06adbae8_1765302190489598200-3">ClangFormat</a></li><li class="tab"><a class="#tab_06adbae8_1765302190489598200-4">ClangTidy</a></li><li class="tab"><a class="#tab_06adbae8_1765302190489598200-5">inline</a></li><li class="tab"><a class="#tab_06adbae8_1765302190489598200-6">namespace</a></li><li class="tab"><a class="#tab_06adbae8_1765302190489598200-7">static</a></li><li class="tab"><a class="#tab_06adbae8_1765302190489598200-8">module</a></li><li class="tab"><a class="#tab_06adbae8_1765302190489598200-9">export</a></li><div class="tab-indicator"></div></ul>
+		<div class="tab-content"><div class="tab-pane active" id="tab_06adbae8_1765302190489598200-1"></div><div class="tab-pane" id="tab_06adbae8_1765302190489598200-2"></div><div class="tab-pane" id="tab_06adbae8_1765302190489598200-3"></div><div class="tab-pane" id="tab_06adbae8_1765302190489598200-4"></div><div class="tab-pane" id="tab_06adbae8_1765302190489598200-5"></div><div class="tab-pane" id="tab_06adbae8_1765302190489598200-6"></div><div class="tab-pane" id="tab_06adbae8_1765302190489598200-7"></div><div class="tab-pane" id="tab_06adbae8_1765302190489598200-8"></div><div class="tab-pane" id="tab_06adbae8_1765302190489598200-9"></div></div>
 	</div><link rel="stylesheet" href="/css/tabs.css" />
 
 <p>上一次学Cxx还是刚上大学，随大流想考一个计算机二级证书，觉得office主要是文字处理没有意思，这门语言早在中学时代就刻入把名字刻在我脑袋里了，毕竟当时手机上玩我的世界首页都会飘着一行“<span style="color:#ffee97"><em>Build with C++</em></span>”。清澈愚蠢的我随大流整了本大名鼎鼎的谭浩强《C++程序设计》, 学了两章就被诸如<code>i*(i+=--i)</code>、<code>a=(a++)+(++a)</code>的窒息语法劝退，随后开始对各种写法排列组合。虽然最后还是拿到证书，我对整个计算机技术的学习也到此为止了(毕竟考试的其实很简单，真没有什么动力再玩这些花式trick了<span class="mysecret" title="你发现了一个秘密">(当时稍微知道计算机学生们天天在用电路做加法乘法二进制呢，怎么能把大学当成小学来读！来自高考数学上不了100分的劳资的鄙视</span></p>
@@ -737,7 +737,8 @@ style comp4 fill:#c0c0c0,stroke:#333,stroke-width:1px
 </span></span><span class="line"><span class="cl">cl /std:c++latest main.obj mathlib.obj
 </span></span></code></pre></div><p>编译<code>main.cpp</code>时编译器会自动搜索同目录下<code>.ifc</code>文件，所以这里只需要两步(
 <code>/EHsc</code>启用 C++ 异常机制，假定不会抛出结构化异常（如 Windows SEH），并且 catch(&hellip;) 不会捕获这些异常&hellip; from OpenAI</p>
-<p>使用<code>module</code>前需要<code>import 模块名</code>，然后通过命名空间访问模块导出内容<code>模块名::导出内容</code>。据说模块编译出来之后是跨不了编译器版本的，它有一套自己的<code>binary module interface</code></p>
+<p>使用<code>module</code>前需要<code>import 模块名</code>，然后通过命名空间访问模块导出内容<code>模块名::导出内容</code>。据说模块编译出来之后是跨不了编译器版本的，它有一套自己的<code>binary module interface</code>。</p>
+<p>总之根据<a href="https://arewemodulesyet.org/">这个网站</a>，我们很快就能用上<code>module</code>了!</p>
 <h2 id="record">
 <a class="header-anchor" href="#record"></a>
 Record
