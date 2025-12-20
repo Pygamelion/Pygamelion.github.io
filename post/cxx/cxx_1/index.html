@@ -189,7 +189,9 @@
     <li><a href="#rule-of-035">Rule of 0/3/5</a></li>
     <li><a href="#智能指针">智能指针</a>
       <ul>
-        <li><a href="#关于原始指针">关于原始指针</a></li>
+        <li><a href="#智能指针的一些转换方法8203">智能指针的一些转换方法​</a></li>
+        <li><a href="#经典原始指针">经典原始指针</a></li>
+        <li><a href="#函数指针">函数指针</a></li>
       </ul>
     </li>
     <li><a href="#运算符和重载">运算符和重载</a>
@@ -206,6 +208,7 @@
       <ul>
         <li><a href="#initializer_list">initializer_list</a></li>
         <li><a href="#标准库算法两种版本">标准库算法两种版本</a></li>
+        <li><a href="#来自-ai-老师的指导">来自 AI 老师的指导</a></li>
       </ul>
     </li>
   </ul>
@@ -342,6 +345,11 @@
 </code></pre>
 <p><strong>这是个人学习<code>Cxx</code>的记录笔记，所以想到哪里写到哪里🤪</strong></p>
 </div>
+<div class="tabs" id="tab-tab_70a5aadb_1766236958344903100">
+		<ul class="nav-tabs center"><li class="tab active"><a class="#tab_70a5aadb_1766236958344903100-1">变量定义</a></li><li class="tab"><a class="#tab_70a5aadb_1766236958344903100-2">类型转换</a></li><li class="tab"><a class="#tab_70a5aadb_1766236958344903100-3">移动语义</a></li><li class="tab"><a class="#tab_70a5aadb_1766236958344903100-4">智能指针</a></li><li class="tab"><a class="#tab_70a5aadb_1766236958344903100-5">运算符重载</a></li><li class="tab"><a class="#tab_70a5aadb_1766236958344903100-6">标准库容器</a></li><li class="tab"><a class="#tab_70a5aadb_1766236958344903100-7">迭代器/范围</a></li><div class="tab-indicator"></div></ul>
+		<div class="tab-content"><div class="tab-pane active" id="tab_70a5aadb_1766236958344903100-1"></div><div class="tab-pane" id="tab_70a5aadb_1766236958344903100-2"></div><div class="tab-pane" id="tab_70a5aadb_1766236958344903100-3"></div><div class="tab-pane" id="tab_70a5aadb_1766236958344903100-4"></div><div class="tab-pane" id="tab_70a5aadb_1766236958344903100-5"></div><div class="tab-pane" id="tab_70a5aadb_1766236958344903100-6"></div><div class="tab-pane" id="tab_70a5aadb_1766236958344903100-7"></div></div>
+	</div><link rel="stylesheet" href="/css/tabs.css" />
+
 <h2 id="变量类型">
 <a class="header-anchor" href="#%e5%8f%98%e9%87%8f%e7%b1%bb%e5%9e%8b"></a>
 变量类型
@@ -355,8 +363,7 @@
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">boolalpha</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;\n&#39;</span><span class="p">;</span> <span class="c1">// 结果为 true
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
-</span></span></code></pre></div><p>decltype</p>
-<h3 id="类型转换">
+</span></span></code></pre></div><h3 id="类型转换">
 <a class="header-anchor" href="#%e7%b1%bb%e5%9e%8b%e8%bd%ac%e6%8d%a2"></a>
 类型转换
 </h3><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">double</span> <span class="n">d</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>  <span class="c1">// double(42) 可以省略 double 
@@ -381,17 +388,37 @@
 </span></span><span class="line"><span class="cl">    <span class="c1">// String -&gt; const char * --&gt; boolean
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">i</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;\n&#39;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p>几个经典的转换方法</p>
+</span></span></code></pre></div><p>几个经典的转换方法 <a href="https://www.bilibili.com/video/BV11r1FBWE9B/">小彭老师视频</a></p>
 <ul>
-<li>dynamic_cast</li>
-<li>static_cast</li>
-<li>reinterpret_cast</li>
-<li>const_cast</li>
+<li><code>static_cast</code> 能够确定后果的转换就用这个，不做运行检查，UB在召唤(ゝ∀･)，</li>
+<li><code>dynamic_cast</code> ⇒ 依靠<code>typeinfo</code>用于类型层级导航 (虚类（类+虚函数）才有虚表指针/<code>typeinfo</code>指针/RTTI哦，除非转换<code>void*</code>就不需要+虚函数&hellip;)
+<ul>
+<li>按值将派生类（共有继承）传给基类时，对象切片发生，派生类对象被截断成为基类对象(丢失信息)</li>
+<li>按指针/引用将派生类传给基类时，相当于改变地址的解释方式，信息会完全保留(这种情况效果和<code>C</code>强转或者<code>static_cast</code>一致的）。派生类大小 ≥ 基类大小，<code>Cxx</code>默认不允许基类的指针/引用转换为派生类（担心会访问到未指定内存？）但是如果这个 <mark style="background-color:yellow">地址完全保留派生类的信息</mark>，就可以通过<code>dynamic_cast</code>来转换（转换不是严格匹配的，只要属于<code>cast</code>目标的派生类即可）</li>
+</ul>
+</li>
+</ul>
+<p><code>dynamic_cast</code>相当于在基类头部放一个指针<code>const std::typeinfo *</code>存着基类的<code>typeid</code>，并随着派生类的构造改变为派生类的<code>typeid</code>，在转换时通过比较<code>typeid</code>就能知道当前内存块的类型，从而决定是否转换（\´ ▽ ` )ﾉ<code>typeid.name()</code>会经过名称重组）</p>
+<p><span style="color: black; text-decoration: underline; text-decoration-color: red; text-decoration-thickness: 2px;">指针转换失败会是空指针，引用转换失败（引用不能是空的 ´ ▽ `）是<code>std::bad_cast</code>异常，最好就不要使用<code>RTTI</code>&hellip;
+</span></p>
+<blockquote>
+<p><code>Cxx</code> name mangling 规则：</p>
+<p><a href="https://en.wikipedia.org/wiki/Name_mangling">_ZN9wikipedia7Article6formatE</a>：<code>_Z</code> 开头，N表示命名空间，数字表示名称长度，E表示参数列表结束</p>
+</blockquote>
+<ul>
+<li><code>reinterpret_cast</code></li>
+<li><code>const_cast</code></li>
+<li><code>std::bit_cast</code></li>
 </ul>
 <blockquote>
-<p>现在又多了两种 std::move，std::forward</p>
+<p>现在又多了两种 <code>std::move</code>，<code>std::forward</code></p>
 </blockquote>
+<p><a href="#pointer_cast">智能指针的一些转换方法</a></p>
 <p>浅拷贝不复制底层资源，但会导致<code>double delete</code>；实现所有权转移，可以避免资源的深拷贝</p>
+<div style="text-align:center; font-size:16px;">
+<p><strong>关于运行时多态</strong></p>
+</div>
+<p>decltype</p>
 <h2 id="移动语义相关">
 <a class="header-anchor" href="#%e7%a7%bb%e5%8a%a8%e8%af%ad%e4%b9%89%e7%9b%b8%e5%85%b3"></a>
 移动语义相关
@@ -434,8 +461,7 @@
 </span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">test</span><span class="p">(</span><span class="kt">int</span><span class="o">&amp;&amp;</span> <span class="n">x</span><span class="p">){</span><span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;test(int&amp;&amp; x)&#34;</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;\n&#39;</span><span class="p">;}</span>
 </span></span><span class="line"><span class="cl"><span class="p">...</span>
 </span></span><span class="line"><span class="cl"><span class="n">test</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span> <span class="c1">// 零食对象优先绑定到右值引用(●ˇ∀ˇ●)
-</span></span></span></code></pre></div><p><code>std::move</code>
-右值引用用来实现所有权的转移</p>
+</span></span></span></code></pre></div><p><code>std::move</code> 右值引用用来实现所有权的转移</p>
 <p>移动语义并非<code>Zero-Cost</code>，因为移出对象的析构函数仍然在运行&hellip;
 并且移动构造函数能够抛出异常，在某种程度上做了检查 ？</p>
 <h3 id="完美转发">
@@ -456,13 +482,19 @@
 Rule of 0/3/5
 </h2><p><code>Rule of 3</code>好像过时了~简单来说就是要么完全相信编译器，要么完全不信编译器</p>
 <p>如果类不具有所有权语义，就啥都不去管(￣_￣ )&hellip;&hellip;如果一个类有所有权语义，由于<mark style="background-color:orange">编译器默认生成的拷贝函数只会做浅拷贝</mark>，类中有裸指针、自定义析构函数的情况，最好就全部去重写一遍吧？</p>
-<ul>
-<li>析构函数</li>
-<li>拷贝构造函数</li>
-<li>移动构造函数</li>
-<li>拷贝赋值函数</li>
-<li>移动赋值函数</li>
-</ul>
+<table>
+  <thead>
+      <tr>
+          <th>析构函数</th>
+          <th>拷贝构造函数</th>
+          <th>移动构造函数</th>
+          <th>拷贝赋值函数</th>
+          <th>移动赋值函数</th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
 <blockquote>
 <p>析构函数总是可以默认合成，如果声明了<code>~T()</code>，编译器停止自动生成其它东西？(<del>也许</del>只是移动操作<del>不太清楚？</del>( •̀ ω •́ )y
 如果定义移动/拷贝 操作，对应的拷贝/移动 操作肯定是没有的 ~
@@ -549,9 +581,9 @@ Rule of 0/3/5
 <li>返回值：默认按值返回放心<code>return</code>，避免可能返回局部的引用</li>
 </ul>
 <blockquote>
-<p>RVO/NRVO/Move Semantics ↠ 减少默认的复制行为&hellip;&hellip;</p>
+<p>RVO/NRVO/Move Semantics ⇒ 目的都是减少默认的复制行为&hellip;&hellip;</p>
 </blockquote>
-<p>(￣ ▽ ￣)” 指针最好用来表达对象是动态的、可以为空<code>optional</code>、调用site能够看出修改对象、所有权相关的这些语义？</p>
+<p>(￣ ▽ ￣)” 指针最好用来表达对象是动态的、可以为空<code>optional</code>、<del>调用site能够看出修改对象</del>、所有权相关的这些语义？</p>
 <h2 id="智能指针">
 <a class="header-anchor" href="#%e6%99%ba%e8%83%bd%e6%8c%87%e9%92%88"></a>
 智能指针
@@ -573,9 +605,37 @@ Rule of 0/3/5
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// auto test_arr = std::make_unique&lt;int[]&gt;(5);  // make_unique只有大小的支持，可以使用`[]`来初始化元素
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">[]</span><span class="o">&gt;</span> <span class="n">test_arr</span><span class="p">{</span><span class="k">new</span> <span class="kt">int</span><span class="p">[]{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">}};</span>
 </span></span><span class="line"><span class="cl"><span class="n">test_arr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">999</span><span class="p">;</span> <span class="c1">// 如果使用std::unique_ptr&lt;int&gt; 就需要 test_arr.get()[0]这样的语法了 
-</span></span></span></code></pre></div><h3 id="关于原始指针">
-<a class="header-anchor" href="#%e5%85%b3%e4%ba%8e%e5%8e%9f%e5%a7%8b%e6%8c%87%e9%92%88"></a>
-关于原始指针
+</span></span></span></code></pre></div><h3 id="智能指针的一些转换方法8203">
+<a class="header-anchor" href="#%e6%99%ba%e8%83%bd%e6%8c%87%e9%92%88%e7%9a%84%e4%b8%80%e4%ba%9b%e8%bd%ac%e6%8d%a2%e6%96%b9%e6%b3%958203"></a>
+智能指针的一些转换方法<a id="pointer_cast">​</a>
+</h3><p><code>shared_ptr</code> 有语义对应的转换</p>
+<table>
+  <thead>
+      <tr>
+          <th>裸指针</th>
+          <th><code>shared_ptr</code></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>static_cast&lt;T*&gt;(p)</code></td>
+          <td><code>static_pointer_cast&lt;T&gt;(sp)</code></td>
+      </tr>
+      <tr>
+          <td><code>dynamic_cast&lt;T*&gt;(p)</code></td>
+          <td><code>dynamic_pointer_cast&lt;T&gt;(sp)</code></td>
+      </tr>
+  </tbody>
+</table>
+<p><code>unique_ptr</code> 需要自己手动处理（程序里不要瞎<code>cast</code>就完事啦(╬▔—▔)╯</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">Base</span><span class="o">&gt;</span> <span class="n">b</span> <span class="o">=</span> <span class="p">...;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="k">auto</span> <span class="n">d</span> <span class="o">=</span> <span class="k">dynamic_cast</span><span class="o">&lt;</span><span class="n">Derived</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">b</span><span class="p">.</span><span class="n">get</span><span class="p">()))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">Derived</span><span class="o">&gt;</span> <span class="n">p</span><span class="p">(</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">Derived</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">b</span><span class="p">.</span><span class="n">release</span><span class="p">()));</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h3 id="经典原始指针">
+<a class="header-anchor" href="#%e7%bb%8f%e5%85%b8%e5%8e%9f%e5%a7%8b%e6%8c%87%e9%92%88"></a>
+经典原始指针
 </h3><p>虽然有了智能指针，但是稍微了解原始指针对于增长见识有帮助 (例如智能指针例如<code>unique_ptr</code>还是引入了overhead的，毕竟它利用了堆栈，不像原始指针可以寄存器上传递&hellip;</p>
 <p>原始指针变量相当于“存入其它变量地址的值”的变量，它和地址稍有不同: 指针类型保留了对地址(内存)的解释方式（比如数组指针的自增增加的地址值不同），<code>void*</code>存储但没有解释地址，<code>C</code>中常用<code>C-style Conversion</code>来转换成其它类型以做到多态 (✿◠‿◠)?</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span><span class="o">*</span> <span class="n">a1</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
@@ -584,6 +644,18 @@ Rule of 0/3/5
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">*</span><span class="p">((</span><span class="kt">int</span><span class="o">*</span><span class="p">)</span><span class="n">a1</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;\n&#39;</span><span class="p">;</span> <span class="c1">// a1 相当于字符 0x0000015740779620
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">**</span><span class="n">a1_ptr</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;\n&#39;</span><span class="p">;</span> <span class="c1">// 二级指针
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">*</span><span class="p">((</span><span class="kt">int</span><span class="o">*</span><span class="p">)(</span><span class="o">*</span><span class="n">a1_ptr</span><span class="p">))</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;\n&#39;</span><span class="p">;</span> <span class="c1">//取一次地址相当于变成一级指针地址
+</span></span></span></code></pre></div><p>作为函数参数时，数组会“退化”为指针，算不了长度啦</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">f</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">[])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">sizeof</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>       <span class="c1">// sizeof(int*)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></div><p><code>sizeof</code> 只有在“对象本身”仍然存在的地方，才能得到它的完整大小</p>
+<h3 id="函数指针">
+<a class="header-anchor" href="#%e5%87%bd%e6%95%b0%e6%8c%87%e9%92%88"></a>
+函数指针
+</h3><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 用宏的方式可以定义类型，而非指针变量名
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">using</span> <span class="n">FuncType</span> <span class="o">=</span> <span class="kt">int</span><span class="p">(</span><span class="o">*</span><span class="p">)(</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="p">);</span> <span class="c1">// 等价于 typedef int(*FuncType)(int, int);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">(</span><span class="kt">int</span> <span class="kt">int</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">add</span><span class="p">;</span> <span class="c1">// 来自`&lt;functional&gt;`，功能强大，运行期多态, 调用开销较高
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">add</span><span class="p">)(</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="p">);</span> <span class="c1">// 无法存储捕获 lambda、对象的 operator() 等复杂可调用对象
 </span></span></span></code></pre></div><h2 id="运算符和重载">
 <a class="header-anchor" href="#%e8%bf%90%e7%ae%97%e7%ac%a6%e5%92%8c%e9%87%8d%e8%bd%bd"></a>
 运算符和重载
@@ -613,7 +685,25 @@ Ranges
 </h2><h3 id="for循环迭代器">
 <a class="header-anchor" href="#for%e5%be%aa%e7%8e%af%e8%bf%ad%e4%bb%a3%e5%99%a8"></a>
 For循环/迭代器
-</h3><p><code>std::begin</code>、<code>std::end</code>几乎在所有的标准库中都有，不需要特意引入<a id="range_based_forloop">​</a></p>
+</h3><blockquote>
+<p>Iterators are the mechanism used to minimize an algorithm&rsquo;s dependence on the data structures on which it operates
+迭代器作为标准库函数和容器类型之间的桥梁，</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 所有 iterator ?find
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="o">*</span><span class="n">it</span>
+</span></span><span class="line"><span class="cl"><span class="n">it</span><span class="o">-&gt;</span><span class="n">member</span>
+</span></span><span class="line"><span class="cl"><span class="o">++</span><span class="n">it</span>
+</span></span><span class="line"><span class="cl"><span class="n">it1</span> <span class="o">==</span> <span class="n">it2</span>
+</span></span><span class="line"><span class="cl"><span class="n">it1</span> <span class="o">!=</span> <span class="n">it2</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// it1 = it2
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 双向 iterator
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="o">--</span><span class="n">it</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 随机访问 iterator ?sort
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">it</span> <span class="o">+</span> <span class="n">n</span> <span class="c1">// it -n
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">it2</span> <span class="o">-</span> <span class="n">it1</span>
+</span></span><span class="line"><span class="cl"><span class="n">it1</span> <span class="o">&lt;</span> <span class="n">it2</span>
+</span></span><span class="line"><span class="cl"><span class="n">it</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+</span></span></code></pre></div><p><code>std::begin</code>、<code>std::end</code>几乎在所有的标准库中都有，不需要特意引入<a id="range_based_forloop">​</a></p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">auto</span> <span class="n">arr</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">};</span>
 </span></span><span class="line"><span class="cl"><span class="k">auto</span> <span class="n">beg</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">begin</span><span class="p">(</span><span class="n">arr</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="k">auto</span> <span class="n">end</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">end</span><span class="p">(</span><span class="n">arr</span><span class="p">);</span>
@@ -644,8 +734,52 @@ initializer_list
 </span></span></code></pre></div><h3 id="标准库算法两种版本">
 <a class="header-anchor" href="#%e6%a0%87%e5%87%86%e5%ba%93%e7%ae%97%e6%b3%95%e4%b8%a4%e7%a7%8d%e7%89%88%e6%9c%ac"></a>
 标准库算法两种版本
-</h3><p>传统版本接受序列e.g.<code>sort(begin(v),v.end())</code>，范围版本接受一个单独的范围<code>sort(v)</code>，范围版本的必须在作用域内显示声明</p>
-</div>
+</h3><p>传统版本接受迭代器，范围版本接受一个单独的范围，但范围版本的必须在作用域内显示声明。几乎所有的非数值算法都有<code>ranges</code>版本</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">sort</span><span class="p">(</span><span class="n">v</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">v</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">find</span><span class="p">(</span><span class="n">v</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">v</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="mi">42</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 范围版本
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">std</span><span class="o">::</span><span class="n">ranges</span><span class="o">::</span><span class="n">sort</span><span class="p">(</span><span class="n">v</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">ranges</span><span class="o">::</span><span class="n">find</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="mi">42</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="n">result</span> <span class="o">!=</span> <span class="n">std</span><span class="o">::</span><span class="n">end</span><span class="p">(</span><span class="n">v</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span><span class="n">success</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="k">else</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span><span class="n">fail</span><span class="p">}</span>
+</span></span></code></pre></div><p>ranges 使用<code>concepts</code>检查类型，并且还能接<code>view</code></p>
+<h3 id="来自-ai-老师的指导">
+<a class="header-anchor" href="#%e6%9d%a5%e8%87%aa-ai-%e8%80%81%e5%b8%88%e7%9a%84%e6%8c%87%e5%af%bc"></a>
+来自 AI 老师的指导
+</h3><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">iterator</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// using iterator_category = std::random_access_iterator_tag;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">using</span> <span class="n">value_type</span>        <span class="o">=</span> <span class="n">T</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">using</span> <span class="n">difference_type</span>   <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">ptrdiff_t</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">using</span> <span class="n">pointer</span>           <span class="o">=</span> <span class="n">T</span><span class="o">*</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">using</span> <span class="n">reference</span>         <span class="o">=</span> <span class="n">T</span><span class="o">&amp;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">reference</span> <span class="k">operator</span><span class="o">*</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pointer</span> <span class="k">operator</span><span class="o">-&gt;</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">iterator</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">++</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">iterator</span> <span class="k">operator</span><span class="o">++</span><span class="p">(</span><span class="kt">int</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">iterator</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">--</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">iterator</span> <span class="k">operator</span><span class="o">--</span><span class="p">(</span><span class="kt">int</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">iterator</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">+=</span><span class="p">(</span><span class="n">difference_type</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">iterator</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">-=</span><span class="p">(</span><span class="n">difference_type</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">friend</span> <span class="n">iterator</span> <span class="k">operator</span><span class="o">+</span><span class="p">(</span><span class="n">iterator</span><span class="p">,</span> <span class="n">difference_type</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">friend</span> <span class="n">iterator</span> <span class="k">operator</span><span class="o">-</span><span class="p">(</span><span class="n">iterator</span><span class="p">,</span> <span class="n">difference_type</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">friend</span> <span class="n">difference_type</span> <span class="k">operator</span><span class="o">-</span><span class="p">(</span><span class="n">iterator</span><span class="p">,</span> <span class="n">iterator</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">reference</span> <span class="k">operator</span><span class="p">[](</span><span class="n">difference_type</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">friend</span> <span class="kt">bool</span> <span class="k">operator</span><span class="o">==</span><span class="p">(</span><span class="n">iterator</span><span class="p">,</span> <span class="n">iterator</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">friend</span> <span class="kt">bool</span> <span class="k">operator</span><span class="o">!=</span><span class="p">(</span><span class="n">iterator</span><span class="p">,</span> <span class="n">iterator</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">friend</span> <span class="kt">bool</span> <span class="k">operator</span><span class="o">&lt;</span><span class="p">(</span><span class="n">iterator</span><span class="p">,</span> <span class="n">iterator</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div></div>
     <footer class="article-footer"><div class="sponsor-wrapper">
   <div class="sponsor-button">
     <div class="sponsor-icon rotate"></div>
@@ -744,10 +878,10 @@ initializer_list
         >
       </div><div>
         <span class="icon-brush"
-          >&nbsp;21.4k</span
+          >&nbsp;22.9k</span
         >
         &nbsp;|&nbsp;
-        <span class="icon-coffee">&nbsp;00:47</span>
+        <span class="icon-coffee">&nbsp;00:49</span>
       </div><div>
         <span class="icon-eye"></span>
         <span id="busuanzi_container_site_pv"
@@ -787,7 +921,9 @@ initializer_list
     <li><a href="#rule-of-035">Rule of 0/3/5</a></li>
     <li><a href="#智能指针">智能指针</a>
       <ul>
-        <li><a href="#关于原始指针">关于原始指针</a></li>
+        <li><a href="#智能指针的一些转换方法8203">智能指针的一些转换方法​</a></li>
+        <li><a href="#经典原始指针">经典原始指针</a></li>
+        <li><a href="#函数指针">函数指针</a></li>
       </ul>
     </li>
     <li><a href="#运算符和重载">运算符和重载</a>
@@ -804,6 +940,7 @@ initializer_list
       <ul>
         <li><a href="#initializer_list">initializer_list</a></li>
         <li><a href="#标准库算法两种版本">标准库算法两种版本</a></li>
+        <li><a href="#来自-ai-老师的指导">来自 AI 老师的指导</a></li>
       </ul>
     </li>
   </ul>
