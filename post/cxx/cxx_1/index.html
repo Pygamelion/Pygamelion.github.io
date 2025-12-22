@@ -345,9 +345,9 @@
 </code></pre>
 <p><strong>这是个人学习<code>Cxx</code>的记录笔记，所以想到哪里写到哪里🤪</strong></p>
 </div>
-<div class="tabs" id="tab-tab_70a5aadb_1766236958344903100">
-		<ul class="nav-tabs center"><li class="tab active"><a class="#tab_70a5aadb_1766236958344903100-1">变量定义</a></li><li class="tab"><a class="#tab_70a5aadb_1766236958344903100-2">类型转换</a></li><li class="tab"><a class="#tab_70a5aadb_1766236958344903100-3">移动语义</a></li><li class="tab"><a class="#tab_70a5aadb_1766236958344903100-4">智能指针</a></li><li class="tab"><a class="#tab_70a5aadb_1766236958344903100-5">运算符重载</a></li><li class="tab"><a class="#tab_70a5aadb_1766236958344903100-6">标准库容器</a></li><li class="tab"><a class="#tab_70a5aadb_1766236958344903100-7">迭代器/范围</a></li><div class="tab-indicator"></div></ul>
-		<div class="tab-content"><div class="tab-pane active" id="tab_70a5aadb_1766236958344903100-1"></div><div class="tab-pane" id="tab_70a5aadb_1766236958344903100-2"></div><div class="tab-pane" id="tab_70a5aadb_1766236958344903100-3"></div><div class="tab-pane" id="tab_70a5aadb_1766236958344903100-4"></div><div class="tab-pane" id="tab_70a5aadb_1766236958344903100-5"></div><div class="tab-pane" id="tab_70a5aadb_1766236958344903100-6"></div><div class="tab-pane" id="tab_70a5aadb_1766236958344903100-7"></div></div>
+<div class="tabs" id="tab-tab_70a5aadb_1766413049701400800">
+		<ul class="nav-tabs center"><li class="tab active"><a class="#tab_70a5aadb_1766413049701400800-1">变量定义</a></li><li class="tab"><a class="#tab_70a5aadb_1766413049701400800-2">类型转换</a></li><li class="tab"><a class="#tab_70a5aadb_1766413049701400800-3">移动语义</a></li><li class="tab"><a class="#tab_70a5aadb_1766413049701400800-4">智能指针</a></li><li class="tab"><a class="#tab_70a5aadb_1766413049701400800-5">运算符重载</a></li><li class="tab"><a class="#tab_70a5aadb_1766413049701400800-6">标准库容器</a></li><li class="tab"><a class="#tab_70a5aadb_1766413049701400800-7">迭代器/范围</a></li><div class="tab-indicator"></div></ul>
+		<div class="tab-content"><div class="tab-pane active" id="tab_70a5aadb_1766413049701400800-1"></div><div class="tab-pane" id="tab_70a5aadb_1766413049701400800-2"></div><div class="tab-pane" id="tab_70a5aadb_1766413049701400800-3"></div><div class="tab-pane" id="tab_70a5aadb_1766413049701400800-4"></div><div class="tab-pane" id="tab_70a5aadb_1766413049701400800-5"></div><div class="tab-pane" id="tab_70a5aadb_1766413049701400800-6"></div><div class="tab-pane" id="tab_70a5aadb_1766413049701400800-7"></div></div>
 	</div><link rel="stylesheet" href="/css/tabs.css" />
 
 <h2 id="变量类型">
@@ -660,7 +660,8 @@ Rule of 0/3/5
 <a class="header-anchor" href="#%e8%bf%90%e7%ae%97%e7%ac%a6%e5%92%8c%e9%87%8d%e8%bd%bd"></a>
 运算符和重载
 </h2><p>重载输入输出操作符以实现自定义类型的I/O</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">Person</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 如果是类的private成员需要在类中声明 friend
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">struct</span> <span class="nc">Person</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">name</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">age</span><span class="p">;</span>
@@ -675,6 +676,24 @@ Rule of 0/3/5
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="p">...</span> <span class="err">自定义输入格式</span> <span class="p">...</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>重载自增运算符 ？</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">Counter</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">value</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 前置 ++x;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">Counter</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">++</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="o">++</span><span class="n">value</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 后置 x++; 后置必须返回旧值，不能是引用
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 能用前置 ++ 就别用后置 ++
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">Counter</span> <span class="k">operator</span><span class="o">++</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Counter</span> <span class="n">tmp</span> <span class="o">=</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">++</span><span class="n">value</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">tmp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
 </span></span></code></pre></div><h3 id="序关系比较">
 <a class="header-anchor" href="#%e5%ba%8f%e5%85%b3%e7%b3%bb%e6%af%94%e8%be%83"></a>
 序关系比较
@@ -878,10 +897,10 @@ initializer_list
         >
       </div><div>
         <span class="icon-brush"
-          >&nbsp;22.9k</span
+          >&nbsp;23.1k</span
         >
         &nbsp;|&nbsp;
-        <span class="icon-coffee">&nbsp;00:49</span>
+        <span class="icon-coffee">&nbsp;00:50</span>
       </div><div>
         <span class="icon-eye"></span>
         <span id="busuanzi_container_site_pv"
