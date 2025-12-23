@@ -343,11 +343,11 @@
         </blockquote><div style="text-align:center; font-size:16px;">
 <pre><code>xkcd 303
 </code></pre>
-<p><strong>这是个人学习<code>Cxx</code>的记录笔记，所以想到哪里写到哪里🤪</strong></p>
+<p><strong>这是个人学习<code>Cxx</code>的笔记还有和AI老师的聊天记录，所以想到哪里写到哪里🤪</strong></p>
 </div>
-<div class="tabs" id="tab-tab_70a5aadb_1766413049701400800">
-		<ul class="nav-tabs center"><li class="tab active"><a class="#tab_70a5aadb_1766413049701400800-1">变量定义</a></li><li class="tab"><a class="#tab_70a5aadb_1766413049701400800-2">类型转换</a></li><li class="tab"><a class="#tab_70a5aadb_1766413049701400800-3">移动语义</a></li><li class="tab"><a class="#tab_70a5aadb_1766413049701400800-4">智能指针</a></li><li class="tab"><a class="#tab_70a5aadb_1766413049701400800-5">运算符重载</a></li><li class="tab"><a class="#tab_70a5aadb_1766413049701400800-6">标准库容器</a></li><li class="tab"><a class="#tab_70a5aadb_1766413049701400800-7">迭代器/范围</a></li><div class="tab-indicator"></div></ul>
-		<div class="tab-content"><div class="tab-pane active" id="tab_70a5aadb_1766413049701400800-1"></div><div class="tab-pane" id="tab_70a5aadb_1766413049701400800-2"></div><div class="tab-pane" id="tab_70a5aadb_1766413049701400800-3"></div><div class="tab-pane" id="tab_70a5aadb_1766413049701400800-4"></div><div class="tab-pane" id="tab_70a5aadb_1766413049701400800-5"></div><div class="tab-pane" id="tab_70a5aadb_1766413049701400800-6"></div><div class="tab-pane" id="tab_70a5aadb_1766413049701400800-7"></div></div>
+<div class="tabs" id="tab-tab_70a5aadb_1766502286411559400">
+		<ul class="nav-tabs center"><li class="tab active"><a class="#tab_70a5aadb_1766502286411559400-1">变量定义</a></li><li class="tab"><a class="#tab_70a5aadb_1766502286411559400-2">类型转换</a></li><li class="tab"><a class="#tab_70a5aadb_1766502286411559400-3">移动语义</a></li><li class="tab"><a class="#tab_70a5aadb_1766502286411559400-4">智能指针</a></li><li class="tab"><a class="#tab_70a5aadb_1766502286411559400-5">运算符重载</a></li><li class="tab"><a class="#tab_70a5aadb_1766502286411559400-6">标准库容器</a></li><li class="tab"><a class="#tab_70a5aadb_1766502286411559400-7">迭代器/范围</a></li><div class="tab-indicator"></div></ul>
+		<div class="tab-content"><div class="tab-pane active" id="tab_70a5aadb_1766502286411559400-1"></div><div class="tab-pane" id="tab_70a5aadb_1766502286411559400-2"></div><div class="tab-pane" id="tab_70a5aadb_1766502286411559400-3"></div><div class="tab-pane" id="tab_70a5aadb_1766502286411559400-4"></div><div class="tab-pane" id="tab_70a5aadb_1766502286411559400-5"></div><div class="tab-pane" id="tab_70a5aadb_1766502286411559400-6"></div><div class="tab-pane" id="tab_70a5aadb_1766502286411559400-7"></div></div>
 	</div><link rel="stylesheet" href="/css/tabs.css" />
 
 <h2 id="变量类型">
@@ -694,7 +694,37 @@ Rule of 0/3/5
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">tmp</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span>
-</span></span></code></pre></div><h3 id="序关系比较">
+</span></span></code></pre></div><table>
+  <thead>
+      <tr>
+          <th>写法</th>
+          <th>类型</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>R&quot;(abc)&quot;</code></td>
+          <td><code>const char[N]</code></td>
+      </tr>
+      <tr>
+          <td><code>u8R&quot;(abc)&quot;</code></td>
+          <td><code>const char8_t[N]</code></td>
+      </tr>
+      <tr>
+          <td><code>uR&quot;(abc)&quot;</code></td>
+          <td><code>const char16_t[N]</code></td>
+      </tr>
+      <tr>
+          <td><code>UR&quot;(abc)&quot;</code></td>
+          <td><code>const char32_t[N]</code></td>
+      </tr>
+      <tr>
+          <td><code>LR&quot;(abc)&quot;</code></td>
+          <td><code>const wchar_t[N]</code></td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="序关系比较">
 <a class="header-anchor" href="#%e5%ba%8f%e5%85%b3%e7%b3%bb%e6%af%94%e8%be%83"></a>
 序关系比较
 </h3><p>三路比较运算符 <code>&lt;=&gt;</code> 飞船 ~</p>
@@ -706,7 +736,48 @@ Ranges
 For循环/迭代器
 </h3><blockquote>
 <p>Iterators are the mechanism used to minimize an algorithm&rsquo;s dependence on the data structures on which it operates
-迭代器作为标准库函数和容器类型之间的桥梁，</p>
+迭代器作为标准库函数和容器类型之间的桥梁，只要一个类型提供了符合要求的迭代器接口（iterator concept），就可以使用标准库算法</p>
+<table>
+  <thead>
+      <tr>
+          <th>迭代器类别</th>
+          <th>能力</th>
+          <th>典型算法</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>input_iterator</code></td>
+          <td>只读、单向</td>
+          <td><code>std::find</code></td>
+      </tr>
+      <tr>
+          <td><code>output_iterator</code></td>
+          <td>只写</td>
+          <td><code>std::copy</code></td>
+      </tr>
+      <tr>
+          <td><code>forward_iterator</code></td>
+          <td>多遍、单向</td>
+          <td><code>std::remove</code></td>
+      </tr>
+      <tr>
+          <td><code>bidirectional_iterator</code></td>
+          <td>可前可后</td>
+          <td><code>std::reverse</code></td>
+      </tr>
+      <tr>
+          <td><code>random_access_iterator</code></td>
+          <td>跳跃访问</td>
+          <td><code>std::sort</code></td>
+      </tr>
+      <tr>
+          <td><code>contiguous_iterator</code></td>
+          <td>连续内存</td>
+          <td><code>std::span</code></td>
+      </tr>
+  </tbody>
+</table>
 </blockquote>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 所有 iterator ?find
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="o">*</span><span class="n">it</span>
@@ -722,7 +793,16 @@ For循环/迭代器
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">it2</span> <span class="o">-</span> <span class="n">it1</span>
 </span></span><span class="line"><span class="cl"><span class="n">it1</span> <span class="o">&lt;</span> <span class="n">it2</span>
 </span></span><span class="line"><span class="cl"><span class="n">it</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
-</span></span></code></pre></div><p><code>std::begin</code>、<code>std::end</code>几乎在所有的标准库中都有，不需要特意引入<a id="range_based_forloop">​</a></p>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">swap_adjacent_pairs</span> <span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">v</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="n">v</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl">      <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">i</span><span class="o">=</span><span class="n">begin</span><span class="p">(</span><span class="n">v</span><span class="p">),</span> <span class="n">j</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">e</span><span class="o">=</span><span class="n">end</span><span class="p">(</span><span class="n">v</span><span class="p">);</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">e</span><span class="p">;</span> <span class="n">i</span><span class="o">+=</span><span class="mi">2</span><span class="p">,</span> <span class="n">j</span><span class="o">+=</span><span class="mi">2</span><span class="p">)</span>   
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">std</span><span class="o">::</span><span class="n">swap</span><span class="p">(</span><span class="o">*</span><span class="n">i</span><span class="p">,</span><span class="o">*</span><span class="n">j</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p><code>std::begin</code>、<code>std::end</code>几乎在所有的标准库中都有，不需要特意引入<a id="range_based_forloop">​</a> 反向遍历使用<code>rbegin</code> 和 <code>rend</code>（在第一个元素前一位），<code>.base()</code>能将其转换成正向遍历</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">auto</span> <span class="n">arr</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">};</span>
 </span></span><span class="line"><span class="cl"><span class="k">auto</span> <span class="n">beg</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">begin</span><span class="p">(</span><span class="n">arr</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="k">auto</span> <span class="n">end</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">end</span><span class="p">(</span><span class="n">arr</span><span class="p">);</span>
@@ -759,8 +839,6 @@ initializer_list
 </span></span><span class="line"><span class="cl"><span class="c1">// 范围版本
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">std</span><span class="o">::</span><span class="n">ranges</span><span class="o">::</span><span class="n">sort</span><span class="p">(</span><span class="n">v</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">ranges</span><span class="o">::</span><span class="n">find</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="mi">42</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="n">result</span> <span class="o">!=</span> <span class="n">std</span><span class="o">::</span><span class="n">end</span><span class="p">(</span><span class="n">v</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">  <span class="p">{</span><span class="n">success</span><span class="p">}</span>
@@ -897,10 +975,10 @@ initializer_list
         >
       </div><div>
         <span class="icon-brush"
-          >&nbsp;23.1k</span
+          >&nbsp;23.3k</span
         >
         &nbsp;|&nbsp;
-        <span class="icon-coffee">&nbsp;00:50</span>
+        <span class="icon-coffee">&nbsp;00:51</span>
       </div><div>
         <span class="icon-eye"></span>
         <span id="busuanzi_container_site_pv"
