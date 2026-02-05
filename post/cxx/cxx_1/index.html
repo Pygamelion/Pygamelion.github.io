@@ -40,8 +40,7 @@
     as="font"
     type="font/woff2"
     crossorigin="anonymous"
-  /><link rel="stylesheet" href="/css/loader.css" />
-<meta property="og:type" content="website" />
+  /><link rel="stylesheet" href="/css/loader.css" /><meta property="og:type" content="website" />
   <meta property="og:title" content="从负开始的C&#43;&#43;学习 | Yabusame Houlen" />
   <meta
     property="og:description"
@@ -60,19 +59,24 @@
   <meta property="article:published_time" content="2025-11-26T11:00:00&#43;08:00" />
   <meta property="article:modified_time" content="2025-12-11T17:00:00&#43;08:00" /><meta property="article:tag" content="Cxx" /><meta name="twitter:card" content="summary" />
   <meta name="twitter:image" content="https://raw.githubusercontent.com/Pygamelion/Mottos/refs/heads/master/Figures/Art/TH/kaguya.jpg" />
-<link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/css/main.css" />
-<link
+<link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/css/main.css" /><link
     rel="preload"
     as="style"
     href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css"
-    integrity="sha384-IfxC36XL/toUyJ939C73PcgMuRzAZuIzZxE38drsmO5p6jD7ei&#43;Zx/1oA/0l8ysE" crossorigin="anonymous"onload="this.onload=null;this.rel='stylesheet'"
+    integrity="sha384-IfxC36XL/toUyJ939C73PcgMuRzAZuIzZxE38drsmO5p6jD7ei&#43;Zx/1oA/0l8ysE" crossorigin="anonymous"
+    onload="this.onload=null;this.rel='stylesheet'"
   /><link
     rel="preload"
     as="style"
     href="https://npm.webcache.cn/katex@0.16.24/dist/katex.min.css"
-    integrity="sha384-tTgKLjMYmJr94v8qu2PE5MUGSMbyN2xiH266JUB3gpm8vnnJywd1dWSOEfrFz&#43;YI" crossorigin="anonymous"onload="this.onload=null;this.rel='stylesheet'"
+    integrity="sha384-tTgKLjMYmJr94v8qu2PE5MUGSMbyN2xiH266JUB3gpm8vnnJywd1dWSOEfrFz&#43;YI" crossorigin="anonymous"
+    onload="this.onload=null;this.rel='stylesheet'"
   /><script
     src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js"
+    
+    
+    
+    
     integrity="sha384-k6YtvFUEIuEFBdrLKJ3YAUbBki333tj1CSUisai5Cswsg9wcLNaPzsTHDswp4Az8" crossorigin="anonymous"></script><link
     rel="stylesheet"
     href="https://npm.webcache.cn/@reimujs/aos@0.1.2/dist/aos.css"
@@ -197,18 +201,17 @@
     <li><a href="#运算符和重载">运算符和重载</a>
       <ul>
         <li><a href="#序关系比较">序关系比较</a></li>
-      </ul>
-    </li>
-    <li><a href="#ranges">Ranges</a>
-      <ul>
         <li><a href="#for循环迭代器">For循环/迭代器</a></li>
       </ul>
     </li>
     <li><a href="#标准库-containers">标准库 Containers</a>
       <ul>
         <li><a href="#initializer_list">initializer_list</a></li>
+      </ul>
+    </li>
+    <li><a href="#ranges">Ranges</a>
+      <ul>
         <li><a href="#标准库算法两种版本">标准库算法两种版本</a></li>
-        <li><a href="#来自-ai-老师的指导">来自 AI 老师的指导</a></li>
       </ul>
     </li>
   </ul>
@@ -239,7 +242,7 @@
     <div class="sidebar-state-number">4</div>
   </a>
 </div>
-<div class="sidebar-social"><div class="icon-bilibili sidebar-social-icon">
+<div class="sidebar-social" ><div class="icon-bilibili sidebar-social-icon">
       <a
         href="https://space.bilibili.com/312577459"
         itemprop="url"
@@ -263,41 +266,31 @@
         aria-label="steam"
         rel="noopener nofollow noreferrer"
       ></a>
-    </div></div>
-<div class="sidebar-menu"><div class="sidebar-menu-link-wrap">
+    </div></div><div class="sidebar-menu"><div class="sidebar-menu-link-wrap">
       <a
         class="sidebar-menu-link-dummy"
         href="/"
         aria-label="首页"
-      ></a>
-      <div class='sidebar-menu-icon icon '>&#x1F704;</div>
-      <div class="sidebar-menu-link">首页</div>
+      ></a><div class='sidebar-menu-icon icon '>&#x1F704;</div><div class="sidebar-menu-link">首页</div>
     </div><div class="sidebar-menu-link-wrap">
       <a
         class="sidebar-menu-link-dummy"
         href="/archives"
         aria-label="归档"
-      ></a>
-      <div class='sidebar-menu-icon icon '>&#x1F702;</div>
-      <div class="sidebar-menu-link">归档</div>
+      ></a><div class='sidebar-menu-icon icon '>&#x1F702;</div><div class="sidebar-menu-link">归档</div>
     </div><div class="sidebar-menu-link-wrap">
       <a
         class="sidebar-menu-link-dummy"
         href="/resource"
         aria-label="站点"
-      ></a>
-      <div class='sidebar-menu-icon icon '>&#x1F703;</div>
-      <div class="sidebar-menu-link">站点</div>
+      ></a><div class='sidebar-menu-icon icon '>&#x1F703;</div><div class="sidebar-menu-link">站点</div>
     </div><div class="sidebar-menu-link-wrap">
       <a
         class="sidebar-menu-link-dummy"
         href="/about"
         aria-label="收录"
-      ></a>
-      <div class='sidebar-menu-icon icon '>&#x1F701;</div>
-      <div class="sidebar-menu-link">收录</div>
-    </div></div>
-</div><div class="sidebar-btn-wrapper" style="position:static">
+      ></a><div class='sidebar-menu-icon icon '>&#x1F701;</div><div class="sidebar-menu-link">收录</div>
+    </div></div></div><div class="sidebar-btn-wrapper" style="position:static">
             <div class="sidebar-toc-btn current"></div>
             <div class="sidebar-common-btn"></div>
           </div></div>
@@ -323,12 +316,6 @@
       >2025-12-11</time
     >
   </span></div>
-<div class="article-category"><a
-      class="article-category-link"
-      href="/categories/programming"
-      data-aos="zoom-in"
-      >PROGRAMMING</a
-    ></div>
 </div><div class="hr-line"></div><div class="article-gallery">
     <div class="article-gallery-photos"><a class="article-gallery-img article-gallery-item" href="https://raw.githubusercontent.com/Pygamelion/Mottos/refs/heads/master/Figures/Techology/compiling.png" target="_blank">
           <img src="https://raw.githubusercontent.com/Pygamelion/Mottos/refs/heads/master/Figures/Techology/compiling.png" itemprop="image" alt="gallery" onload="this.parentNode.dataset.pswpWidth = this.naturalWidth;this.parentNode.dataset.pswpHeight = this.naturalHeight;" >
@@ -345,11 +332,10 @@
 </code></pre>
 <p><strong>这是个人学习<code>Cxx</code>的笔记还有和AI老师的聊天记录，所以想到哪里写到哪里🤪</strong></p>
 </div>
-<div class="tabs" id="tab-tab_70a5aadb_1768138320030096600">
-		<ul class="nav-tabs center"><li class="tab active"><a class="#tab_70a5aadb_1768138320030096600-1">变量定义</a></li><li class="tab"><a class="#tab_70a5aadb_1768138320030096600-2">类型转换</a></li><li class="tab"><a class="#tab_70a5aadb_1768138320030096600-3">移动语义</a></li><li class="tab"><a class="#tab_70a5aadb_1768138320030096600-4">智能指针</a></li><li class="tab"><a class="#tab_70a5aadb_1768138320030096600-5">运算符重载</a></li><li class="tab"><a class="#tab_70a5aadb_1768138320030096600-6">标准库容器</a></li><li class="tab"><a class="#tab_70a5aadb_1768138320030096600-7">迭代器/范围</a></li><div class="tab-indicator"></div></ul>
-		<div class="tab-content"><div class="tab-pane active" id="tab_70a5aadb_1768138320030096600-1"></div><div class="tab-pane" id="tab_70a5aadb_1768138320030096600-2"></div><div class="tab-pane" id="tab_70a5aadb_1768138320030096600-3"></div><div class="tab-pane" id="tab_70a5aadb_1768138320030096600-4"></div><div class="tab-pane" id="tab_70a5aadb_1768138320030096600-5"></div><div class="tab-pane" id="tab_70a5aadb_1768138320030096600-6"></div><div class="tab-pane" id="tab_70a5aadb_1768138320030096600-7"></div></div>
-	</div><link rel="stylesheet" href="/css/tabs.css" />
-
+<div class="tabs" id="tab-tab_70a5aadb_1770306042837365800">
+		<ul class="nav-tabs center"><li class="tab active"><a class="#tab_70a5aadb_1770306042837365800-1">变量定义</a></li><li class="tab"><a class="#tab_70a5aadb_1770306042837365800-2">类型转换</a></li><li class="tab"><a class="#tab_70a5aadb_1770306042837365800-3">移动语义</a></li><li class="tab"><a class="#tab_70a5aadb_1770306042837365800-4">智能指针</a></li><li class="tab"><a class="#tab_70a5aadb_1770306042837365800-5">运算符重载</a></li><li class="tab"><a class="#tab_70a5aadb_1770306042837365800-6">标准库容器</a></li><li class="tab"><a class="#tab_70a5aadb_1770306042837365800-7">迭代器/范围</a></li><div class="tab-indicator"></div></ul>
+		<div class="tab-content"><div class="tab-pane active" id="tab_70a5aadb_1770306042837365800-1"></div><div class="tab-pane" id="tab_70a5aadb_1770306042837365800-2"></div><div class="tab-pane" id="tab_70a5aadb_1770306042837365800-3"></div><div class="tab-pane" id="tab_70a5aadb_1770306042837365800-4"></div><div class="tab-pane" id="tab_70a5aadb_1770306042837365800-5"></div><div class="tab-pane" id="tab_70a5aadb_1770306042837365800-6"></div><div class="tab-pane" id="tab_70a5aadb_1770306042837365800-7"></div></div>
+	</div><link rel="preload" as="style" href="/css/tabs.css" onload="this.onload=null;this.rel='stylesheet'" />
 <h2 id="变量类型">
 <a class="header-anchor" href="#%e5%8f%98%e9%87%8f%e7%b1%bb%e5%9e%8b"></a>
 变量类型
@@ -728,10 +714,7 @@ Rule of 0/3/5
 <a class="header-anchor" href="#%e5%ba%8f%e5%85%b3%e7%b3%bb%e6%af%94%e8%be%83"></a>
 序关系比较
 </h3><p>三路比较运算符 <code>&lt;=&gt;</code> 飞船 ~</p>
-<h2 id="ranges">
-<a class="header-anchor" href="#ranges"></a>
-Ranges
-</h2><h3 id="for循环迭代器">
+<h3 id="for循环迭代器">
 <a class="header-anchor" href="#for%e5%be%aa%e7%8e%af%e8%bf%ad%e4%bb%a3%e5%99%a8"></a>
 For循环/迭代器
 </h3><blockquote>
@@ -830,25 +813,8 @@ initializer_list
 </span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;\n&#39;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><h3 id="标准库算法两种版本">
-<a class="header-anchor" href="#%e6%a0%87%e5%87%86%e5%ba%93%e7%ae%97%e6%b3%95%e4%b8%a4%e7%a7%8d%e7%89%88%e6%9c%ac"></a>
-标准库算法两种版本
-</h3><p>传统版本接受迭代器，范围版本接受一个单独的范围，但范围版本的必须在作用域内显示声明。几乎所有的非数值算法都有<code>ranges</code>版本</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">sort</span><span class="p">(</span><span class="n">v</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">v</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
-</span></span><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">find</span><span class="p">(</span><span class="n">v</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">v</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="mi">42</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="c1">// 范围版本
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">std</span><span class="o">::</span><span class="n">ranges</span><span class="o">::</span><span class="n">sort</span><span class="p">(</span><span class="n">v</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">ranges</span><span class="o">::</span><span class="n">find</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="mi">42</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="n">result</span> <span class="o">!=</span> <span class="n">std</span><span class="o">::</span><span class="n">end</span><span class="p">(</span><span class="n">v</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">  <span class="p">{</span><span class="n">success</span><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="k">else</span>
-</span></span><span class="line"><span class="cl">  <span class="p">{</span><span class="n">fail</span><span class="p">}</span>
-</span></span></code></pre></div><p>ranges 使用<code>concepts</code>检查类型，并且还能接<code>view</code></p>
-<h3 id="来自-ai-老师的指导">
-<a class="header-anchor" href="#%e6%9d%a5%e8%87%aa-ai-%e8%80%81%e5%b8%88%e7%9a%84%e6%8c%87%e5%af%bc"></a>
-来自 AI 老师的指导
-</h3><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">iterator</span> <span class="p">{</span>
+</span></span></code></pre></div><p>来自 AI 老师的指导，我也没试过怎么用</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">iterator</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// using iterator_category = std::random_access_iterator_tag;
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">using</span> <span class="n">value_type</span>        <span class="o">=</span> <span class="n">T</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="k">using</span> <span class="n">difference_type</span>   <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">ptrdiff_t</span><span class="p">;</span>
@@ -876,13 +842,116 @@ initializer_list
 </span></span><span class="line"><span class="cl">    <span class="k">friend</span> <span class="kt">bool</span> <span class="k">operator</span><span class="o">!=</span><span class="p">(</span><span class="n">iterator</span><span class="p">,</span> <span class="n">iterator</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="k">friend</span> <span class="kt">bool</span> <span class="k">operator</span><span class="o">&lt;</span><span class="p">(</span><span class="n">iterator</span><span class="p">,</span> <span class="n">iterator</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span>
-</span></span></code></pre></div></div>
+</span></span></code></pre></div><h2 id="ranges">
+<a class="header-anchor" href="#ranges"></a>
+Ranges
+</h2><p>Ranges 是 STL 自 1994 诞生以来最大的一次架构升级</p>
+<p>STL（由Alexander Stepanov 设计）核心模型是 <kbd>算法 + 迭代器对</kbd> <code>std::sort(v.begin(), v.end())</code>, 一个区间相当于两个<code>iterator</code> ⇒ 容器与算法解耦合, 方便泛型编程</p>
+<p>解决一些历史遗留问题：</p>
+<ul>
+<li><code>[first, last)</code> 这个区间两个迭代器是没有语义关联的
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">a</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">b</span><span class="p">{</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">sort</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">b</span><span class="p">.</span><span class="n">end</span><span class="p">());</span> <span class="c1">// 编译通过，逻辑灾难
+</span></span></span></code></pre></div></li>
+<li>区间没有统一对象，无法将区间作为一个整体传递</li>
+<li>迭代器生命周期问题
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">auto</span> <span class="n">it</span> <span class="o">=</span> <span class="n">vec</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="n">vec</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>   <span class="c1">// 迭代器失效
+</span></span></span></code></pre></div></li>
+<li>迭代器必须同类型是很大的限制
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">char* begin    &#39;\0&#39; sentinel 结束
+</span></span><span class="line"><span class="cl">ranges 修复：Sentinel 模型, 允许iterator != sentinel
+</span></span><span class="line"><span class="cl">sentinel_for&lt;S, I&gt; 表示 I 可与 S 比较
+</span></span><span class="line"><span class="cl">方便表示 无限序列/流输入/null 终止字符串/网络流/生成器
+</span></span></code></pre></div></li>
+<li>STL 算法全部是 <strong>Eager Evaluation</strong>，每一步都产生新容器，多次遍历，内存浪费，性能低
+ranges 引入 <strong>Lazy Evaluation</strong> views 不存储数据，只是“计算描述”
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">auto</span> <span class="n">v</span> <span class="o">=</span> <span class="n">filter</span><span class="p">(</span><span class="n">vec</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">auto</span> <span class="n">v2</span> <span class="o">=</span> <span class="n">transform</span><span class="p">(</span><span class="n">v</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 改进到
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">auto</span> <span class="n">r</span> <span class="o">=</span>  <span class="n">vec</span>
+</span></span><span class="line"><span class="cl">  <span class="o">|</span> <span class="n">std</span><span class="o">::</span><span class="n">views</span><span class="o">::</span><span class="n">filter</span><span class="p">(...)</span>
+</span></span><span class="line"><span class="cl">  <span class="o">|</span> <span class="n">std</span><span class="o">::</span><span class="n">views</span><span class="o">::</span><span class="n">transform</span><span class="p">(...)</span>
+</span></span><span class="line"><span class="cl">  <span class="o">|</span> <span class="n">std</span><span class="o">::</span><span class="n">views</span><span class="o">::</span><span class="n">take</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+</span></span></code></pre></div></li>
+</ul>
+<h3 id="标准库算法两种版本">
+<a class="header-anchor" href="#%e6%a0%87%e5%87%86%e5%ba%93%e7%ae%97%e6%b3%95%e4%b8%a4%e7%a7%8d%e7%89%88%e6%9c%ac"></a>
+标准库算法两种版本
+</h3><p>传统版本接受迭代器，范围版本接受一个单独的范围，但范围版本的必须在作用域内显示声明。几乎所有的非数值算法都有<code>ranges</code>版本，并且还能接<code>view</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">sort</span><span class="p">(</span><span class="n">v</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">v</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">find</span><span class="p">(</span><span class="n">v</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">v</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="mi">42</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 范围版本
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">std</span><span class="o">::</span><span class="n">ranges</span><span class="o">::</span><span class="n">sort</span><span class="p">(</span><span class="n">v</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">ranges</span><span class="o">::</span><span class="n">find</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="mi">42</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="n">result</span> <span class="o">!=</span> <span class="n">std</span><span class="o">::</span><span class="n">end</span><span class="p">(</span><span class="n">v</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span><span class="n">success</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="k">else</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span><span class="n">fail</span><span class="p">}</span>
+</span></span></code></pre></div><p>ranges 搭配使用<code>concepts</code>检查类型爽歪歪： e.g. Shell Sort</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">template</span> <span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">ranges</span><span class="o">::</span><span class="n">random_access_range</span> <span class="n">R</span><span class="p">,</span> <span class="k">class</span> <span class="nc">Comp</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">ranges</span><span class="o">::</span><span class="n">less</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">requires</span> <span class="n">std</span><span class="o">::</span><span class="n">sortable</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">ranges</span><span class="o">::</span><span class="n">iterator_t</span><span class="o">&lt;</span><span class="n">R</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">Comp</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="n">ShellSort</span><span class="p">(</span><span class="n">R</span><span class="o">&amp;</span> <span class="n">r</span><span class="p">,</span> <span class="n">Comp</span> <span class="n">comp</span> <span class="o">=</span> <span class="p">{})</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">auto</span> <span class="n">first</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">ranges</span><span class="o">::</span><span class="n">begin</span><span class="p">(</span><span class="n">r</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">auto</span> <span class="n">last</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">ranges</span><span class="o">::</span><span class="n">end</span><span class="p">(</span><span class="n">r</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">auto</span> <span class="n">step</span> <span class="o">=</span> <span class="p">(</span><span class="n">last</span> <span class="o">-</span> <span class="n">first</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="p">(</span><span class="n">step</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">i</span> <span class="o">=</span> <span class="n">first</span> <span class="o">+</span> <span class="n">step</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">last</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">auto</span> <span class="n">key</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">ranges</span><span class="o">::</span><span class="n">iter_move</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">auto</span> <span class="n">j</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="k">while</span> <span class="p">(</span><span class="n">j</span> <span class="o">&gt;=</span> <span class="n">first</span> <span class="o">+</span> <span class="n">step</span> <span class="o">&amp;&amp;</span> <span class="n">comp</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="o">*</span><span class="p">(</span><span class="n">j</span> <span class="o">-</span> <span class="n">step</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">            <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="o">*</span><span class="n">j</span> <span class="o">=</span> <span class="o">*</span><span class="p">(</span><span class="n">j</span> <span class="o">-</span> <span class="n">step</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="n">j</span> <span class="o">-=</span> <span class="n">step</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="o">*</span><span class="n">j</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">key</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">step</span> <span class="o">/=</span> <span class="mi">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>如果 gap 约等于前一个 gap 的 0.4~0.5 插入排序工作量最小, 维基百科上有 <code>5/11</code> 这样的近似(2 → 1)&hellip;</p>
+</div>
     <footer class="article-footer"><div class="sponsor-wrapper">
-  <div class="sponsor-button">
-    <div class="sponsor-icon rotate"></div>
-    <div class="sponsor-title">赞助</div>
-    <div class="sponsor-icon rotate"></div>
-  </div><div class="sponsor-tip">能有人看就十分感谢啦！</div></div><div class="share-wrapper"><a href="https://connect.qq.com/widget/shareqq/index.html?url=http://localhost:1313/post/cxx/cxx_1/&amp;title=%e4%bb%8e%e8%b4%9f%e5%bc%80%e5%a7%8b%e7%9a%84C&#43;&#43;%e5%ad%a6%e4%b9%a0&amp;desc=CAUTIONLearning%20C&#43;&#43;%20can%20seriously%20harm%20your%20mental%20health%20and%20that%20of%20your%20loved%20ones.&amp;source=http://localhost:1313/" target="_blank" rel="noopener noreferrer" title="从负开始的C&#43;&#43;学习">
+  <div class="sponsor-button"><div class="sponsor-icon rotate"></div><div class="sponsor-title">赞助</div><div class="sponsor-icon rotate"></div></div><div class="sponsor-tip">能有人看就十分感谢啦！</div></div><div class="share-wrapper"><a href="https://connect.qq.com/widget/shareqq/index.html?url=http://localhost:1313/post/cxx/cxx_1/&amp;title=%e4%bb%8e%e8%b4%9f%e5%bc%80%e5%a7%8b%e7%9a%84C&#43;&#43;%e5%ad%a6%e4%b9%a0&amp;desc=CAUTIONLearning%20C&#43;&#43;%20can%20seriously%20harm%20your%20mental%20health%20and%20that%20of%20your%20loved%20ones.&amp;source=http://localhost:1313/" target="_blank" rel="noopener noreferrer" title="从负开始的C&#43;&#43;学习">
       <div class="share-icon icon icon-qq"></div>
     </a><a href="https://twitter.com/intent/tweet?url=http://localhost:1313/post/cxx/cxx_1/&amp;text=%e4%bb%8e%e8%b4%9f%e5%bc%80%e5%a7%8b%e7%9a%84C&#43;&#43;%e5%ad%a6%e4%b9%a0&amp;via=http://localhost:1313/" target="_blank" rel="noopener noreferrer" title="从负开始的C&#43;&#43;学习">
       <div class="share-icon icon icon-twitter"></div>
@@ -904,12 +973,20 @@ initializer_list
             </div>
             <div class="share-weixin-canvas"></div>
           </div></div>
-    </a></div><ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in">
+    </a></div><ul class="article-category-list"><li class="article-tag-list-item" data-aos="zoom-in">
+    <a
+      class="article-category-link"
+      href="/categories/programming"
+      data-aos="zoom-in"
+      >Programming</a
+    >
+    </li></ul>
+<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in">
       <a
         class="article-tag-list-link"
         href="/tags/cxx"
         rel="tag"
-        >CXX</a
+        >Cxx</a
       >
     </li></ul>
 </footer>
@@ -959,15 +1036,14 @@ initializer_list
     <div class="footer-line"></div>
   </div>
   <div id="footer-info"><div>
-      <span class="icon-copyright"></span>2025-2026<span class="footer-info-sep rotate"></span>
-      Yabusame Houlen
+      <span class="icon-copyright"></span>2025-2026<span class="footer-info-sep rotate"></span>Yabusame Houlen
     </div><div>
         基于&nbsp;<a
           href="https://gohugo.io/"
           target="_blank"
           rel="noopener nofollow noreferrer"
           >Hugo</a
-        >&nbsp; Theme.<a
+        >&nbsp;Theme.<a
           href="https://github.com/D-Sketon/hugo-theme-reimu"
           target="_blank"
           rel="noopener nofollow noreferrer"
@@ -975,10 +1051,10 @@ initializer_list
         >
       </div><div>
         <span class="icon-brush"
-          >&nbsp;23.5k</span
+          >&nbsp;24.0k</span
         >
         &nbsp;|&nbsp;
-        <span class="icon-coffee">&nbsp;00:51</span>
+        <span class="icon-coffee">&nbsp;00:52</span>
       </div><div>
         <span class="icon-eye"></span>
         <span id="busuanzi_container_site_pv"
@@ -1026,18 +1102,17 @@ initializer_list
     <li><a href="#运算符和重载">运算符和重载</a>
       <ul>
         <li><a href="#序关系比较">序关系比较</a></li>
-      </ul>
-    </li>
-    <li><a href="#ranges">Ranges</a>
-      <ul>
         <li><a href="#for循环迭代器">For循环/迭代器</a></li>
       </ul>
     </li>
     <li><a href="#标准库-containers">标准库 Containers</a>
       <ul>
         <li><a href="#initializer_list">initializer_list</a></li>
+      </ul>
+    </li>
+    <li><a href="#ranges">Ranges</a>
+      <ul>
         <li><a href="#标准库算法两种版本">标准库算法两种版本</a></li>
-        <li><a href="#来自-ai-老师的指导">来自 AI 老师的指导</a></li>
       </ul>
     </li>
   </ul>
@@ -1068,7 +1143,7 @@ initializer_list
     <div class="sidebar-state-number">4</div>
   </a>
 </div>
-<div class="sidebar-social"><div class="icon-bilibili sidebar-social-icon">
+<div class="sidebar-social" ><div class="icon-bilibili sidebar-social-icon">
       <a
         href="https://space.bilibili.com/312577459"
         itemprop="url"
@@ -1092,41 +1167,31 @@ initializer_list
         aria-label="steam"
         rel="noopener nofollow noreferrer"
       ></a>
-    </div></div>
-<div class="sidebar-menu"><div class="sidebar-menu-link-wrap">
+    </div></div><div class="sidebar-menu"><div class="sidebar-menu-link-wrap">
       <a
         class="sidebar-menu-link-dummy"
         href="/"
         aria-label="首页"
-      ></a>
-      <div class='sidebar-menu-icon icon '>&#x1F704;</div>
-      <div class="sidebar-menu-link">首页</div>
+      ></a><div class='sidebar-menu-icon icon '>&#x1F704;</div><div class="sidebar-menu-link">首页</div>
     </div><div class="sidebar-menu-link-wrap">
       <a
         class="sidebar-menu-link-dummy"
         href="/archives"
         aria-label="归档"
-      ></a>
-      <div class='sidebar-menu-icon icon '>&#x1F702;</div>
-      <div class="sidebar-menu-link">归档</div>
+      ></a><div class='sidebar-menu-icon icon '>&#x1F702;</div><div class="sidebar-menu-link">归档</div>
     </div><div class="sidebar-menu-link-wrap">
       <a
         class="sidebar-menu-link-dummy"
         href="/resource"
         aria-label="站点"
-      ></a>
-      <div class='sidebar-menu-icon icon '>&#x1F703;</div>
-      <div class="sidebar-menu-link">站点</div>
+      ></a><div class='sidebar-menu-icon icon '>&#x1F703;</div><div class="sidebar-menu-link">站点</div>
     </div><div class="sidebar-menu-link-wrap">
       <a
         class="sidebar-menu-link-dummy"
         href="/about"
         aria-label="收录"
-      ></a>
-      <div class='sidebar-menu-icon icon '>&#x1F701;</div>
-      <div class="sidebar-menu-link">收录</div>
-    </div></div>
-</div></div><div class="sidebar-btn-wrapper">
+      ></a><div class='sidebar-menu-icon icon '>&#x1F701;</div><div class="sidebar-menu-link">收录</div>
+    </div></div></div></div><div class="sidebar-btn-wrapper">
         <div class="sidebar-toc-btn current"></div>
         <div class="sidebar-common-btn"></div>
       </div></nav>
@@ -1149,11 +1214,23 @@ initializer_list
         id="13552043145"server="netease"type="playlist"fixed="true"autoplay="false"order="random"volume="0.33"mutex="true"list-folded="false"lrc-type="1">
       </meting-js><script
     src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js"
+    
+    
+    
+    
     integrity="sha384-3gT/vsepWkfz/ff7PpWNUeMzeWoH3cDhm/A8jM7ouoAK0/fP/9bcHHR5kHq2nf&#43;e" crossorigin="anonymous"></script><script
     src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js"
+    
+    
+    
+    
     integrity="sha384-J08i8An/QeARD9ExYpvphB8BsyOj3Gh2TSh1aLINKO3L0cMSH2dN3E22zFoXEi0Q" crossorigin="anonymous"></script><script
     src="https://npm.webcache.cn/material-theme@1.0.0/dist/material-theme.umd.js"
-    integrity="sha384-vLev0II0HKFaxkcm&#43;/7kX5IGwVFBASkGchU311wmU/veIj2bB0UcBkQbW6yw2asK" crossorigin="anonymous"></script><script src="/js/main.js" ></script><script src="/js/aos.js" ></script><script>
+    
+    
+    
+    
+    integrity="sha384-vLev0II0HKFaxkcm&#43;/7kX5IGwVFBASkGchU311wmU/veIj2bB0UcBkQbW6yw2asK" crossorigin="anonymous"></script><script src="/js/main.js"  ></script><script src="/js/aos.js"  ></script><script>
     var aosInit = () => {
       AOS.init({
         duration: 1000,
@@ -1167,7 +1244,7 @@ initializer_list
     } else {
       aosInit();
     }
-  </script><script src="/js/pjax_main.js" data-pjax></script><script>
+  </script><script src="/js/pjax_main.js" data-pjax ></script><script>
     var ALGOLIA_CONFIG = {
       logo: '\/images\/algolia_logo.svg',
       algolia: {
@@ -1186,24 +1263,46 @@ initializer_list
     };
   </script><script
     src="https://npm.webcache.cn/algoliasearch@4.17.1/dist/algoliasearch-lite.umd.js"
-    deferintegrity="sha384-xvLS0jfKuoREs7pqkRI/OI8GcqohO5S&#43;jQz7ZBtQXnsXmD&#43;9jDOOY4cL6dCPzlrk" crossorigin="anonymous"></script><script
+    defer
+    
+    
+    
+    integrity="sha384-xvLS0jfKuoREs7pqkRI/OI8GcqohO5S&#43;jQz7ZBtQXnsXmD&#43;9jDOOY4cL6dCPzlrk" crossorigin="anonymous"></script><script
     src="https://npm.webcache.cn/@reimujs/instantsearch.js@4.57.0-beta.1/dist/instantsearch.production.min.js"
-    deferintegrity="sha384-aagKMe8nkqaP2DYQc8kkYOL5l&#43;M5Q2WH/Uhr4teOh0Ybp0RZj0kUSDm45qPikMjK" crossorigin="anonymous"></script><script src="/js/algolia_search.js" ></script><script
-    src="https://npm.webcache.cn/mouse-firework@0.1.1/dist/index.umd.js"
-    integrity="sha384-8LyaidD9GPxQQgLJO/WRw/O2h3BoNq/ApI/ecpvM6RsrCz2qP2ppBXUKihP4V/2d" crossorigin="anonymous"></script><script>
-  if (! false  || !window.matchMedia('(max-width: 768px)').matches) {
-    if (window.firework) {
-      const options = JSON.parse("{\"excludeelements\":[\"a\",\"button\"],\"particles\":[{\"colors\":[\"var(--red-1)\",\"var(--red-2)\",\"var(--red-3)\",\"var(--red-4)\"],\"duration\":[1200,1800],\"easing\":\"easeOutExpo\",\"move\":[\"emit\"],\"number\":20,\"shape\":\"circle\",\"shapeOptions\":{\"alpha\":[0.3,0.5],\"radius\":[12,28]}},{\"colors\":[\"var(--red-0)\"],\"duration\":[1200,1800],\"easing\":\"easeOutExpo\",\"move\":[\"diffuse\"],\"number\":1,\"shape\":\"circle\",\"shapeOptions\":{\"alpha\":[0.2,0.5],\"lineWidth\":6,\"radius\":20}}]}");
-      options.excludeElements = options.excludeelements;
-      delete options.excludeelements;
-      window.firework(options);
+    defer
+    
+    
+    
+    integrity="sha384-aagKMe8nkqaP2DYQc8kkYOL5l&#43;M5Q2WH/Uhr4teOh0Ybp0RZj0kUSDm45qPikMjK" crossorigin="anonymous"></script><script src="/js/algolia_search.js"  ></script><script>
+  var setupFirework = () => {
+    if (! false  || !window.matchMedia('(max-width: 768px)').matches) {
+      if (window.firework) {
+        const options = JSON.parse("{\"excludeelements\":[\"a\",\"button\"],\"particles\":[{\"colors\":[\"var(--red-1)\",\"var(--red-2)\",\"var(--red-3)\",\"var(--red-4)\"],\"duration\":[1200,1800],\"easing\":\"easeOutExpo\",\"move\":[\"emit\"],\"number\":20,\"shape\":\"circle\",\"shapeOptions\":{\"alpha\":[0.3,0.5],\"radius\":[12,28]}},{\"colors\":[\"var(--red-0)\"],\"duration\":[1200,1800],\"easing\":\"easeOutExpo\",\"move\":[\"diffuse\"],\"number\":1,\"shape\":\"circle\",\"shapeOptions\":{\"alpha\":[0.2,0.5],\"lineWidth\":6,\"radius\":20}}]}");
+        options.excludeElements = options.excludeelements;
+        delete options.excludeelements;
+        window.firework(options);
+      }
     }
   }
 </script><script
+    src="https://npm.webcache.cn/mouse-firework@0.2.0/dist/index.umd.js"
+    defer
+    
+    
+    onload="setupFirework()"
+    integrity="sha384-qi9WggRt19tv8Vc7pCHW3ulMNLwrn515zaLEWZjl1px07vz8&#43;pUoWX8n1rgq282T" crossorigin="anonymous"></script><script
     src="https://npm.webcache.cn/theme-shokax-pjax@0.0.3/dist/index.umd.js"
-    integrity="sha384-xneY1WY8hOfUzswrE4CrYq35N4BdVcxqxwHPr9zawE/jMSCxD&#43;jAPU55x/jj3wlf" crossorigin="anonymous"></script><script src="/js/pjax.js" ></script><script
+    
+    
+    
+    
+    integrity="sha384-xneY1WY8hOfUzswrE4CrYq35N4BdVcxqxwHPr9zawE/jMSCxD&#43;jAPU55x/jj3wlf" crossorigin="anonymous"></script><script src="/js/pjax.js"  ></script><script
     src="https://npm.webcache.cn/live2d-widgets@0.9.0/autoload.js"
-    deferintegrity="sha384-poTN7wN/SqNhQqo3jdFeX20ikddWeFGkUkDEzsKjgH/ez8aQLn81oI0Cw6q5xNyB" crossorigin="anonymous"></script>
+    defer
+    
+    
+    
+    integrity="sha384-poTN7wN/SqNhQqo3jdFeX20ikddWeFGkUkDEzsKjgH/ez8aQLn81oI0Cw6q5xNyB" crossorigin="anonymous"></script>
 
 <div id="lazy-script">
   <div><script data-pjax>
@@ -1216,11 +1315,23 @@ initializer_list
         };
       </script><script
     src="https://npm.webcache.cn/mermaid@11.12.0/dist/mermaid.min.js"
-    data-pjaxintegrity="sha384-o&#43;g/BxPwhi0C3RK7oQBxQuNimeafQ3GE/ST4iT2BxVI4Wzt60SH4pq9iXVYujjaS" crossorigin="anonymous"></script><script
+    
+    
+    data-pjax
+    
+    integrity="sha384-o&#43;g/BxPwhi0C3RK7oQBxQuNimeafQ3GE/ST4iT2BxVI4Wzt60SH4pq9iXVYujjaS" crossorigin="anonymous"></script><script
     src="https://npm.webcache.cn/dompurify@3.2.6/dist/purify.min.js"
-    data-pjaxintegrity="sha384-JEyTNhjM6R1ElGoJns4U2Ln4ofPcqzSsynQkmEc/KGy6336qAZl70tDLufbkla&#43;3" crossorigin="anonymous"></script><script
+    
+    
+    data-pjax
+    
+    integrity="sha384-JEyTNhjM6R1ElGoJns4U2Ln4ofPcqzSsynQkmEc/KGy6336qAZl70tDLufbkla&#43;3" crossorigin="anonymous"></script><script
     src="https://npm.webcache.cn/svg-pan-zoom@3.6.2/dist/svg-pan-zoom.min.js"
-    data-pjaxintegrity="sha384-GGX4llYprEPGp9w5caepn95YWAEflHnsA5ewt&#43;Y&#43;cBEb95og5cXKllnWKSELlzbx" crossorigin="anonymous"></script><script data-pjax>
+    
+    
+    data-pjax
+    
+    integrity="sha384-GGX4llYprEPGp9w5caepn95YWAEflHnsA5ewt&#43;Y&#43;cBEb95og5cXKllnWKSELlzbx" crossorigin="anonymous"></script><script data-pjax>
         if (window.mermaid) {
           
           const elementCode = '.mermaid'
@@ -1305,7 +1416,7 @@ initializer_list
             initMermaid(mode === 'true' ? 'dark' : 'default');
           }
         }
-      </script><script src="/js/insert_highlight.js" data-pjax></script><script src="/js/tabs.js" data-pjax></script><script type="module" data-pjax>const PhotoSwipeLightbox = (await safeImport("https:\/\/npm.webcache.cn\/photoswipe@5.4.4\/dist\/photoswipe-lightbox.esm.min.js", "sha384-DiL6M\/gG\u002bwmTxmCRZyD1zee6lIhawn5TGvED0FOh7fXcN9B0aZ9dexSF\/N6lrZi\/")).default;const initPswp = (gallery, children) => {
+      </script><script src="/js/insert_highlight.js" data-pjax ></script><script src="/js/tabs.js" data-pjax defer></script><script type="module" data-pjax>const PhotoSwipeLightbox = (await safeImport("https:\/\/npm.webcache.cn\/photoswipe@5.4.4\/dist\/photoswipe-lightbox.esm.min.js", "sha384-DiL6M\/gG\u002bwmTxmCRZyD1zee6lIhawn5TGvED0FOh7fXcN9B0aZ9dexSF\/N6lrZi\/")).default;const initPswp = (gallery, children) => {
           if (_$$(`${gallery} ${children}`).length > 0) {
             new PhotoSwipeLightbox({
               gallery,
@@ -1331,7 +1442,7 @@ initializer_list
     script.crossOrigin = 'anonymous';
     return script;
   };
-  var commentConfigKeys = ['valine', 'waline', 'twikoo', 'gitalk', 'giscus', 'disqus'];
+  var commentConfigKeys = ['valine', 'waline', 'twikoo', 'gitalk', 'giscus', 'disqus', 'utterances'];
   var commentConfig = {giscus: {
       enable: true,
       load: () => {
@@ -1371,16 +1482,24 @@ initializer_list
         giscusScript.setAttribute('crossorigin', 'anonymous');
         giscusScript.async = true;
         container.appendChild(giscusScript);
-        document.body.addEventListener('light-theme-set', () => {
+        const lightThemeHandler = () => {
           const iframe = document.querySelector('iframe.giscus-frame');
-          if (!iframe) return;
+          if (!iframe || !iframe.contentWindow) {
+            document.body.removeEventListener('light-theme-set', lightThemeHandler);
+            return;
+          }
           iframe.contentWindow.postMessage({ giscus: { setConfig: { theme: 'light' } } }, 'https://giscus.app');
-        });
-        document.body.addEventListener('dark-theme-set', () => {
+        };
+        const darkThemeHandler = () => {
           const iframe = document.querySelector('iframe.giscus-frame');
-          if (!iframe) return;
+          if (!iframe || !iframe.contentWindow) {
+            document.body.removeEventListener('dark-theme-set', darkThemeHandler);
+            return;
+          }
           iframe.contentWindow.postMessage({ giscus: { setConfig: { theme: 'dark' } } }, 'https://giscus.app');
-        });
+        };
+        document.body.addEventListener('light-theme-set', lightThemeHandler);
+        document.body.addEventListener('dark-theme-set', darkThemeHandler);
       }
     },};
   commentConfig.enable = commentConfigKeys.some(key => commentConfig?.[key]?.enable);
@@ -1493,13 +1612,29 @@ initializer_list
   loadComments();
 </script><script
     src="https://npm.webcache.cn/qrcode@1.5.1/build/qrcode.js"
-    deferdata-pjaxintegrity="sha384-VT1EeewTCEXgndcPMQ0PzV&#43;uVFYjxFIjmAA7s5gcMX9t4Dt5TD&#43;OVQIn7NJWIXn7" crossorigin="anonymous"></script><script
+    defer
+    
+    data-pjax
+    
+    integrity="sha384-VT1EeewTCEXgndcPMQ0PzV&#43;uVFYjxFIjmAA7s5gcMX9t4Dt5TD&#43;OVQIn7NJWIXn7" crossorigin="anonymous"></script><script
     src="https://npm.webcache.cn/@zumer/snapdom@1.9.14/dist/snapdom.min.js"
-    deferdata-pjaxintegrity="sha384-OEQ&#43;fJp/Mvi2uzBREXybtxryJvLytWapuHu4EE6LPwTKUwATYcc55tPPcZTzVcmx" crossorigin="anonymous"></script><script
+    defer
+    
+    data-pjax
+    
+    integrity="sha384-OEQ&#43;fJp/Mvi2uzBREXybtxryJvLytWapuHu4EE6LPwTKUwATYcc55tPPcZTzVcmx" crossorigin="anonymous"></script><script
     src="https://npm.webcache.cn/katex@0.16.24/dist/katex.min.js"
-    data-pjaxintegrity="sha384-MWNUH0WmtsYGhn2cbH6ELRCbf9LG3QDqCC&#43;gqPB3IBNO35xjZK3Ejb6oONRpDbPg" crossorigin="anonymous"></script><script
+    
+    
+    data-pjax
+    
+    integrity="sha384-MWNUH0WmtsYGhn2cbH6ELRCbf9LG3QDqCC&#43;gqPB3IBNO35xjZK3Ejb6oONRpDbPg" crossorigin="anonymous"></script><script
     src="https://npm.webcache.cn/katex@0.16.24/dist/contrib/auto-render.min.js"
-    data-pjaxintegrity="sha384-hCXGrW6PitJEwbkoStFjeJxv&#43;fSOOQKOPbJxSfM6G5sWZjAyWhXiTIIAmQqnlLlh" crossorigin="anonymous"></script><script data-pjax>
+    
+    
+    data-pjax
+    
+    integrity="sha384-hCXGrW6PitJEwbkoStFjeJxv&#43;fSOOQKOPbJxSfM6G5sWZjAyWhXiTIIAmQqnlLlh" crossorigin="anonymous"></script><script data-pjax>
           var renderMath = () => {
             if (!window.renderMathInElement) return;
             window.renderMathInElement(_$("article"), {
@@ -1546,7 +1681,11 @@ initializer_list
     }
   </script><script
     src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js"
-    asyncintegrity="sha384-0M75wtSkhjIInv4coYlaJU83&#43;OypaRCIq2SukQVQX04eGTCBXJDuWAbJet56id&#43;S" crossorigin="anonymous"></script><script src="/js/service_worker.js" ></script><script>
+    
+    async
+    
+    
+    integrity="sha384-0M75wtSkhjIInv4coYlaJU83&#43;OypaRCIq2SukQVQX04eGTCBXJDuWAbJet56id&#43;S" crossorigin="anonymous"></script><script src="/js/service_worker.js"  ></script><script>
   const reimuCopyright = String.raw`
    ______     ______     __     __    __     __  __    
   /\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
@@ -1561,29 +1700,39 @@ initializer_list
     "color: white; background: #ff5252; padding:5px 0;",
     "padding:4px;border:1px solid #ff5252;",
   );
-</script><script
-    src="https://npm.webcache.cn/aplayer@1.10.1/dist/APlayer.min.js"
-    integrity="sha384-gdGYZwHnfJM54evoZhpO0s6ZF5BQiybkiyW7VXr&#43;h5UfruuRL/aORyw&#43;5&#43;HZoU6e" crossorigin="anonymous"></script><script>
-    if (! false  || !window.matchMedia('(max-width: 768px)').matches) {
-      if (window.matchMedia('(max-width: 959px)').matches) {
-        const meting = _$('meting-js');
-        if (meting) {
-          meting.setAttribute('fixed', 'true');
-          const aside = meting.parentNode?.parentNode;
-          if (aside?.tagName === 'ASIDE') {
-            meting.parentNode.removeChild(meting);
-            document.body.appendChild(meting);
+</script><script>
+    var setupAPlayer = () => {
+      if (! false  || !window.matchMedia('(max-width: 768px)').matches) {
+        if (window.matchMedia('(max-width: 959px)').matches) {
+          const meting = _$('meting-js');
+          if (meting) {
+            meting.setAttribute('fixed', 'true');
+            const aside = meting.parentNode?.parentNode;
+            if (aside?.tagName === 'ASIDE') {
+              meting.parentNode.removeChild(meting);
+              document.body.appendChild(meting);
+            }
           }
         }
       }
-      const script = document.createElement('script');
-      script.src = "https:\/\/npm.webcache.cn\/meting@2.0.1\/dist\/Meting.min.js";
-      script.integrity = "sha384-ASVlpKF80A22OXTK3tfEjZm1EL6uFMKIC4p8\u002b0maanw1S\/IyB\u002bY4JG\u002bZDU7GpKE8";
-      script.crossOrigin = "anonymous";
-      document.body.appendChild(script);
-    }
-  </script><script
+    };</script><script
+    src="https://npm.webcache.cn/aplayer@1.10.1/dist/APlayer.min.js"
+    defer
+    
+    
+    onload="setupAPlayer()"
+    integrity="sha384-gdGYZwHnfJM54evoZhpO0s6ZF5BQiybkiyW7VXr&#43;h5UfruuRL/aORyw&#43;5&#43;HZoU6e" crossorigin="anonymous"></script><script
+    src="https://npm.webcache.cn/meting@2.0.1/dist/Meting.min.js"
+    defer
+    
+    
+    
+    integrity="sha384-ASVlpKF80A22OXTK3tfEjZm1EL6uFMKIC4p8&#43;0maanw1S/IyB&#43;Y4JG&#43;ZDU7GpKE8" crossorigin="anonymous"></script><script
     src="https://npm.webcache.cn/pangu@4.0.7/dist/browser/pangu.min.js"
+    
+    
+    
+    
     integrity="sha384-HeUHqi0nVsPUm/E0ss7OfnIV/yD96JWB8ehZvUuoVax9DpNHL17jj9pdfXHzqDxm" crossorigin="anonymous"></script><script data-pjax>
     if (document.readyState === "loading") {
       document.addEventListener('DOMContentLoaded', () => {
