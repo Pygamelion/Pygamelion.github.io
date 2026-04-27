@@ -339,10 +339,6 @@ body [data-aos="zoom-in"] {
   content: "\e62a";
 }
 
-.icon-bilibili:before {
-  content: "\e603";
-}
-
 .icon-steam:before {
   content: "\e624";
 }
@@ -3154,10 +3150,6 @@ mjx-container::-webkit-scrollbar {
 
 [data-theme="dark"] .icon-github {
   color: #bc88ff;
-}
-
-.icon-bilibili {
-  color: #00a1d6;
 }
 
 .icon-steam {

@@ -58,8 +58,6 @@
     element.parentNode?.removeChild(element);
     wrapper.appendChild(element);
   });
-  window.lightboxStatus = "ready";
-  window.dispatchEvent(new Event("lightbox:ready"));
   var isMobileNavAnim = false;
   _$("#main-nav-toggle")?.off("click").on("click", () => {
     if (isMobileNavAnim) return;
